@@ -12,7 +12,7 @@ wall_main_building_south_east=pyplasm.T(1)(7)(pyplasm.CUBOID([0,2,5]))
 #Porte e finestre
 windows_example=pyplasm.COLOR([0.03, 0.9, 0.87])(pyplasm.CUBOID([0.4,0,0.66]))
 windows_example2=pyplasm.COLOR([0.03, 0.9, 0.87])(pyplasm.CUBOID([0.4,0,0.53]))
-door_example=pyplasm.COLOR([0.996, 0.996,0.913 ])(pyplasm.CUBOID([0.6,0,1.55]))
+door_example=pyplasm.COLOR([0.596, 0.462,0.329])(pyplasm.CUBOID([0.6,0,1.55]))
 
 door_main_1=pyplasm.T([1,3])([3.2,0])(door_example)
 
@@ -154,9 +154,10 @@ floor0=pyplasm.STRUCT([main_b, hall_sx, hall_dx, office_1_sx, office_1_dx, offic
 floor1=pyplasm.T(3)(3)(pyplasm.STRUCT([main_b, pyplasm.T([1,2])([-2.6,2.0])(hall), office_1_sx, office_1_dx, office_2_sx, office_2_dx, pyplasm.T([1,2])([7,2.0])(hall) ]))
 
 ################ BUILDING ################
-two_and_half_model=pyplasm.STRUCT([floor0,floor1, south, north])
+two_and_half_model=pyplasm.STRUCT([floor0,floor1])
+mock_up_3D=pyplasm.STRUCT([two_and_half_model, north, south])
 
-pyplasm.VIEW(two_and_half_model)
+pyplasm.VIEW(mock_up_3D)
 
 
 
