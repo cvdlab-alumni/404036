@@ -1,5 +1,9 @@
 from larcc import *
 
+def color4f(a):
+	r,g,b,l=a
+	return([r/255.0,g/255.0,g/255.0,l/255.0])
+
 ######## MAIN FLOOR ##############
 
 main_build=CUBOID([23,21,1.2])
@@ -86,4 +90,6 @@ wall_wing_dx_f1=T(3)(5.5)(wall_wing_dx)
 
 wall=STRUCT([wall_main,wall_main_f1,wall_wing_sx,wall_wing_dx, wall_wing_sx_f1, wall_wing_dx_f1])
 
-VIEW(STRUCT([first_floor_half,main_floor,first_floor_main, roof_hall_sx, roof_hall_dx, roof_wing_sx, roof_wing_dx, roof_main_build, roof_main_build, wall]))
+
+house_interior=(STRUCT([first_floor_half,main_floor,first_floor_main, roof_hall_sx, roof_hall_dx, roof_wing_sx, roof_wing_dx, roof_main_build, roof_main_build, wall]))
+VIEW(house_interior)
