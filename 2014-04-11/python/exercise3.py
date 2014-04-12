@@ -1,6 +1,6 @@
 from larcc import *
 
-def color4f(a):
+def color4ff(a):
 	r,g,b,l=a
 	return([r/255.0,g/255.0,g/255.0,l/255.0])
 
@@ -50,19 +50,19 @@ first_floor_main=T(3)(7.5)(CUBOID([23,21,0.2]))
 pts=[[3,0,0],[6,0,0],[4.5,0,1],[3,7,0],[6,7,0],[4.5,7,1]]
 triangle_roof=JOIN(AA(MK)(pts))
 roof_hall=JOIN([CUBOID([9,7,0.1]),MK([0,3,1]),MK([9,3,1])])
-roof_hall_sx=COLOR(color4f([79,79,79,255]))(T([1,2,3])([-9,6,5.5])(STRUCT([roof_hall,triangle_roof])))
-roof_hall_dx=COLOR(color4f([79,79,79,255]))(T([1,2,3])([23,6,5.5])(STRUCT([roof_hall,triangle_roof])))
+roof_hall_sx=COLOR(color4ff([79,79,79,255]))(T([1,2,3])([-9,6,5.5])(STRUCT([roof_hall,triangle_roof])))
+roof_hall_dx=COLOR(color4ff([79,79,79,255]))(T([1,2,3])([23,6,5.5])(STRUCT([roof_hall,triangle_roof])))
 
 roof_octa=JOIN([MK([4.5,0,1.5]),wing_octa])
 roof_wing_part=JOIN([MK([4.5,0,1.5]),MK([4.5,15,1.5]),wing_part1])
-roof_wing_sx=COLOR(color4f([79,79,79,255]))(T([1,2,3])([-18,1,11])(STRUCT([roof_octa,roof_wing_part])))
-roof_wing_dx=COLOR(color4f([79,79,79,255]))(T([1,2,3])([32,1,11])(STRUCT([roof_octa,roof_wing_part])))
+roof_wing_sx=COLOR(color4ff([79,79,79,255]))(T([1,2,3])([-18,1,11])(STRUCT([roof_octa,roof_wing_part])))
+roof_wing_dx=COLOR(color4ff([79,79,79,255]))(T([1,2,3])([32,1,11])(STRUCT([roof_octa,roof_wing_part])))
 
 
 roof_main_build_part=T(3)(13)(CUBOID([23,21,0.2]))
 pts_tri_main=[[5,0,13.2],[18,0,13.2],[11.5,0,15.2],[5,21,13.2],[18,21,13.2],[11.5,21,15.2]]
 tri_main=JOIN(AA(MK)(pts_tri_main))
-roof_main_build=COLOR(color4f([79,79,79,255]))(STRUCT([JOIN([roof_main_build_part,MK([3,10,17.2]),MK([19,10,17.2])]),tri_main]))
+roof_main_build=COLOR(color4ff([79,79,79,255]))(STRUCT([JOIN([roof_main_build_part,MK([3,10,17.2]),MK([19,10,17.2])]),tri_main]))
 
 
 ########## Internal Wall ############
@@ -166,7 +166,7 @@ porta_hall=COLOR(WHITE)(STRUCT([T([1,2,3])([-5.5,6,0.2])(CUBOID([2,1,3])), T([1,
 
 
 ######### Decorazioni ######################
-# dec_main=COLOR(GREEN)(T([1,2,3])([-0.05,-0.05,7.5])(CUBOID([23.1,21.1,0.2])))
+# dec_main=COLOR([0.0901,0.4470,0.2705])(T([1,2,3])([-0.05,-0.05,7.5])(CUBOID([23.1,21.1,0.2])))
 
 
 ############# FINESTRE #################################
@@ -201,7 +201,7 @@ windows_wing_1=MATERIAL(glass_material)(STRUCT([holes_wing,T(3)(5.7)(holes_wing)
 
 
 
-enclosures=STRUCT([COLOR(color4f([92,8,8,255])) (enclosures), windows_main_2, windows_main_1, windows_hall, windows_wing_1])
+enclosures=STRUCT([COLOR(color4ff([92,8,8,255])) (enclosures), windows_main_2, windows_main_1, windows_hall, windows_wing_1])
 
 
 ###### Scale ########
@@ -211,8 +211,8 @@ step3=T([2])([-1.9])(CUBOID([3,0.5,0.72]))
 step4=T([2])([-2.4])(CUBOID([3,0.5,0.48]))
 step5=T([2])([-2.9])(CUBOID([3,0.5,0.24]))
 
-stairs=COLOR(color4f([79,79,79,255]))(T([1])([10])(STRUCT([step1,step2,step3, step4, step5])))
-stairs2=COLOR(color4f([79,79,79,255]))(T([1,2])([23,20.9])(R([1,2])(PI)(stairs)))
+stairs=COLOR(color4ff([79,79,79,255]))(T([1])([10])(STRUCT([step1,step2,step3, step4, step5])))
+stairs2=COLOR(color4ff([79,79,79,255]))(T([1,2])([23,20.9])(R([1,2])(PI)(stairs)))
 
 house_enclosures=STRUCT([enclosures,porte_main, porta_hall, stairs, stairs2])
 
@@ -237,19 +237,19 @@ street=STRUCT([street_x, street_y])
 
 ### MALL ###
 mall=COLOR(GRAY)(T(1)(500)(CUBOID([200,360])))
-mall_building=(T([1,2])([510,15])(CUBOID([180,300,35])))
+mall_building=COLOR([0.9686,0.9098,0.6235])(T([1,2])([510,15])(CUBOID([180,300,35])))
 
 mall_complex=STRUCT([mall, mall_building])
 
 ### Houses ###
-park=COLOR(GREEN)(T([1,2])([15,15])(CUBOID([485,100])))
+park=COLOR([0.0901,0.4470,0.2705])(T([1,2])([15,15])(CUBOID([485,100])))
 
 model_house=CUBOID([30,18,8])
 door_model_house=CUBOID([0,1.5,3])
 
 roof=JOIN([MK([0,9,10]),MK([30,9,10]), T(3)(8)(CUBOID([30,18,0]))])
 
-model1=STRUCT([COLOR(color4f([250,218,221,255]))(model_house), COLOR(color4f([47,47,47,255]))(roof),COLOR(color4f([128,128,128,255]))(T([1,2])([-0.05,8])(door_model_house))])
+model1=STRUCT([COLOR(color4ff([250,218,221,255]))(model_house), COLOR(color4ff([47,47,47,255]))(roof),COLOR(color4ff([128,128,128,255]))(T([1,2])([-0.05,8])(door_model_house))])
 model2=R([1,2])(PI/2)(model1)
 
 row_house=[T(1)(60),model1]
@@ -261,7 +261,7 @@ row_3=T(2)(115)(row_2)
 
 
 
-park2=COLOR(GREEN)(T([1,2])([15,360])(CUBOID([100,240])))
+park2=COLOR([0.0901,0.4470,0.2705])(T([1,2])([15,360])(CUBOID([100,240])))
 column_house=[T(2)(60), (model1)]
 column_house1=T([1,2])([50,340])(STRUCT(NN(3)(column_house)))
 column_1=STRUCT([column_house1,park2])
@@ -272,15 +272,15 @@ rows= STRUCT([row_1, row_2, row_3])
 columns= STRUCT([column_1, column_2, column_3])
 
 ### Hammond ###
-garden=T([1,2])([360,360])( COLOR(GREEN)( CUBOID([100, 100]) ))
+garden=T([1,2])([360,360])( COLOR([0.0901,0.4470,0.2705])( CUBOID([100, 100]) ))
 house=T([1,2])([395,380])(STRUCT([house_enclosures, house_interior]))
 
 
 ### Swimming pool ###
-pool=T([1,2])([400,500])(COLOR(color4f([64,234,235,180]))(CUBOID([20,50])))
+pool=T([1,2])([400,500])(COLOR(color4ff([64,234,235,180]))(CUBOID([20,50])))
 pool_street=T([1,2])([360,460])( COLOR(GRAY)( CUBOID([100, 140]) ))
-pool_garden=T([1,2])([380,480])( COLOR(GREEN)( CUBOID([60, 100]) ))
-baby_pool=T([1,2])([400,560])(COLOR(color4f([64,234,235,180]))(CUBOID([25,10])))
+pool_garden=T([1,2])([380,480])( COLOR([0.0901,0.4470,0.2705])( CUBOID([60, 100]) ))
+baby_pool=T([1,2])([400,560])(COLOR(color4ff([64,234,235,180]))(CUBOID([25,10])))
 
 pool=STRUCT([pool_street, pool_garden, baby_pool, pool])
 

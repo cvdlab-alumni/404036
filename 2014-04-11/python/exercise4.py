@@ -177,7 +177,7 @@ porta_hall=COLOR(WHITE)(STRUCT([T([1,2,3])([-5.5,6,0.2])(CUBOID([2,1,3])), T([1,
 
 
 ######### Decorazioni ######################
-# dec_main=COLOR(GREEN)(T([1,2,3])([-0.05,-0.05,7.5])(CUBOID([23.1,21.1,0.2])))
+# dec_main=COLOR([0.0901,0.4470,0.2705])(T([1,2,3])([-0.05,-0.05,7.5])(CUBOID([23.1,21.1,0.2])))
 
 
 ############# FINESTRE #################################
@@ -248,7 +248,7 @@ street=STRUCT([street_x, street_y])
 
 ### MALL ###
 mall=COLOR(GRAY)(T(1)(500)(CUBOID([200,360])))
-mall_building=(T([1,2])([510,15])(CUBOID([180,300,35])))
+mall_building=COLOR([0.9686,0.9098,0.6235])(T([1,2])([510,15])(CUBOID([180,300,35])))
 
 mall_complex=STRUCT([mall, mall_building])
 
@@ -257,7 +257,7 @@ chioma=COLOR(color4f([13,70,14,255]))(SPHERE(3.3)([32,32]))
 tronco=COLOR(color4f([101,67,33,255]))(JOIN([CIRCLE(1)([32,32]), T(3)(15)(CIRCLE(1)([32,32])) ]))
 tree=(STRUCT([tronco,T(3)(15)(chioma) ]))
 
-park=COLOR(GREEN)(T([1,2])([15,15])(CUBOID([485,100])))
+park=COLOR([0.0901,0.4470,0.2705])(T([1,2])([15,15])(CUBOID([485,100])))
 
 model_house=(CUBOID([30,18,8]))
 door_model_house=CUBOID([0,1.5,3])
@@ -276,7 +276,7 @@ row_3=T(2)(115)(row_2)
 
 
 
-park2=COLOR(GREEN)(T([1,2])([15,360])(CUBOID([100,240])))
+park2=COLOR([0.0901,0.4470,0.2705])(T([1,2])([15,360])(CUBOID([100,240])))
 column_house=[T(2)(60), (model1)]
 column_house1=T([1,2])([50,340])(STRUCT(NN(3)(column_house)))
 column_1=STRUCT([column_house1,park2])
@@ -287,14 +287,14 @@ rows= STRUCT([row_1, row_2, row_3])
 columns= STRUCT([column_1, column_2, column_3])
 
 ### Hammond ###
-garden=T([1,2])([360,360])( COLOR(GREEN)( CUBOID([100, 100]) ))
+garden=T([1,2])([360,360])( COLOR([0.0901,0.4470,0.2705])( CUBOID([100, 100]) ))
 house=T([1,2])([395,380])(STRUCT([house_enclosures, house_interior]))
 
 
 ### Swimming pool ###
 pool=T([1,2])([400,500])(COLOR(color4f([64,234,235,180]))(CUBOID([20,50])))
 pool_street=T([1,2])([360,460])( COLOR(GRAY)( CUBOID([100, 140]) ))
-pool_garden=T([1,2])([380,480])( COLOR(GREEN)( CUBOID([60, 100]) ))
+pool_garden=T([1,2])([380,480])( COLOR([0.0901,0.4470,0.2705])( CUBOID([60, 100]) ))
 baby_pool=T([1,2])([400,560])(COLOR(color4f([64,234,235,180]))(CUBOID([25,10])))
 
 pool=STRUCT([pool_street, pool_garden, baby_pool, pool])
