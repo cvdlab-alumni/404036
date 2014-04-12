@@ -216,10 +216,60 @@ stairs2=T([1,2])([23,20.9])(R([1,2])(PI)(stairs))
 
 house_enclosures=STRUCT([enclosures,porte_main, dec_main, porta_hall, stairs, stairs2])
 
-VIEW(STRUCT([house_interior,house_enclosures]))
+##################################################################################################################################
+##################################################################################################################################
+#############################																		##############################
+#############################                               Exercise 3                              ##############################
+#############################																		##############################
+##################################################################################################################################
+##################################################################################################################################
+
+mappa=CUBOID([700,600])
+street_x=COLOR(GRAY)(CUBOID([500,15]))
+street_x=STRUCT([street_x, T(2)(115)(street_x),T(2)(230)(street_x),T(2)(345)(street_x) ])
+park=COLOR(GREEN)(T([1,2])([15,15])(CUBOID([485,100])))
+
+mall=COLOR(GRAY)(T(1)(500)(CUBOID([200,360])))
+mall_building=(T([1,2])([510,15])(CUBOID([180,300,35])))
+
+model_house=CUBOID([30,18,8])
+roof=JOIN([MK([0,9,10]),MK([30,9,10]), T(3)(8)(CUBOID([30,18,0]))])
+
+model1=STRUCT([model_house, roof])
+model2=R([1,2])(PI/2)(model1)
+
+row_house=[T(1)(60),model1]
+row_house1=T(2)(40)(STRUCT(NN(7)(row_house)))
+row_house2=T(2)(80)(STRUCT(NN(7)(row_house)))
+row_1=STRUCT([row_house1,row_house2,park])
+row_2=T(2)(115)(row_1)
+row_3=T(2)(115)(row_2)
+
+street_y=COLOR(GRAY)(CUBOID([15,600]))
+street_y_half=COLOR(GRAY)(T([1,2])([115,360])(CUBOID([15,240])))
+street_y=STRUCT([street_y, street_y_half, T(1)(115)(street_y_half),T(1)(230)(street_y_half),T(1)(345)(street_y_half) ])
+
+park2=COLOR(GREEN)(T([1,2])([15,360])(CUBOID([100,240])))
+column_house=[T(2)(60), (model1)]
+column_house1=T([1,2])([50,340])(STRUCT(NN(3)(column_house)))
+column_1=STRUCT([column_house1,park2])
+column_2=T(1)(115)(column_1)
+column_3=T(1)(115)(column_2)
 
 
+garden=T([1,2])([360,360])( COLOR(GREEN)( CUBOID([100, 100]) ))
+house=T([1,2])([395,380])(STRUCT([house_enclosures, house_interior]))
+
+pool=T([1,2])([400,500])(COLOR(color4f([64,234,235,180]))(CUBOID([20,50])))
+pool_street=T([1,2])([360,460])( COLOR(GRAY)( CUBOID([100, 140]) ))
+pool_garden=T([1,2])([380,480])( COLOR(GREEN)( CUBOID([60, 100]) ))
+baby_pool=T([1,2])([400,560])(COLOR(color4f([64,234,235,180]))(CUBOID([25,10])))
+
+pool=STRUCT([pool_street, pool_garden, baby_pool, pool])
+
+parkink_zone=T([1,2])([475,360])( COLOR(GRAY)( CUBOID([225, 240]) ))
+
+VIEW(STRUCT([mappa,street_x, street_y, mall, mall_building, row_1, row_2, row_3, column_1, column_2, column_3, garden, house, pool, parkink_zone]))
 
 
-
-
+# VIEW(STRUCT([house_enclosures, house_interior, garden]))
