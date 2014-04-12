@@ -13,6 +13,17 @@ def mkstair(a):
 		s.append(CUBOID([wid,dept/n,(height/(n))*i]))
 	return s
 
+def larTorus(params):
+	r,R = params
+	def larTorus0(shape=[24,36,1]):
+		domain = larIntervals(shape)([2*PI,PI,r])
+		V,CV = domain
+		x = lambda V : [(R + p[2]*COS(p[0])) * COS(p[1]) for p in V]
+		y = lambda V : [(R + p[2]*COS(p[0])) * SIN(p[1]) for p in V]
+		z = lambda V : [-p[2] * SIN(p[0]) for p in V]
+		return larMap([x,y,z])(domain)
+	return larTorus0
+
 
 ######## MAIN FLOOR ##############
 
@@ -241,15 +252,19 @@ mall_building=(T([1,2])([510,15])(CUBOID([180,300,35])))
 
 mall_complex=STRUCT([mall, mall_building])
 
-### Houses ###
+### Houses & Tree###
+chioma=COLOR(color4f([13,70,14,255]))(SPHERE(3.3)([32,32]))
+tronco=COLOR(color4f([101,67,33,255]))(JOIN([CIRCLE(1)([32,32]), T(3)(15)(CIRCLE(1)([32,32])) ]))
+tree=(STRUCT([tronco,T(3)(15)(chioma) ]))
+
 park=COLOR(GREEN)(T([1,2])([15,15])(CUBOID([485,100])))
 
-model_house=CUBOID([30,18,8])
+model_house=(CUBOID([30,18,8]))
 door_model_house=CUBOID([0,1.5,3])
 
 roof=JOIN([MK([0,9,10]),MK([30,9,10]), T(3)(8)(CUBOID([30,18,0]))])
 
-model1=STRUCT([COLOR(color4f([250,218,221,255]))(model_house), COLOR(color4f([47,47,47,255]))(roof),COLOR(color4f([128,128,128,255]))(T([1,2])([-0.05,8])(door_model_house))])
+model1=STRUCT([COLOR(color4f([250,218,221,255]))(model_house), COLOR(color4f([47,47,47,255]))(roof),COLOR(color4f([128,128,128,255]))(T([1,2])([-0.05,8])(door_model_house)), T([1,2])([0,-8])(tree)])
 model2=R([1,2])(PI/2)(model1)
 
 row_house=[T(1)(60),model1]
@@ -288,7 +303,78 @@ parkink_zone=T([1,2])([475,360])( COLOR(GRAY)( CUBOID([225, 240]) ))
 
 small_area_plan=STRUCT([mappa,street, mall_complex, rows, columns, garden, house, pool, parkink_zone])
 
-VIEW(small_area_plan)
+##################################################################################################################################
+##################################################################################################################################
+#############################																		##############################
+#############################                               Exercise 4                              ##############################
+#############################																		##############################
+##################################################################################################################################
+##################################################################################################################################
+parking_access=T([1,2])([-19,12])(COLOR(GRAY)(CUBOID([20,8])))
+parking_square=T([1,2])([1,0])(COLOR(GRAY)(CUBOID([20,35])))
+px=INSR(PROD)([QUOTE([10.30]),QUOTE([0.3]),Q(0.1)])
+px_pair=[T(2)(2.5),px]
+parking_x=STRUCT(NN(13)(px_pair))
+
+py=INSR(PROD)([QUOTE([0.3]),QUOTE([30.25]),Q(0.1)])
+py_pair=[T(1)(5),py]
+parking_y=STRUCT(NN(3)(py_pair))
+
+parking=(COLOR(WHITE)(STRUCT([T(1)(5)(parking_x), T(2)(2.5)(parking_y)])))
+parking_houses_1=T([1,2,3])([33.5,48,0.01])(STRUCT([parking_access, parking_square, parking]))
+parking_houses_2=T([2])([115])(parking_houses_1)
+parking_houses_3=T([2])([115])(parking_houses_2)
+
+parking_lot=T([1,2])([520,360])(parking)
+parking_lot_pair=[T(2)(40), parking_lot]
+parking_lot_column=STRUCT((NN(5) (parking_lot_pair)))
+parking_lot_column=STRUCT([parking_lot_column,parking_lot])
+parking_lot_row_pair=[T(1)(20), parking_lot_column]
+parking_lot_row=STRUCT((NN(8) (parking_lot_row_pair)))
+
+parking_complex=STRUCT([parking_houses_1, parking_houses_2, parking_houses_3, parking_lot_column, parking_lot_row])
+
+### Tree ###
+#### Stanno a linea 255
 
 
-# VIEW(STRUCT([house_enclosures, house_interior, garden]))
+### Lampioni ###
+semi_anello=(larTorus([0.2,1])([36,36,1]))
+palo=CYLINDER([0.2,7.0])(32)
+# semi_anello=T([1,3])([1,5])(R([2,3])(PI/2)(STRUCT(MKPOLS(semi_anello))))
+luce=SPHERE(0.4)([32,32])
+luce=T([1,3])([0,7])((luce))
+
+lampione=(STRUCT([COLOR(color4f([128,128,128,255]))(palo), COLOR(YELLOW)(luce)]))
+lampione_y_pair=[T(2)(75), lampione]
+lampione_row_long=STRUCT(NN(7)(lampione_y_pair))
+
+lampione=T([1,2])([115,360])(lampione)
+lampione_y_pair_2=[T(2)(75), lampione]
+lampione_row_short=STRUCT(NN(3)(lampione_y_pair_2))
+lampione_row_short_1=STRUCT([lampione, lampione_row_short])
+lampione_row_short_2=T([1])([115])(lampione_row_short_1)
+lampione_row_short_3=T([1])([115])(lampione_row_short_2)
+lampione_row_short_4=T([1])([215])(lampione_row_short_3)
+lampione_row_short_5=T([1])([100])(lampione_row_short_4)
+
+lampione_rows=STRUCT([(lampione_row_long), lampione_row_short_1, lampione_row_short_2, lampione_row_short_3, lampione_row_short_4, lampione_row_short_5])
+
+lampione=(STRUCT([COLOR(color4f([128,128,128,255]))(palo), COLOR(YELLOW)(luce)]))
+lampione_x_pair=[T(1)(75), lampione]
+lampione_column_long=STRUCT(NN(9)(lampione_x_pair))
+
+lampione=T([1,2])([15,115])(lampione)
+lampione_x_pair_2=[T(1)(75), lampione]
+lampione_column_short=STRUCT(NN(6)(lampione_x_pair_2))
+lampione_column_short_1=STRUCT([lampione, lampione_column_short])
+lampione_column_short_2=T([2])([115])(lampione_column_short_1)
+lampione_column_short_3=T([2])([115])(lampione_column_short_2)
+
+lampione_columns=STRUCT([lampione_column_long, lampione_column_short_1, lampione_column_short_2, lampione_column_short_3])
+
+details=STRUCT([small_area_plan, parking_complex, lampione_rows, lampione_columns])
+VIEW(details)
+
+
+

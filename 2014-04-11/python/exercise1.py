@@ -40,19 +40,19 @@ first_floor_main=T(3)(7.5)(CUBOID([23,21,0.2]))
 pts=[[3,0,0],[6,0,0],[4.5,0,1],[3,7,0],[6,7,0],[4.5,7,1]]
 triangle_roof=JOIN(AA(MK)(pts))
 roof_hall=JOIN([CUBOID([9,7,0.1]),MK([0,3,1]),MK([9,3,1])])
-roof_hall_sx=T([1,2,3])([-9,6,5.5])(STRUCT([roof_hall,triangle_roof]))
-roof_hall_dx=T([1,2,3])([23,6,5.5])(STRUCT([roof_hall,triangle_roof]))
+roof_hall_sx=COLOR(color4f([79,79,79,255]))(T([1,2,3])([-9,6,5.5])(STRUCT([roof_hall,triangle_roof])))
+roof_hall_dx=COLOR(color4f([79,79,79,255]))(T([1,2,3])([23,6,5.5])(STRUCT([roof_hall,triangle_roof])))
 
 roof_octa=JOIN([MK([4.5,0,1.5]),wing_octa])
 roof_wing_part=JOIN([MK([4.5,0,1.5]),MK([4.5,15,1.5]),wing_part1])
-roof_wing_sx=T([1,2,3])([-18,1,11])(STRUCT([roof_octa,roof_wing_part]))
-roof_wing_dx=T([1,2,3])([32,1,11])(STRUCT([roof_octa,roof_wing_part]))
+roof_wing_sx=COLOR(color4f([79,79,79,255]))(T([1,2,3])([-18,1,11])(STRUCT([roof_octa,roof_wing_part])))
+roof_wing_dx=COLOR(color4f([79,79,79,255]))(T([1,2,3])([32,1,11])(STRUCT([roof_octa,roof_wing_part])))
 
 
 roof_main_build_part=T(3)(13)(CUBOID([23,21,0.2]))
 pts_tri_main=[[5,0,13.2],[18,0,13.2],[11.5,0,15.2],[5,21,13.2],[18,21,13.2],[11.5,21,15.2]]
 tri_main=JOIN(AA(MK)(pts_tri_main))
-roof_main_build=STRUCT([JOIN([roof_main_build_part,MK([3,10,17.2]),MK([19,10,17.2])]),tri_main])
+roof_main_build=COLOR(color4f([79,79,79,255]))(STRUCT([JOIN([roof_main_build_part,MK([3,10,17.2]),MK([19,10,17.2])]),tri_main]))
 
 
 ########## Internal Wall ############
