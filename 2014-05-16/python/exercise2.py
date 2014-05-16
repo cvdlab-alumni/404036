@@ -20,6 +20,12 @@ def unisci(num,list1, list2, pol):
 	pol_final = diagram2cell(room,pol,merge)
 	return pol_final
 
+def scale(larghezza, lunghezza, spessore, numero):
+	s=CUBOID([larghezza, lunghezza, spessore])
+	s=STRUCT([s,T([1,3])([larghezza,spessore])]*numero)
+	return s
+
+
 
 house=assemblyDiagramInit([5,3,2])([[.3,5,.3,5.0,.3],[.3,10,.3],[.3,3]])
 
@@ -186,11 +192,19 @@ hpc_building=dis(building)
 	
 # VIEW(hpc_building)
 
-DRAW(building)
-a=STRUCT([T([1,2])([4.75,10])(CUBOID([3,2,0.27]))])
-b=STRUCT([T(2)(-12)(a)])
-building_plasm=STRUCT(MKPOLS((building)))
-VIEW(STRUCT([a,b, building_plasm]))
+# DRAW(building)
 
+a=STRUCT([T([1,2])([4.75,10])(CUBOID([3,4,0.27]))])
+b=STRUCT([T(2)(-14)(a)])
+pian=STRUCT([a,b])
+pian=STRUCT([pian,T(3)(3)]*4)
+building_plasm=STRUCT(MKPOLS((building)))
+scala=STRUCT([T([1,2])([7.73,-2])(scale(0.35,2,0.27,6)),T([1,2,3])([9.83,-2,1.35])(R([1,2,])(PI)(scale(0.35,2,0.27,6)))])
+scala_inv=STRUCT([T([1,2,3])([12.5,-4,3])(R([1,2])(PI)(scala))])
+scala=STRUCT([T(3)(6)(scala), scala, scala_inv])
+scala2=STRUCT([T([1,2])([12.5,10])(R([1,2])(PI)(scala))])
+terreno=STRUCT([T([2,3])([-5,-3])(COLOR(GREEN)(CUBOID([15,20,3])))])
+VIEW(STRUCT([pian, building_plasm, scala, scala2,terreno]))
+# VIEW(STRUCT([scale(1,2,0.27,5)]))
 
 
