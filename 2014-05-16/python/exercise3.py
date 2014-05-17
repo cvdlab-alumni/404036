@@ -11,16 +11,16 @@ def aggiornaToRemove(lista, volte, facce, k):
 			lista.append(lista2[y]+(facce*(i+1)))
 	return lista
 
- 
-# Funzione per mappare un diagram in più blocchi di un master
+
+# Funzione per mappare un diagram in piu' blocchi di un master
 # Parametri:
 #	subDiagram -> diagramma da innestare
-#	master -> diagramma in cui verrà effettuato l'innesto
+#	master -> diagramma in cui verra' effettuato l'innesto
 #	toRemove -> lista di celle del subDiagram da rimuovere
-#	toMerges -> lista di celle del master nelle quali verrà innestato il subDiagram
+#	toMerges -> lista di celle del master nelle quali verra' innestato il subDiagram
 def multipleDiagram2cell(subDiagram, master,toRemove, toMerges):
 	toMerges = list(sort(toMerges))
-	#Aggiorno la lista di celle da rimuovere, calcolo quale sarà la loro numerazione dopo l'innesto
+	#Aggiorno la lista di celle da rimuovere, calcolo quale sara' la loro numerazione dopo l'innesto
 	toRemovE=aggiornaToRemove(toRemove, len(toMerges), len(subDiagram[1]), (len(master[1]))-len(toMerges))
 	#eseguo gli innesti
 	for i in range(len(toMerges)):
@@ -53,7 +53,7 @@ DRAW(diagram)
 
  
 """ Innesto il diagramma nel master e gli passo gli array toRemove e toMerge """
-master = multipleDiagram2cell(diagram,master,[5,6],[0,2,5,7])
+master = multipleDiagram2cell(diagram,master,[5,6],[5,2,0,7])
 V,CV = master
 hpc = SKEL_1(STRUCT(MKPOLS(master)))
 hpc = cellNumbering ((V,CV),hpc)(range(len(CV)),YELLOW,5)

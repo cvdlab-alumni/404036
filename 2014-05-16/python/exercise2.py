@@ -1,5 +1,10 @@
 from larcc import *
 
+def tree(altezza, rTronco, rChioma):
+	chioma=COLOR([0.050980,0.274509,0.054901,1])(SPHERE(rChioma)([32,32]))
+	tronco=COLOR([0.396078,0.262745,0.129411,1])(JOIN([CIRCLE(rTronco)([32,32]), T(3)(altezza)(CIRCLE(rTronco)([32,32])) ]))
+	tree=(STRUCT([tronco,T(3)(altezza)(chioma) ]))
+	return tree;
 
 DRAW = COMP([VIEW,STRUCT,MKPOLS])
 
@@ -245,4 +250,7 @@ base=CUBOID([10,10])
 punta=MK([5,5,2])
 tetto=T(3)(12)(JOIN([base, punta]))
 
-VIEW(STRUCT([pian, building_plasm, tetto, scala, scala2,terreno, lake, bridge]))
+
+tree=T([1,2])([16,-2])(tree(9,0.4,3.0))
+
+VIEW(STRUCT([pian, building_plasm, tetto, scala, scala2,terreno, lake, bridge, tree]))
