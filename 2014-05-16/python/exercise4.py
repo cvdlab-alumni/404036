@@ -10,7 +10,7 @@ def filt_dupl(lst):
 			filtered.append(e)
 	return filtered
 
-def diagram2cell2(diagram,master,cell):
+def diagram2cell(diagram,master,cell):
 	mat = diagram2cellMatrix(diagram)(master,cell)
 	diagram =larApply(mat)(diagram)  
    	"""
@@ -47,7 +47,7 @@ V3=V+dV
 print(len(filt_dupl(V3)))
 
 """ Numerando i vertici non vengono ripetuti """
-master = diagram2cell2(diagram,master,0)
+master = diagram2cell(diagram,master,0)
 V,CV=master
 print(len(V))
 VV = [[i] for i in range(len(V))]
