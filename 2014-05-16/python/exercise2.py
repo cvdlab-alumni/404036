@@ -197,18 +197,25 @@ hpc_building=dis(building)
 
 # DRAW(building)
 
-a=STRUCT([T([1,2])([4.75,10])(CUBOID([3,4,0.27]))])
-b=STRUCT([T(2)(-14)(a)])
+building_plasm=STRUCT(MKPOLS((building)))
+# building_plasm=TEXTURE("brick_02.jpg")(building_plasm)
+
+""" Scala """
+a=STRUCT([T([1,2])([4.75,10])(CUBOID([3,3,0.27]))])
+b=STRUCT([T(2)(-13)(a)])
 pian=STRUCT([a,b])
 pian=STRUCT([pian,T(3)(3)]*4)
-building_plasm=STRUCT(MKPOLS((building)))
-scala=STRUCT([T([1,2])([7.73,-2])(scale(0.35,2,0.27,6)),T([1,2,3])([9.83,-2,1.35])(R([1,2,])(PI)(scale(0.35,2,0.27,6)))])
+
+
+scala=STRUCT([T([1,2])([7.73,-2])(scale(0.35,1,0.27,6)),T([1,2,3])([9.83,-2,1.35])(R([1,2,])(PI)(scale(0.35,1,0.27,6)))])
 scala_inv=STRUCT([T([1,2,3])([12.5,-4,3])(R([1,2])(PI)(scala))])
 scala=STRUCT([T(3)(6)(scala), scala, scala_inv])
 scala2=STRUCT([T([1,2])([12.5,10])(R([1,2])(PI)(scala))])
 
-terreno=STRUCT([T([2,3])([-5,-0.1])(COLOR(GREEN)(CUBOID([20,20,0.1])))])
 
+""" Prato """
+terreno=STRUCT([T([2,3])([-5,-0.1])(CUBOID([20,20,0.1]))])
+terreno=TEXTURE("../images/prato_02.jpg")(terreno)
 # VIEW(STRUCT([scale(1,2,0.27,5)]))
 
 """ Lake """
@@ -220,6 +227,19 @@ lake_5 = bezCurve([[4.819, 5.591], [4.819, 5.732], [5.386, 7.008], [3.968, 6.724
 lake_6 = bezCurve([[3.968, 6.724], [2.551, 6.441], [3.402, 7.858], [2.268, 7.575]])
 lake_7 = bezCurve([[2.268, 7.575], [1.134, 7.291], [0.0, 7.008], [0.709, 5.874]])
 
-lake = COLOR(BLUE)(SOLIDIFY((T([1,2])([12,0])(STRUCT([lake_1,lake_2,lake_3,lake_4,lake_5,lake_6,lake_7])))))
+lake = S([1,2])([1.5,1.5])(SOLIDIFY(T([1,2])([7,-1])(STRUCT([lake_1,lake_2,lake_3,lake_4,lake_5,lake_6,lake_7]))))
+lake= TEXTURE("../images/water_02.jpg")(lake)
 
-VIEW(STRUCT([pian, building_plasm, scala, scala2,terreno, lake]))
+""" Ponte """
+bridge1 = larBezier(S1)([[15,-1,0],[16,-1,0],[17.5,-1,0]])
+bridge2 = larBezier(S1)([[15,3,2],[16,3,2],[17.5,3,2]])
+bridge3 = larBezier(S1)([[15,7,0],[16,7,0],[17.5,7,0]])
+mapping = BEZIER(S2)([bridge1,bridge2,bridge3])
+domain = larDomain([48,48])
+surface = larMap(mapping)(domain)
+bridge = STRUCT(MKPOLS(surface))
+
+bridge= T([1,2])([-1,4])(STRUCT([bridge]))
+bridge= TEXTURE("../images/wood_10.jpg")(bridge)
+
+VIEW(STRUCT([pian, building_plasm, scala, scala2,terreno, lake, bridge]))
