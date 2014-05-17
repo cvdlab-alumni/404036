@@ -18,7 +18,7 @@ def aggiornaToRemove(lista, volte, facce, k):
 #	master -> diagramma in cui verra' effettuato l'innesto
 #	toRemove -> lista di celle del subDiagram da rimuovere
 #	toMerges -> lista di celle del master nelle quali verra' innestato il subDiagram
-def multipleDiagram2cell(subDiagram, master,toRemove, toMerges):
+def MergingDiagram2MultipleCells(subDiagram, master,toRemove, toMerges):
 	toMerges = list(sort(toMerges))
 	#Aggiorno la lista di celle da rimuovere, calcolo quale sara' la loro numerazione dopo l'innesto
 	toRemovE=aggiornaToRemove(toRemove, len(toMerges), len(subDiagram[1]), (len(master[1]))-len(toMerges))
@@ -40,7 +40,7 @@ V,CV = master
 hpc = SKEL_1(STRUCT(MKPOLS(master)))
 hpc = cellNumbering ((V,CV),hpc)(range(len(CV)),YELLOW,5)
 VIEW(hpc)
-DRAW(master)
+# DRAW(master)
  
 """ Istanzio la stanza/parete/diagram da innestare """
 
@@ -49,14 +49,15 @@ dV,dCV = diagram
 hpc2 = SKEL_1(STRUCT(MKPOLS(diagram)))
 hpc2 = cellNumbering ((dV,dCV),hpc2)(range(len(dCV)),YELLOW,2)
 VIEW(hpc2)
-DRAW(diagram)
+# DRAW(diagram)
 
  
 """ Innesto il diagramma nel master e gli passo gli array toRemove e toMerge """
-master = multipleDiagram2cell(diagram,master,[5,6],[5,2,0,7])
+master = MergingDiagram2MultipleCells(diagram,master,[5,6],[5,2,0,7])
 V,CV = master
 hpc = SKEL_1(STRUCT(MKPOLS(master)))
 hpc = cellNumbering ((V,CV),hpc)(range(len(CV)),YELLOW,5)
+
 VIEW(hpc)
 DRAW(master)
 

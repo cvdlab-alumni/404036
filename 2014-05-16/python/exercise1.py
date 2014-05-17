@@ -124,7 +124,7 @@ house = unisci(28,[3,1,2],[[0.5,1,0.5],[1],[2,1]],house)
 house = unisci(102,[1,3,1],[[1],[1,1,1],[1]],house)
 house = unisci(103,[1,3,1],[[1],[1,1,1],[1]],house)
 hpc_house=dis(house)
-VIEW(hpc_house)
+# VIEW(hpc_house)
 
 house= rem([73,67,82,88,39,58,61, 99, 105, 109, 115,120, 123],house)
 DRAW(house)
