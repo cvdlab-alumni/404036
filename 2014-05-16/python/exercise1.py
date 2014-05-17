@@ -29,8 +29,7 @@ hpc_house=dis(house)
 # VIEW(hpc_house)
 
 """ Identifico rimuovo il blocco del salone"""
-# toRemove = [9]
-# house = V,[cell for k,cell in enumerate(CV) if not (k in toRemove)]
+
 house= rem([9],house)
 # DRAW(house)
 
@@ -66,9 +65,6 @@ house = diagram2cell(stanze,house,toMerge)
 hpc_house=dis(house)
 # VIEW(hpc_house)
 
-# toRemove = [40,42,44,30,35,32,33,34,39]
-# V,CV = house
-# house = V,[cell for k,cell in enumerate(CV) if not (k in toRemove)]
 house= rem([40,42,44,30,35,32,33,34,39], house)
 # DRAW(house)
 
@@ -95,8 +91,6 @@ cell = MKPOL([house[0],[[v+1 for v in  house[1][toMerge]]],None])
 # VIEW(STRUCT([hpc_house,cell]))
 
 house=unisci(toMerge,[3,1,1], [[14,1.1,13],[1],[1]], house)
-# stanze = assemblyDiagramInit([3,1,1])([[14,1.1,13],[1],[1]])
-# house = diagram2cell(stanze, house, toMerge)
 hpc_house=dis(house)
 # VIEW(hpc_house)
 

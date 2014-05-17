@@ -198,7 +198,6 @@ hpc_building=dis(building)
 # DRAW(building)
 
 building_plasm=STRUCT(MKPOLS((building)))
-# building_plasm=TEXTURE("brick_02.jpg")(building_plasm)
 
 """ Scala """
 a=STRUCT([T([1,2])([4.75,10])(CUBOID([3,3,0.27]))])
@@ -212,11 +211,10 @@ scala_inv=STRUCT([T([1,2,3])([12.5,-4,3])(R([1,2])(PI)(scala))])
 scala=STRUCT([T(3)(6)(scala), scala, scala_inv])
 scala2=STRUCT([T([1,2])([12.5,10])(R([1,2])(PI)(scala))])
 
-
+# VIEW(STRUCT([scala, scala2]))
 """ Prato """
 terreno=STRUCT([T([2,3])([-5,-0.1])(CUBOID([20,20,0.1]))])
 terreno=TEXTURE("../images/prato_02.jpg")(terreno)
-# VIEW(STRUCT([scale(1,2,0.27,5)]))
 
 """ Lake """
 lake_1 = bezCurve([[0.709, 5.874], [1.009, 5.393], [0.567, 4.032], [1.276, 4.457]])
@@ -229,7 +227,7 @@ lake_7 = bezCurve([[2.268, 7.575], [1.134, 7.291], [0.0, 7.008], [0.709, 5.874]]
 
 lake = S([1,2])([1.5,1.5])(SOLIDIFY(T([1,2])([7,-1])(STRUCT([lake_1,lake_2,lake_3,lake_4,lake_5,lake_6,lake_7]))))
 lake= TEXTURE("../images/water_02.jpg")(lake)
-
+# VIEW(lake)
 """ Ponte """
 bridge1 = larBezier(S1)([[15,-1,0],[16,-1,0],[17.5,-1,0]])
 bridge2 = larBezier(S1)([[15,3,2],[16,3,2],[17.5,3,2]])
