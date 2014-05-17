@@ -242,4 +242,9 @@ bridge = STRUCT(MKPOLS(surface))
 bridge= T([1,2])([-1,4])(STRUCT([bridge]))
 bridge= TEXTURE("../images/wood_10.jpg")(bridge)
 
-VIEW(STRUCT([pian, building_plasm, scala, scala2,terreno, lake, bridge]))
+""" Tetto """
+base=CUBOID([10,10])
+punta=MK([5,5,2])
+tetto=T(3)(12)(JOIN([base, punta]))
+
+VIEW(STRUCT([pian, building_plasm, tetto, scala, scala2,terreno, lake, bridge]))
