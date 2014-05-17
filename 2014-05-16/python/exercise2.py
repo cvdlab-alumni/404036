@@ -3,6 +3,9 @@ from larcc import *
 
 DRAW = COMP([VIEW,STRUCT,MKPOLS])
 
+def bezCurve(controlPoints):
+	return STRUCT(MKPOLS(larMap(larBezierCurve(controlPoints))(larDomain([32]))))
+
 def dis(pol):
 	hpc=SKEL_1(STRUCT(MKPOLS(pol)))
 	hpc = cellNumbering (pol,hpc)(range(len(pol[1])),CYAN,1)
@@ -203,8 +206,20 @@ scala=STRUCT([T([1,2])([7.73,-2])(scale(0.35,2,0.27,6)),T([1,2,3])([9.83,-2,1.35
 scala_inv=STRUCT([T([1,2,3])([12.5,-4,3])(R([1,2])(PI)(scala))])
 scala=STRUCT([T(3)(6)(scala), scala, scala_inv])
 scala2=STRUCT([T([1,2])([12.5,10])(R([1,2])(PI)(scala))])
-terreno=STRUCT([T([2,3])([-5,-3])(COLOR(GREEN)(CUBOID([15,20,3])))])
-VIEW(STRUCT([pian, building_plasm, scala, scala2,terreno]))
+
+terreno=STRUCT([T([2,3])([-5,-0.1])(COLOR(GREEN)(CUBOID([20,20,0.1])))])
+
 # VIEW(STRUCT([scale(1,2,0.27,5)]))
 
+""" Lake """
+lake_1 = bezCurve([[0.709, 5.874], [1.009, 5.393], [0.567, 4.032], [1.276, 4.457]])
+lake_2 = bezCurve([[1.276, 4.457], [1.984, 4.882], [2.409, 4.598], [2.693, 4.315]])
+lake_3 = bezCurve([[2.693, 4.315], [2.976, 4.032], [4.677, 3.465], [4.252, 4.315]])
+lake_4 = bezCurve([[4.252, 4.315], [3.827, 5.165], [4.819, 5.449], [4.819, 5.591]])
+lake_5 = bezCurve([[4.819, 5.591], [4.819, 5.732], [5.386, 7.008], [3.968, 6.724]])
+lake_6 = bezCurve([[3.968, 6.724], [2.551, 6.441], [3.402, 7.858], [2.268, 7.575]])
+lake_7 = bezCurve([[2.268, 7.575], [1.134, 7.291], [0.0, 7.008], [0.709, 5.874]])
 
+lake = COLOR(BLUE)(SOLIDIFY((T([1,2])([12,0])(STRUCT([lake_1,lake_2,lake_3,lake_4,lake_5,lake_6,lake_7])))))
+
+VIEW(STRUCT([pian, building_plasm, scala, scala2,terreno, lake]))
