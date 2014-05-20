@@ -1,8 +1,10 @@
 from larcc import *
 
 def tree(altezza, rTronco, rChioma):
-	chioma=COLOR([0.050980,0.274509,0.054901,1])(SPHERE(rChioma)([32,32]))
-	tronco=COLOR([0.396078,0.262745,0.129411,1])(JOIN([CIRCLE(rTronco)([32,32]), T(3)(altezza)(CIRCLE(rTronco)([32,32])) ]))
+	# chioma=COLOR([0.050980,0.274509,0.054901,1])(SPHERE(rChioma)([32,32]))
+	chioma=COLOR([0.050980,0.274509,0.054901,1])(STRUCT(MKPOLS(larSphere(rChioma)())))
+	# tronco=COLOR([0.396078,0.262745,0.129411,1])(JOIN([CIRCLE(rTronco)([32,32]), T(3)(altezza)(CIRCLE(rTronco)([32,32])) ]))
+	tronco=COLOR([0.396078,0.262745,0.129411,1])(STRUCT(MKPOLS(larCylinder(rTronco, altezza)())))
 	tree=(STRUCT([tronco,T(3)(altezza)(chioma) ]))
 	return tree;
 
@@ -11,9 +13,34 @@ DRAW = COMP([VIEW,STRUCT,MKPOLS])
 def bezCurve(controlPoints):
 	return STRUCT(MKPOLS(larMap(larBezierCurve(controlPoints))(larDomain([32]))))
 
+	
+def multiply(n,tvect,model):
+	oldV,oldCV=model
+	# transform points from integer to float
+	oldV = AA(AA (lambda x: float(x))) (oldV)
+	# add 2nd dimension to tvect if necessary
+	if len(tvect)==1:
+		tvect = tvect+[0]
+	# add 3rd dimension to points if necessary
+	if len(oldV[0])<len(tvect):
+		oldV = AA ( lambda x: x+[0.0] ) (oldV)
+	newV = oldV
+	newCV = oldCV
+	# each iteration multiplies the model
+	for i in range(1,n):
+		# translate points of "tvect*i"
+		newV = newV + translatePoints(oldV, AA(lambda x: x*i)(tvect))
+		# create new cells, related to above points
+		newCV = newCV + AA(AA(lambda x: x+(len(oldV)*i)))(oldCV)
+	return newV,newCV
+
 def scale(larghezza, lunghezza, spessore, numero):
-	s=CUBOID([larghezza, lunghezza, spessore])
-	s=STRUCT([s,T([1,3])([larghezza,spessore])]*numero)
+	s=[[0,0,0],[larghezza,0,0],[larghezza, lunghezza, 0],[0,lunghezza, 0],[0,0,spessore],[larghezza, 0,spessore],[larghezza, lunghezza, spessore],[0, lunghezza, spessore]], [[0,1,2,3,4,5,6,7]]
+	# s=CUBOID([larghezza, lunghezza, spessore])
+	s=multiply(numero, (larghezza, 0, spessore), s)
+	print(s)
+	# s=STRUCT([s,T([1,3])([larghezza,spessore])]*numero)
+	s=(STRUCT(MKPOLS((s))))
 	return s
 
 def sottrai(lista1, lista2):
@@ -204,20 +231,20 @@ hpc_building=dis(building)
 building_plasm=STRUCT(MKPOLS((building)))
 
 """ Scala """
-a=STRUCT([T([1,2])([4.75,20])(CUBOID([3,3,0.27]))])
+a=STRUCT([T([1,2])([4.75,20])(scale(3,3,0.27,1))])
 b=STRUCT([T(2)(-23)(a)])
 pian=STRUCT([a,b])
 pian=STRUCT([pian,T(3)(3)]*4)
 
 
-scala=STRUCT([T([1,2])([7.73,-2])(scale(0.35,1,0.27,6)),T([1,2,3])([9.83,-2,1.35])(R([1,2,])(PI)(scale(0.35,1,0.27,6)))])
+scala=STRUCT([T([1,2])([7.73,-2])(scale(0.35,1,0.27,6)),T([1,2,3])([9.83,-2,1.35])(R([1,2])(PI)(scale(0.35,1,0.27,6)))])
 scala_inv=STRUCT([T([1,2,3])([12.5,-4,3])(R([1,2])(PI)(scala))])
 scala=STRUCT([T(3)(6)(scala), scala, scala_inv])
 scala2=STRUCT([T([1,2])([12.5,20])(R([1,2])(PI)(scala))])
 
 # VIEW(STRUCT([scala, scala2]))
 """ Prato """
-terreno=STRUCT([T([1,2,3])([-5,-5,-0.1])(CUBOID([30,30,0.1]))])
+terreno=STRUCT([T([1,2,3])([-5,-5,-0.1])(scale(30,30,0.1,1))])
 terreno=TEXTURE("../images/prato_02.jpg")(terreno)
 
 """ Lake """
