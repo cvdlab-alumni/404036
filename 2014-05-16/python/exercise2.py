@@ -1,19 +1,16 @@
 from larcc import *
 
 
-def aggiornaIndex(lista, volte, celle, k):
-	for z in (range(len(lista))):
-		lista[z]=lista[z]+k
-	lista2=lista[:]
-	for i in range(volte-1):
-		for y in range(len(lista2)):
-			lista.append(lista2[y]+(celle*(i+1)))
-	return lista
+def updateIndex(lista, k, celleTot):
+	lst=[]
+	for y in range(k):
+		for i in range(len(lista)):
+			lst.append(lista[i]+(y*celleTot))
+	return lst
+
 
 def tree(altezza, rTronco, rChioma):
-	# chioma=COLOR([0.050980,0.274509,0.054901,1])(SPHERE(rChioma)([32,32]))
 	chioma=COLOR([0.050980,0.274509,0.054901,1])(STRUCT(MKPOLS(larSphere(rChioma)())))
-	# tronco=COLOR([0.396078,0.262745,0.129411,1])(JOIN([CIRCLE(rTronco)([32,32]), T(3)(altezza)(CIRCLE(rTronco)([32,32])) ]))
 	tronco=COLOR([0.396078,0.262745,0.129411,1])(STRUCT(MKPOLS(larCylinder(rTronco, altezza)())))
 	tree=(STRUCT([tronco,T(3)(altezza)(chioma) ]))
 	return tree;
@@ -46,16 +43,13 @@ def multiply(n,tvect,model):
 
 def scale(larghezza, lunghezza, spessore, numero):
 	s=[[0,0,0],[larghezza,0,0],[larghezza, lunghezza, 0],[0,lunghezza, 0],[0,0,spessore],[larghezza, 0,spessore],[larghezza, lunghezza, spessore],[0, lunghezza, spessore]], [[0,1,2,3,4,5,6,7]]
-	# s=CUBOID([larghezza, lunghezza, spessore])
 	s=multiply(numero, (larghezza, 0, spessore), s)
 	print(s)
-	# s=STRUCT([s,T([1,3])([larghezza,spessore])]*numero)
 	s=(STRUCT(MKPOLS((s))))
 	return s
 
 DRAW = COMP([VIEW,STRUCT,MKPOLS])
 
-# glass_material = [0.3,0.4,0.3,0.5,  0,0,0,0.5,  2,2,2,0.5, 0,0,0,0.5, 100]
 glass_material = [0,1,1,0.2,  0,0,0,0.5,  2,2,2,0.5, 0,0,0,0.5, 100]
 
 def sottrai(lista1, lista2):
@@ -69,20 +63,6 @@ def dis(pol):
 	hpc=SKEL_1(STRUCT(MKPOLS(pol)))
 	hpc = cellNumbering (pol,hpc)(range(len(pol[1])),CYAN,.5)
 	return hpc
-
-""" rimuove una cella che va persa """
-# def rem(list, pol):
-# 	toRemove = list
-# 	V,CV = pol
-# 	pol = V,[cell for k,cell in enumerate(CV) if not (k in toRemove)]
-# 	return pol
-
-""" rimuove una cella e la inserisce in una lista """
-# def rem(toRemove, pol, addTo):
-# 	V,CV=pol
-# 	pol = V,[cell for k,cell in enumerate(CV) if not (k in toRemove)]
-# 	addTo=sottrai(CV,pol[1])
-# 	return (pol,addTo )
 
 def unisci(num,list1, list2, pol):
 	merge=num
@@ -101,7 +81,6 @@ def select(list, pol):
 house=assemblyDiagramInit([5,3,2])([[.8,9.4,.30,13.3,.8],[.8,20,.8],[.8,6]])
 
 hpc_house=dis(house)
-# VIEW(hpc_house)
 
 toMerge=21
 
@@ -129,8 +108,6 @@ hpc_house=dis(house)
 
 """ porte """
 toMerge=19
-# cell = MKPOL([house[0],[[v+1 for v in  house[1][toMerge]]],None])
-# VIEW(STRUCT([hpc_house,cell]))
 
 house=unisci(toMerge,[3,1,1], [[22,1.5,43],[10],[10]], house)
 hpc_house=dis(house)
@@ -190,7 +167,7 @@ house = unisci(140,[1,3,1],[[1],[0.85,1,0.85],[1]],house)
 
 """ buco Finestre Camera2 """
 house = unisci(145,[1,3,1],[[1],[1.425,1,1.425],[1]],house)
-hpc_house=dis(house)
+# hpc_house=dis(house)
 
 """ porta blindata """
 house = unisci(45,[2,3,1],[[0.85,0.85],[0.15,.1,.15],[1]],house)
@@ -199,7 +176,6 @@ house = unisci(45,[2,3,1],[[0.85,0.85],[0.15,.1,.15],[1]],house)
 house = unisci(56,[3,1,1],[[0.055,0.04,0.055],[1],[1]],house)
 
 house = unisci(63,[3,1,1],[[0.055,0.04,0.055],[1],[1]],house)
-
 
 house = unisci(74,[3,1,1],[[0.055,0.04,0.055],[1],[1]],house)
 
@@ -232,11 +208,9 @@ house = unisci(68,[1,3,1],[[1],[0.055,0.04,0.055],[1]],house)
 
 hpc_house=dis(house)
 
-# porte=[45,51,57,65,72,77,80]
 porte=[137,140, 143, 146, 149, 152, 155, 255]
 porte_CV=select(porte,house)
 
-# finestre=[104,98,92,86,113,119,128,147,150]
 finestre=[214,220, 231, 237, 243, 246,249, 252, 163, 169, 180, 186, 197, 203]
 finestre_CV=select(finestre, house)
 
@@ -250,8 +224,8 @@ empty_CV=select(empty, house)
 
 wall=sottrai(sottrai(sottrai(sottrai(range(len(house[1])),empty),finestre),porte),telaio_fin)
 wall_CV=select(wall, house)
-apartment=house[0],select(wall,house)
-
+# apartment=house[0],select(wall,house)
+apartment=house
 """ *************************************************************************************************************************** """
 """ *************************************************************************************************************************** """
 """ *********************************************** Exercise 2 **************************************************************** """
@@ -339,4 +313,29 @@ tetto= TEXTURE("../images/tegole_03.jpg")(tetto)
 
 tree=T([1,2])([16,-2])(tree(9,0.4,3.0))
 
-VIEW(STRUCT([pian, building_plasm, scala, scala2,terreno, lake, bridge, tree, tetto]))
+# win=finestre
+# win=win + updateIndex(win,257)
+# win=win + updateIndex(finestre, 514)
+# win=win + updateIndex(finestre, 771)
+# win=win + updateIndex(finestre, 1028)
+# win=win + updateIndex(finestre, 1285)
+# win=win + updateIndex(finestre, 1542)
+# win=win + updateIndex(finestre, 1799)
+win=updateIndex(finestre,8, 257)
+windows_CV=select(win,building)
+
+doo=updateIndex(porte, 8, 257)
+doors_CV=select(doo, building)
+
+wa=updateIndex(wall,8,257)
+walls_CV=select(wa, building)
+
+fra=updateIndex(telaio_fin,8,257)
+frames_CV=select(fra, building)
+print win
+windows=COLOR(BLUE)(STRUCT(MKPOLS((building[0],windows_CV))))
+doors=COLOR(RED)(STRUCT(MKPOLS((building[0], doors_CV))))
+walls=STRUCT(MKPOLS((building[0], walls_CV)))
+frames=COLOR(BROWN)(STRUCT(MKPOLS((building[0],frames_CV))))
+
+VIEW(STRUCT([pian,  scala, scala2,terreno, lake, bridge, tree, tetto, windows, doors,walls, frames]))
