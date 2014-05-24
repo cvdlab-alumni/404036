@@ -9,7 +9,7 @@ def updateIndex(lista, k, celleTot):
 	return lst
 
 
-def tree(altezza, rTronco, rChioma):
+def makeTree(altezza, rTronco, rChioma):
 	chioma=COLOR([0.050980,0.274509,0.054901,1])(STRUCT(MKPOLS(larSphere(rChioma)())))
 	tronco=COLOR([0.396078,0.262745,0.129411,1])(STRUCT(MKPOLS(larCylinder(rTronco, altezza)())))
 	tree=(STRUCT([tronco,T(3)(altezza)(chioma) ]))
@@ -76,42 +76,38 @@ def select(list, pol):
 		lst.append(pol[1][i])
 	return lst
 
-""" ********************************************************************************************************************************************** """
-
 house=assemblyDiagramInit([5,3,2])([[.8,9.4,.30,13.3,.8],[.8,20,.8],[.8,6]])
 
-hpc_house=dis(house)
+# hpc_house=dis(house)
 
 toMerge=21
 
 """ divisione ingresso/camera1 """
 stanze = assemblyDiagramInit([3,1,1])([[4.4,.30,8.60],[1],[3]])
 house = diagram2cell(stanze,house,toMerge)
-hpc_house=dis(house)
-# VIEW(hpc_house)
+# hpc_house=dis(house)
 
 toMerge=31
 
 """ Camera1, Bagno1, Camera2 """
 stanze = assemblyDiagramInit([3,5,1])([[2.4,0.3,6],[5.40,.30,5.4,.3,7.7],[3]])
 house = diagram2cell(stanze,house,toMerge)
-hpc_house=dis(house)
-# VIEW(hpc_house)
+# hpc_house=dis(house)
 
 toMerge=29
 
 """ Ingresso, Cucina, Bagno2 """
 stanze = assemblyDiagramInit([1,5,1])([[5],[6.6,.3,8.2,.3,4.6],[3]])
 house = diagram2cell(stanze,house,toMerge)
-hpc_house=dis(house)
-# VIEW(hpc_house)
+# hpc_house=dis(house)
 
 """ porte """
 toMerge=19
+# cell = MKPOL([house[0],[[v+1 for v in  house[1][toMerge]]],None])
+# VIEW(STRUCT([hpc_house,cell]))
 
 house=unisci(toMerge,[3,1,1], [[22,1.5,43],[10],[10]], house)
-hpc_house=dis(house)
-# VIEW(hpc_house)
+# hpc_house=dis(house)
 
 toMerge=49
 """ buco porta blindata """
@@ -119,35 +115,35 @@ house = unisci(toMerge,[3,1,2],[[0.25,1.7,0.25],[.3],[2.2,0.8]],house)
 
 """ buco porta ingresso/cucina """
 house = unisci(45,[3,1,2],[[0.7,0.8,0.7],[.3],[2.1,0.9]],house)
-# # hpc_house=dis(house)
+# hpc_house=dis(house)
 
 """ muro -> porta ingresso/salone """
 house = unisci(15,[1,4,2],[[.3],[1.25,0.8,1.25,6.7],[2.1,0.9]],house)
-# # hpc_house=dis(house)
+# hpc_house=dis(house)
 
 """ buco porta ingresso/camera"""
 house = unisci(27,[1,4,2],[[.3],[1.25,0.8,1.25,6.7],[2.1,0.9]],house)
-# # hpc_house=dis(house)
+# hpc_house=dis(house)
 
 """ buco porta camera1/bagno """
 house = unisci(38,[3,1,2],[[1.1,0.8,1.1],[1],[2.1,0.9]],house)
-# # hpc_house=dis(house)
+# hpc_house=dis(house)
 
 """ Divisione parete camera cucina """
 house = unisci(73,[1,2,1],[[1],[2.4,4],[1]],house)
-# # hpc_house=dis(house)
+# hpc_house=dis(house)
 
 """ buco porta cucina/camera2""" 
 house = unisci(80,[1,3,1],[[1],[0.6,0.8,1],[1]],house)
-# # hpc_house=dis(house)
+# hpc_house=dis(house)
 
 """ buco porta camera2/bagno2 """
 house = unisci(80,[1,3,1],[[1],[2.45,0.8,0.75],[1]],house)
-# # hpc_house=dis(house)
+# hpc_house=dis(house)
 
 """ buco Finestre salone lato lungo """
 house = unisci(3,[1,9,3],[[1],[0.72,1.6,0.72,1.6,0.72,1.6,0.72,1.6,0.72],[1,1.5,0.5]],house)
-# # hpc_house=dis(house)
+# hpc_house=dis(house)
 
 """ buco Finestre salone lato corto """
 house = unisci(6,[5,1,3],[[1.25,1,0.5,1,1.25],[1],[1,1.2,0.8]],house)
@@ -176,6 +172,7 @@ house = unisci(45,[2,3,1],[[0.85,0.85],[0.15,.1,.15],[1]],house)
 house = unisci(56,[3,1,1],[[0.055,0.04,0.055],[1],[1]],house)
 
 house = unisci(63,[3,1,1],[[0.055,0.04,0.055],[1],[1]],house)
+
 
 house = unisci(74,[3,1,1],[[0.055,0.04,0.055],[1],[1]],house)
 
@@ -206,20 +203,23 @@ house = unisci(95,[3,1,1],[[.14, .12, .14],[1],[1]],house)
 
 house = unisci(68,[1,3,1],[[1],[0.055,0.04,0.055],[1]],house)
 
+house = unisci(58,[1,3,1],[[1],[5.05,1,0.65],[1]],house)
+house = unisci(257,[3,1,1],[[0.055,0.04,0.055],[1],[1]],house)
+
 hpc_house=dis(house)
 
-porte=[137,140, 143, 146, 149, 152, 155, 255]
+porte=[136,139, 142, 145, 148, 151, 154, 254, 259]
 porte_CV=select(porte,house)
 
-finestre=[214,220, 231, 237, 243, 246,249, 252, 163, 169, 180, 186, 197, 203]
+finestre=[213,219, 230, 236, 242, 245,248, 251, 162, 168, 179, 185, 196, 202]
 finestre_CV=select(finestre, house)
 
-telaio_fin=[227,228,229,230,232,233,234,235,236,238,239,240,241, 210,211,212,213,215,216,217,218,219,221,222,223,224, 
-			159,160,161,162,164,165,166,167,168,170,171,172,173, 176,177,178,179,181,182,183,184,185,187,188,189,190,
-			193,194,195,196,198,199,200,201,202,204,205,206,207]
+telaio_fin=[226,227,228,229, 231,232,233,234,235, 237,238,239,240,   209,210,211,212, 214,215,216,217,218, 220,221,222,223, 
+			158,159,160,161, 163,164,165,166,167, 169,170,171,172,   175,176,177,178, 180,181,182,183,184, 186,187,188,189,
+			192,193,194,195, 197,198,199,200,201, 203,204,205,206]
 telaio_fin_CV=select(telaio_fin, house)
 
-empty=[7,27,38,39,41,24,26,28,29,33,34,35,37, 225,226, 245,247, 248,250, 251,253, 242,244, 208,209, 157,158, 174,175, 191,192, 136,138, 139,141, 142,144, 145,147, 148,150, 151,153, 154,156, 254,256]
+empty=[7,27,38,39,41,24,26,28,29,33,34,35,37, 224,225, 244,246, 247,249, 250,252, 241,243, 207,208, 156,157, 173,174, 190,191, 135,137, 138,140, 141,143, 144,146, 147,149, 150,152, 153,155, 253,255, 258,260]
 empty_CV=select(empty, house)
 
 wall=sottrai(sottrai(sottrai(sottrai(range(len(house[1])),empty),finestre),porte),telaio_fin)
@@ -236,13 +236,12 @@ apartment2 = larApply(t(2,-10,0))(apartment)
 apartment2 = larApply(s(1,-1,1))(apartment2)
 
 building=assemblyDiagramInit([1,2,4])([[10],[10,10],[3,3,3,3]])
-# DRAW(building)
-hpc_building=dis(building)
+
+# hpc_building=dis(building)
 	
 # VIEW(hpc_building)
 
 building = diagram2cell(apartment,building,0)
-
 building = diagram2cell(apartment,building,0)
 building = diagram2cell(apartment,building,0)
 building = diagram2cell(apartment,building,0)
@@ -255,9 +254,23 @@ hpc_building=dis(building)
 	
 # VIEW(hpc_building)
 
-# DRAW(building)
+""" Dettagli """
+win=updateIndex(finestre,8, 261)
+windows_CV=select(win,building)
 
-building_plasm=STRUCT(MKPOLS((building)))
+doo=updateIndex(porte, 8, 261)
+doors_CV=select(doo, building)
+
+wa=updateIndex(wall,8,261)
+walls_CV=select(wa, building)
+
+fra=updateIndex(telaio_fin,8,261)
+frames_CV=select(fra, building)
+
+windows=COLOR(BLUE)(STRUCT(MKPOLS((building[0],windows_CV))))
+doors=COLOR(RED)(STRUCT(MKPOLS((building[0], doors_CV))))
+walls=STRUCT(MKPOLS((building[0], walls_CV)))
+frames=COLOR(BROWN)(STRUCT(MKPOLS((building[0],frames_CV))))
 
 """ Scala """
 a=STRUCT([T([1,2])([4.75,20])(scale(3,3,0.27,1))])
@@ -306,36 +319,9 @@ CV_tetto=[[0,1,2,3,4,5,6,7],[4,5,6,7,8]]
 
 tetto=T([1,2])([-0.5,-1])(S([1,2])([1.1,1.1])(STRUCT(MKPOLS((C_tetto,CV_tetto)))))
 tetto= TEXTURE("../images/tegole_03.jpg")(tetto)
-# base=CUBOID([10,10])
-# punta=MK([5,5,2])
-# tetto=T(3)(12)(JOIN([base, punta]))
 
+""" Albero """
+tree=T([1,2])([18,-2])(makeTree(9,0.4,3.0))
+tree2=T([1,2])([18,22])(makeTree(9,0.4,3.0))
 
-tree=T([1,2])([16,-2])(tree(9,0.4,3.0))
-
-# win=finestre
-# win=win + updateIndex(win,257)
-# win=win + updateIndex(finestre, 514)
-# win=win + updateIndex(finestre, 771)
-# win=win + updateIndex(finestre, 1028)
-# win=win + updateIndex(finestre, 1285)
-# win=win + updateIndex(finestre, 1542)
-# win=win + updateIndex(finestre, 1799)
-win=updateIndex(finestre,8, 257)
-windows_CV=select(win,building)
-
-doo=updateIndex(porte, 8, 257)
-doors_CV=select(doo, building)
-
-wa=updateIndex(wall,8,257)
-walls_CV=select(wa, building)
-
-fra=updateIndex(telaio_fin,8,257)
-frames_CV=select(fra, building)
-print win
-windows=COLOR(BLUE)(STRUCT(MKPOLS((building[0],windows_CV))))
-doors=COLOR(RED)(STRUCT(MKPOLS((building[0], doors_CV))))
-walls=STRUCT(MKPOLS((building[0], walls_CV)))
-frames=COLOR(BROWN)(STRUCT(MKPOLS((building[0],frames_CV))))
-
-VIEW(STRUCT([pian,  scala, scala2,terreno, lake, bridge, tree, tetto, windows, doors,walls, frames]))
+VIEW(STRUCT([pian,  scala, scala2,terreno, lake, bridge, tree, tree2, tetto, windows, doors,walls, frames]))
