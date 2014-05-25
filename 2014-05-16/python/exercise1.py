@@ -3,7 +3,8 @@ from larcc import *
 DRAW = COMP([VIEW,STRUCT,MKPOLS])
 
 # glass_material = [0.3,0.4,0.3,0.5,  0,0,0,0.5,  2,2,2,0.5, 0,0,0,0.5, 100]
-glass_material = [0,1,1,0.2,  0,0,0,0.5,  2,2,2,0.5, 0,0,0,0.5, 100]
+# glass_material = [0,1,1,0.2,  0,0,0,0.5,  2,2,2,0.5, 0,0,0,0.5, 100]
+glass_material = [0.7086,1,1,0.2,  0,0,0,0.5,  2,2,2,0.5, 0,0,0,0.5, 100]
 
 def sottrai(lista1, lista2):
 	lst=[]
@@ -179,7 +180,7 @@ wall=sottrai(sottrai(sottrai(sottrai(range(len(house[1])),empty),finestre),porte
 wall_CV=select(wall, house)
 
 porte_lar=house[0],porte_CV
-porte_hpc=COLOR(RED)(STRUCT(MKPOLS((porte_lar))))
+porte_hpc=COLOR([0.372549,0.372549,0.372549])(STRUCT(MKPOLS((porte_lar))))
 
 finestre_lar=house[0],finestre_CV
 finestre_hpc=MATERIAL(glass_material)(STRUCT(MKPOLS((finestre_lar))))
@@ -188,11 +189,11 @@ empty_lar=house[0],empty_CV
 empty_hpc=(STRUCT(MKPOLS((empty_lar))))
 
 wall_lar=house[0],wall_CV
-wall_hpc=(STRUCT(MKPOLS((wall_lar))))
+wall_hpc=COLOR([1,0.960784,0.933333])(STRUCT(MKPOLS((wall_lar))))
 
 telaio_fin_lar=house[0],telaio_fin_CV
-telaio_fin_hpc=COLOR(BROWN)(STRUCT(MKPOLS((telaio_fin_lar))))
+telaio_fin_hpc=COLOR([0,0,0])(STRUCT(MKPOLS((telaio_fin_lar))))
 
-VIEW(hpc_house)
+# VIEW(hpc_house)
 VIEW(STRUCT([porte_hpc,finestre_hpc, telaio_fin_hpc, wall_hpc]))
-print(len(house[1]))
+# print(len(house[1]))

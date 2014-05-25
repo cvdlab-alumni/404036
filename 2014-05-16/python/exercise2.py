@@ -1,5 +1,6 @@
 from larcc import *
 
+glass_material = [0.7086,1,1,0.2,  0,0,0,0.5,  2,2,2,0.5, 0,0,0,0.5, 100]
 
 def updateIndex(lista, k, celleTot):
 	lst=[]
@@ -49,8 +50,6 @@ def scale(larghezza, lunghezza, spessore, numero):
 	return s
 
 DRAW = COMP([VIEW,STRUCT,MKPOLS])
-
-glass_material = [0,1,1,0.2,  0,0,0,0.5,  2,2,2,0.5, 0,0,0,0.5, 100]
 
 def sottrai(lista1, lista2):
 	lst=[]
@@ -267,10 +266,10 @@ walls_CV=select(wa, building)
 fra=updateIndex(telaio_fin,8,261)
 frames_CV=select(fra, building)
 
-windows=COLOR(BLUE)(STRUCT(MKPOLS((building[0],windows_CV))))
-doors=COLOR(RED)(STRUCT(MKPOLS((building[0], doors_CV))))
-walls=STRUCT(MKPOLS((building[0], walls_CV)))
-frames=COLOR(BROWN)(STRUCT(MKPOLS((building[0],frames_CV))))
+windows=MATERIAL(glass_material)(STRUCT(MKPOLS((building[0],windows_CV))))
+doors=COLOR([0.372549,0.372549,0.372549])(STRUCT(MKPOLS((building[0], doors_CV))))
+walls=COLOR([1,0.960784,0.933333])(STRUCT(MKPOLS((building[0], walls_CV))))
+frames=COLOR([0,0,0])(STRUCT(MKPOLS((building[0],frames_CV))))
 
 """ Scala """
 a=STRUCT([T([1,2])([4.75,20])(scale(3,3,0.27,1))])
