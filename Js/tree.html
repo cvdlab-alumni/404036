@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <title>Exercise 1 - Making a tree </title> 
+  <style>
+    body{
+      margin: 0;
+      overflow: hidden;
+    }
+  </style> 
+  </head>
+  <body> 
+    <!-- JavaScript libraries -->
+    <script src="three.min.js"></script> 
+    <script src="jquery.min.js"></script> 
+    <script src="Stats.min.js"></script>
+    <script src="dat.gui.min.js"></script>
+    <script src="TrackballControls.js"></script>
+    <!-- Javascript code that runs our Three.js examples --> 
+    <script>
+      // once everything is loaded, we run our Three.js stuff.
+      $(function () {
+
+        var stats = initStats();
+
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        var scene = new THREE.Scene();
+
+        // create a camera, which defines where we're looking at.
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        // create a inspectedCamera
+        var inspectedCamera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 10, 80);
+
+        // create a render and set the size
+        var renderer = new THREE.WebGLRenderer();
+
+        renderer.setClearColor(new THREE.Color(0xEEEEEE));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+
+        // create trackball controls
+        var trackballControls = new THREE.TrackballControls(camera);
+
+        // add subtle ambient lighting
+        var ambientLight = new THREE.AmbientLight(0x0c0c0c);
+        scene.add(ambientLight);
+
+        var axisHelper = new THREE.AxisHelper( 20 );
+        scene.add(axisHelper);
+
+
+
+        // create the ground plane
+        var planeGeometry = new THREE.PlaneGeometry(40,40);
+        var planeMaterial = new THREE.MeshLambertMaterial({color: 0x77DD77});
+        planeMaterial.side=THREE.DoubleSide;
+        var plane = new THREE.Mesh(planeGeometry,planeMaterial);
+
+        // rotate and position the plane
+        plane.rotation.x=-0.5*Math.PI;
+        // add the plane to the scene
+        scene.add(plane);
+
+        // position and point the camera to the center of the scene
+        inspectedCamera.position.set(30,40,-30);
+        inspectedCamera.up = new THREE.Vector3(0,1,0);
+        inspectedCamera.lookAt(scene.position);
+
+        // add cameraHelper
+        var cameraHelper = new THREE.CameraHelper(inspectedCamera);
+        scene.add(inspectedCamera);
+        scene.add(cameraHelper);
+        
+     
+        var controls = new function () {
+        this.positionX = 0.50;
+        this.positionZ = 0.50;
+        this.showAxisHepler = true;
+        this.inspectedCamera = false;
+        this.height = 0.10;
+
+        };
+
+
+        
+
+        var gui = new dat.GUI();
+        gui.add(controls, 'positionX',0,1);
+        gui.add(controls, 'positionZ',0,1);
+        var axis_control = gui.add(controls, 'showAxisHepler');
+        var cameraControl = gui.add(controls, 'inspectedCamera');
+        gui.add(controls, 'height',0,1);
+
+        
+
+
+
+        // create a cylinder
+        var cylinderGeometry = new THREE.CylinderGeometry(1,1,20,128,128);
+        var cubeMaterial = new THREE.MeshLambertMaterial({color: 0x654321});
+        cylinder = new THREE.Mesh(cylinderGeometry, cubeMaterial);
+
+        // position the cube
+        // cylinder.position.set(4,3,0);
+        // cylinder.position.x=controls.positionX;
+        // cylinder.position.z=controls.positionZ;
+        cylinder.position.y=10;
+        
+
+        // add the cylinder to the scene
+        scene.add(cylinder);
+
+        var sphereGeometry = new THREE.SphereGeometry(6,80,80);
+        var sphereMaterial = new THREE.MeshLambertMaterial({color: 0x228b22});
+        var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
+
+        sphere.position.set(0,22,0);
+
+        sphere.position.y=26;
+
+        // add the sphere to the scene
+        scene.add(sphere);
+        // scene.add(sphere2);
+        // position and point the camera to the center of the scene
+        camera.position.set(-55,80,60);
+        camera.up = new THREE.Vector3(0,1,0);
+        camera.lookAt(scene.position);
+
+        
+
+        
+
+
+       
+        
+        $('body').append(renderer.domElement);
+
+        var step = 0;
+
+        var spotLight = new THREE.SpotLight(0xFFFFFF);
+        spotLight.position.set(100,100,100);
+        scene.add(spotLight);
+
+        
+        scene.add(cylinder.height=50);
+
+        render();
+        var renderCamera = camera;
+
+        axis_control.onChange(function (value) {
+            axisHelper.visible = value;
+        });
+
+        cameraControl.onChange(function (value) {
+            renderCamera = value ? inspectedCamera : camera;
+        });
+
+        function render() {
+          stats.update();
+          trackballControls.update();
+          cameraHelper.update();
+          // rotate the camera
+          step+=0.04;
+          // camera.position.x = ( 35*(Math.cos(step)));
+          // camera.position.z = ( 35*(Math.sin(step)));
+          // bounce the sphere up and down
+          
+          // sphere.position.x = 20+( 10*(Math.cos(step)));
+          // sphere.position.y = 2 +( 10*Math.abs(Math.sin(step)));
+
+          // render using requestAnimationFrame
+
+        cylinder.scale.y=controls.height*10;
+
+        cylinder.position.x=(controls.positionX*38)-19;
+        cylinder.position.z=(controls.positionZ*38)-19;
+        
+        sphere.position.x=(controls.positionX*38)-19;
+        sphere.position.z=(controls.positionZ*38)-19;
+
+          camera.lookAt(scene.position);
+          requestAnimationFrame(render);
+          renderer.render(scene, renderCamera);
+          // effect.render(scene,camera);
+        }
+
+        function initStats() {
+          var stats = new Stats();
+          stats.setMode(0); // 0: fps, 1: ms
+          $('body').append(stats.domElement);
+          return stats;
+        }
+      });
+    </script>  
+ </body>
+</html>
