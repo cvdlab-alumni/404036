@@ -69,11 +69,31 @@
 
           return joint;
         }
+
+        function mkBulb (radius_bulb, radius_base, height_base){
+          var bulb = new THREE.Object3D();
+
+          var bulbGlassGeometry = new THREE.SphereGeometry(radius_bulb, 8, 8);
+          var bulbGlassMaterial = new THREE.MeshLambertMaterial({color: 0xffffff, opacity: 0.3, transparent: true});
+          var bulbGlass = new THREE.Mesh(bulbGlassGeometry, bulbGlassMaterial);
+
+          var baseBulbGeometry = new THREE.CylinderGeometry((2/3)*radius_bulb, radius_base, height_base, 8, 8, false);
+          var baseBulbMaterial = new THREE.MeshLambertMaterial({color: cColor, shading: THREE.FlatShading});
+          var baseBulb = new THREE.Mesh(baseBulbGeometry, baseBulbMaterial);
+          // baseBulb.rotation.x=Math.PI/2;
+          bulb.add(bulbGlass);
+          bulb.add(baseBulb);
+          bulbGlass.position.set(0,radius_bulb*(3/3),0);
+          return bulb;
+        }
         var radius_sphere=3;
         var height_cyl=30;
         var radius_base=10;
         var height_base=4;
         var radius_lampShade=8;
+        var radius_bulb=2;
+        var height_bulb_base=1.5;
+        var radius_bulb_base=1;
         var sColor=0xdddd33;
         var cColor=0xcccccc;
         var pointColor = "#ffffff";
@@ -106,10 +126,15 @@
         lampShade.position.set(0,radius_lampShade+radius_sphere,0);
 
 
+        var bulbo = mkBulb(radius_bulb,radius_bulb_base,height_bulb_base);
+        lampShade.add(bulbo);
+        bulbo.position.set(0,-7.25,0);
+        // scene.add(bulbo);
+
 
         /****************************************************************************************************************************************************************************************************************** LUCI  ***************************************************************************************************************************************************************************************************************************/
         var spotLight = new THREE.SpotLight(pointColor);
-        lampShade.add(spotLight);
+        // lampShade.add(spotLight);
         // spotLight.position.set(10,10,10);
 
         var t = new THREE.Object3D();
