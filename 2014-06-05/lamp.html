@@ -84,12 +84,14 @@
           bulb.add(bulbGlass);
           bulb.add(baseBulb);
           bulbGlass.position.set(0,radius_bulb*(3/3),0);
+          bulb.glass=bulbGlass;
+          bulb.base=baseBulb;
           return bulb;
         }
         var radius_sphere=3;
         var height_cyl=30;
-        var radius_base=10;
-        var height_base=4;
+        var radius_base=15;
+        var height_base=3;
         var radius_lampShade=8;
         var radius_bulb=2;
         var height_bulb_base=1.5;
@@ -129,29 +131,28 @@
         var bulbo = mkBulb(radius_bulb,radius_bulb_base,height_bulb_base);
         lampShade.add(bulbo);
         bulbo.position.set(0,-7.25,0);
+        bulbo.glass.material.emissive.setHex(0xf5f51a);
+        console.log(bulbo);
         // scene.add(bulbo);
 
-
-        /****************************************************************************************************************************************************************************************************************** LUCI  ***************************************************************************************************************************************************************************************************************************/
-        var spotLight = new THREE.SpotLight(pointColor);
-        // lampShade.add(spotLight);
-        // spotLight.position.set(10,10,10);
-
-        var t = new THREE.Object3D();
-        lampShade.add(t);
-        // t.position.set(0,5,0);
-
-        spotLight.target = (t);
-        // spotLight.position.set(0, 0, 0);
-        // spotLight.target = plane;
-        // spotLight.distance = 25;
-        // spotLight.angle = 0.75;
-        // spotLight.exponent = 30;
         var cubeGeometry = new THREE.BoxGeometry(400, 400, 3,100,100);
         var cubeMaterial = new THREE.MeshLambertMaterial({color: 0xff3333, shading: THREE.FlatShading});
         var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
         cube.position.set(0,0,-1.5);
         scene.add(cube);
+
+
+        /****************************************************************************************************************************************************************************************************************** LUCI  ***************************************************************************************************************************************************************************************************************************/
+        var spotLight = new THREE.SpotLight(pointColor);
+        lampShade.add(spotLight);
+        var t = new THREE.Object3D();
+        lampShade.add(t);
+        t.position.set(0,3,0);
+        spotLight.target = (t);
+        
+        var lightBulb = new THREE.PointLight(pointColor,1,radius_bulb*3);
+        bulbo.glass.add(lightBulb);
+        
 
 
         scene.add(base);
@@ -160,14 +161,16 @@
 
      
         var controls = new function () {
-        this.alfa = 0.00;
-        this.beta = 0.00;
-        this.gamma = 0.00;
+        this.alfa = 2.00;
+        this.beta = 0.340;
+        this.gamma = 0.630;
         this.delta = 0.00;
-        this.epsilon = 0.00;
+        this.epsilon = 1.10;
         this.showAxisHepler = true;
         this.sphereColor = sColor;
         this.cylinderColor = cColor;
+        this.showLampLight = true;
+        this.lightColor = pointColor;
         
 
         };
@@ -176,33 +179,47 @@
         
 
         var gui = new dat.GUI();
-        gui.add(controls, 'alfa',0,2*Math.PI).onChange(function (value) {
+        var lampFolder = gui.addFolder("lamp");
+        var lightFolder = gui.addFolder("lights");
+        lampFolder.add(controls, 'alfa',0,2*Math.PI).onChange(function (value) {
           joint1.rotation.y = value; 
         });
-        gui.add(controls, 'beta',0,Math.PI/2).onChange(function (value) {
+        lampFolder.add(controls, 'beta',0,Math.PI/2).onChange(function (value) {
           joint1.sphere.rotation.x = value; 
         });
-        gui.add(controls, 'gamma',0,Math.PI/2).onChange(function (value) {
+        lampFolder.add(controls, 'gamma',0,Math.PI/2).onChange(function (value) {
           joint1.hook.rotation.x = value; 
         });
-        gui.add(controls, 'delta',0,Math.PI*2).onChange(function (value) {
+        lampFolder.add(controls, 'delta',0,Math.PI*2).onChange(function (value) {
           joint2.cylinder.rotation.y = value; 
         });
-        gui.add(controls, 'epsilon',0,Math.PI/2).onChange(function (value) {
+        lampFolder.add(controls, 'epsilon',0,Math.PI/2).onChange(function (value) {
           joint2.hook.rotation.x = value; 
         });
-        gui.addColor(controls, 'sphereColor').onChange(function(e) {
+        lampFolder.addColor(controls, 'sphereColor').onChange(function(e) {
           sphere.material.color.setHex(e);
           joint1.sphere.material.color.setHex(e);
           joint2.sphere.material.color.setHex(e);
         });
-        gui.addColor(controls, 'cylinderColor').onChange(function(e) {
+        lampFolder.addColor(controls, 'cylinderColor').onChange(function(e) {
           base.material.color.setHex(e);
           joint1.cylinder.material.color.setHex(e);
           joint2.cylinder.material.color.setHex(e);
           lampShade.material.color.setHex(e);
-
-          
+        });
+        lightFolder.add(controls, 'showLampLight').onChange(function(e){
+          console.log(e);
+          if(e){
+            lampShade.add(spotLight);
+            bulbo.glass.add(lightBulb);
+          } else {
+            lampShade.remove(spotLight);
+            bulbo.glass.remove(lightBulb);
+          }
+        });
+        lightFolder.addColor(controls, 'lightColor').onChange(function(e) {
+          spotLight.color = new THREE.Color(e);
+          lightBulb.color = new THREE.Color(e);
         });
         var axis_control = gui.add(controls, 'showAxisHepler');
         
@@ -217,7 +234,7 @@
 
         
         // scene.add(cylinder.height=50);
-
+        init();
         render();
         var renderCamera = camera;
 
@@ -229,6 +246,12 @@
           trackballControls.update();          
           requestAnimationFrame(render);
           renderer.render(scene, camera);
+        }
+        function init(){
+          joint1.rotation.y = controls.alfa;
+          joint1.sphere.rotation.x = controls.beta; 
+          joint1.hook.rotation.x = controls.gamma;
+          joint2.hook.rotation.x = controls.epsilon;
         }
 
       });
