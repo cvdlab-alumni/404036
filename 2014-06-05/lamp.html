@@ -149,7 +149,7 @@
 
       var pGeometry = new THREE.PlaneGeometry(dimTableX, dimTableY,vertexTable,vertexTable);
       var pMaterial = new THREE.MeshLambertMaterial({color: 0xff3333, shading: THREE.FlatShading});
-      pMaterial.side = THREE.BoubleSide;
+      pMaterial.side = THREE.DoubleSide;
       var plane = new THREE.Mesh(pGeometry, pMaterial);
       plane.position.set(0,0,-1.5);
       plane.receiveShadow = true;
@@ -308,40 +308,8 @@
       init();
       /**************************************************************************************************************************************************************************************************************** ANIMAZIONI  ***********************************************************************************************************************************************************************************************************************/
 
-      // //define animations
-      // var animator = null;
-      // // var duration = 4; // sec
-      // var loopAnimation = false;
-
-      // function initAnimator() {
-      //   animator = new KF.KeyFrameAnimator;
-      //   animator.init({ 
-      //     interps:
-      //     [
-      //     { 
-      //       keys:[0, 0.3, 0.5, 0.75,0.9, 1], 
-      //       values:[
-      //       { x: -20, y: 0, z :height_base/2 },
-      //       { x: 10, y: 15, z :(height_base/2)+30 },
-      //       { x: 40, y: 30, z :height_base/2 },
-      //       { x: 70, y: 45, z :(height_base/2)+45 },
-      //       { x: 90, y: 55, z :(height_base/2)+35 },
-      //       { x: 100, y: 60, z :(height_base/2)+30 },
-      //       ],
-      //       target:base.position
-      //     },
-      //     ],
-      //     loop: loopAnimation,
-      //     duration: 4 * 1000
-      //   });
-      // }
-
-      // initAnimator();
-      // Bounce.In
-      var path = [{x:0, y:0}, {x:50, y:100}, {x:300, y:20}, {x:400, y:200}, {x:500, y:0}];
-
       var lampTweenJumpBack1 = new TWEEN.Tween(base.position)
-        .to({ x: [40, -20], y: [30,0], z: [+70, 0]},1000)
+        .to({ x: [40, -20], y: [30,0], z: [+70, 0]},1500)
         .interpolation( TWEEN.Interpolation.Bezier )
         .delay(3500)
         // .chain(lampTweenJump4);  
@@ -352,22 +320,24 @@
       var lampTweenJump4 = new TWEEN.Tween(base.position)
         .to({x: 100, y: 60, z: (height_base/2)+15}, 1000)
         .easing(TWEEN.Easing.Linear.None)
-        .chain(lampTweenJumpBack1);
+        .chain(lampTweenJumpBack1)
       var lampTweenJump3 = new TWEEN.Tween(base.position)
         .to({x: 100, y: 60, z: (height_base/2)+80}, 2000)
         .easing(TWEEN.Easing.Bounce.In)
-        .chain(lampTweenJump4);
+        .chain(lampTweenJump4)
+        .delay(500);
 
       var lampTweenJump2 = new TWEEN.Tween(base.position)
         .to({ x: [+80, 100], y: [+30,60], z: [+70, 30]},1000)
-        .delay(500)
+        // .delay(500)
         .interpolation( TWEEN.Interpolation.Bezier )
-        .chain(lampTweenJump3);
+        .chain(lampTweenJump3)
+        .delay(500);
       var lampTweenJump1 = new TWEEN.Tween(base.position)
         .to({ x: [+20, 50], y: [+30,30], z: [+70, 0]}, 1000)
         .interpolation( TWEEN.Interpolation.Bezier )
         .chain(lampTweenJump2)
-        .delay(8500)
+        .delay(6500)
         .start();
 
       var textTweenScale2 = new TWEEN.Tween(text1.scale)
@@ -377,42 +347,40 @@
       var textTweenScale1 = new TWEEN.Tween(text1.scale)
         .to({x: 1, y: 0.5, z: 1}, 230)
         .repeat(1)
-        .delay(13820)
-        .yoyo( true )
+        .delay(12420)
+        .yoyo(true)
         .easing(TWEEN.Easing.Linear.None)
         .start();
 
       var lampRotate4 = new TWEEN.Tween(joint1.rotation)
         .to({y: Math.PI*0.6364}, 3000)
         .easing(TWEEN.Easing.Linear.None)
-        .delay(2000)
+        .delay(3000)
       var lampRotate3 = new TWEEN.Tween(joint1.rotation)
-        .to({y: Math.PI*1.5923}, 3000)
+        .to({y: Math.PI*1.5923}, 1500)
         .easing(TWEEN.Easing.Linear.None)
-        .delay(6000)
+        .delay(9000)
         .chain(lampRotate4)
-      var lampRotate2 = new TWEEN.Tween(joint1.rotation)
-        .to({y: Math.PI*0.6364}, 3000)
-        .easing(TWEEN.Easing.Linear.None)
-        .chain(lampRotate3)
+      // var lampRotate2 = new TWEEN.Tween(joint1.rotation)
+      //   .to({y: Math.PI*0.6364}, 3000)
+      //   .easing(TWEEN.Easing.Linear.None)
+      //   .chain(lampRotate3)
       var lampRotate1 = new TWEEN.Tween(joint1.rotation)
-        .to({y: Math.PI*0.41}, 3000)
-        .easing(TWEEN.Easing.Linear.None)
-        .chain(lampRotate2)
-        .delay(2000)
+        .to({y: Math.PI*0.41}, 1500)
+        .easing(TWEEN.Easing.Circular.Out)
+        .repeat(1)
+        .yoyo(true)
+        .delay(1000)
+        .chain(lampRotate3)
         .start();
-      
-      
-      // var cubeTween = new TWEEN.Tween(cube.position)
-      //   .to({x: -13, y: 3, z: -5}, 4000)
-      //   .easing(TWEEN.Easing.Bounce.Out)
-      //   .chain(cubeTweenBack)
-      //   .start();
+      // var tween1 = new TWEEN.Tween( text1.position )
+      //       .to( { x: 360, y: 300 }, 750 )
+      //       .repeat( 1 )
+      //       .delay( 1000 )
+      //       .yoyo( true )
+      //       .easing( TWEEN.Easing.Cubic.InOut )
+      //       .start();
 
-      // var sphereTween = new TWEEN.Tween(sphere.position)
-      //   .to({x:0, y: 3, z:0}, 1000)
-      //   .delay(1000)
-      //   .start();
       $('body').append(renderer.domElement);
 
       
@@ -426,7 +394,7 @@
 
       function render() {
         trackballControls.update(); 
-        // KF.update();  
+ 
         TWEEN.update();
 
         requestAnimationFrame(render);

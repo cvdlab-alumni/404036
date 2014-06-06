@@ -39,7 +39,7 @@ KF.KeyFrameAnimator = function()
 KF.KeyFrameAnimator.prototype.init = function(param)
 {
 	param = param || {};
-
+	
 	if (param.interps)
 	{
 		this.createInterpolators(param.interps);
@@ -67,7 +67,7 @@ KF.KeyFrameAnimator.prototype.start = function()
 {
 	if (this.running)
 		return;
-
+	
 	this.startTime = Date.now();
 	this.running = true;
 	KF.add(this);
@@ -84,14 +84,14 @@ KF.KeyFrameAnimator.prototype.update = function()
 {
 	if (!this.running)
 		return;
-
+	
 	var now = Date.now();
 	var deltat = (now - this.startTime) % this.duration;
 	var nCycles = Math.floor((now - this.startTime) / this.duration);
 	var fract = deltat / this.duration;
 	if (this.easing)
 		fract = this.easing(fract);
-
+	
 	if (nCycles >= 1 && !this.loop)
 	{
 		this.running = false;
@@ -119,17 +119,17 @@ KF.KeyFrameAnimator.default_duration = 1000;
 //Construction/initialization
 KF.Interpolator = function() 
 {
-
+	    		
 	this.keys = [];
 	this.values = [];
 	this.target = null;
 	this.running = false;
 }
-
+	
 KF.Interpolator.prototype.init = function(param)
 {
 	param = param || {};
-
+	
 	if (param.keys && param.values)
 	{
 		this.setValue(param.keys, param.values);
@@ -173,7 +173,7 @@ KF.Interpolator.prototype.copyValues = function(from, to)
 KF.Interpolator.prototype.copyValue = function(from, to)
 {
 	for ( var property in from ) {
-
+		
 		if ( from[ property ] === null ) {		
 		continue;		
 		}
@@ -208,7 +208,7 @@ KF.Interpolator.prototype.interp = function(fract)
 			value = this.tween(val1, val2, (fract - key1) / (key2 - key1));
 		}
 	}
-
+	
 	if (this.target)
 	{
 		this.copyValue(value, this.target);
@@ -219,7 +219,7 @@ KF.Interpolator.prototype.tween = function(from, to, fract)
 {
 	var value = {};
 	for ( var property in from ) {
-
+		
 		if ( from[ property ] === null ) {		
 		continue;		
 		}
@@ -228,6 +228,6 @@ KF.Interpolator.prototype.tween = function(from, to, fract)
 		var delta = range * fract;
 		value[ property ] = from[ property ] + delta;
 	}
-
+	
 	return value;
 }
