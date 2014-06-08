@@ -12,9 +12,24 @@ function mkJoint (radius, height) {
   sphere.position.set(0, 0, 0);
   joint.add(sphere);
 
-  var cylinderGeometry = new THREE.CylinderGeometry(radius, radius, height, 32, 32, false);
+  var cylinderGeometry = new THREE.CylinderGeometry(radius/2, radius/2, height, 32, 32, false);
   var cylinderMaterial = new THREE.MeshPhongMaterial({color: cColor, shading: THREE.SmoothShading, shininess: 100, metal: true});
   cylinderMaterial.side=THREE.DoubleSide;
+  
+/*  var cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
+  cylinder.position.set(0, (height / 2 + radius)-0.8, 1);
+  cylinder.castShadow = true;
+  sphere.add(cylinder);
+
+  var cylinder2 = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
+  cylinder2.position.set(0, (height / 2 + radius)-0.8, -1);
+  cylinder2.castShadow = true;
+  sphere.add(cylinder2);
+
+  var hook = new THREE.Object3D();
+  hook.position.set(0, (height / 2 + radius)-0.8, -1);
+  cylinder.add(hook);
+  */
   var cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
   cylinder.position.set(0, height / 2 + radius, 0);
   cylinder.castShadow = true;
