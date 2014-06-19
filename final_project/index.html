@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Final Project - Daniele Conti</title> 
+  <style>
+    body{
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #stats {  /* Align stats top-left */
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
+  </style> 
+  </head>
+  <body>
+  <!-- JavaScript libraries -->
+  <script src="scripts/functions.js"></script>
+  <script src="libs/jquery.min.js"></script> 
+  <script src="libs/three.min.js"></script>
+  <script src="libs/Stats.min.js"></script>
+  <script src="libs/dat.gui.min.js"></script>
+  <script src="libs/TrackballControls.js"></script>
+  <script src="libs/OBJLoader.js"></script>
+  <script src="scripts/init.js"></script>
+  <script src="scripts/forniture.js"></script>
+  <script src="scripts/apartment.js"></script>
+
+  <!-- Javascript code that runs our Three.js examples --> 
+  <script>
+    // once everything is loaded, we run our Three.js stuff.
+    $(function () {
+
+      
+
+      // add spotlights
+      var spotLight1 = new THREE.DirectionalLight(0xffffff);
+      spotLight1.position.set(-10, 100, 50);
+      spotLight1.intensity = 0.5;
+      scene.add(spotLight1);
+
+      var dir2 = new THREE.DirectionalLight(0xffffff);
+      dir2.position.set(100, -20, 100);
+      dir2.intensity = 0.5;
+      scene.add(dir2);
+
+
+      var dir3 = new THREE.DirectionalLight(0xffffff);
+      dir3.position.set(0, -100, 100);
+      dir3.intensity = 0.5;
+      scene.add(dir3);
+
+
+      // var light = new THREE.PointLight(0xffffff,1,20);
+      // scene.add(light);
+      // light.shadowCameraVisible=true;
+      // light.position.set(0,0,5);
+
+      // add the output of the renderer to the html element
+      $('body').append(webGLRenderer.domElement);
+
+
+      // setup the control gui
+      var controls = new function () {};
+
+      var gui = new dat.GUI();
+      
+    
+      console.log(scene);
+      render();
+
+
+    });
+  </script>  
+ </body>
+</html>
