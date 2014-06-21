@@ -15,14 +15,35 @@
       left: 0px;
       top: 0px;
     }
+/*roba aggiunta da me*/
+    #pointer {
+       position: fixed;
+       top: 50%;
+       left: 50%;
+       margin-top: -15px;
+       margin-left: -15px;
+       width: 30px;
+       height: 30px;
+       display: none;
+       background-image: url("images/pointer.png");
+       background-repeat: no-repeat;
+       background-size: contain;
+     }
+      /**/
   </style> 
   </head>
   <body>
+<!--  roba aggiunta da me -->
+  <div id="pointer"></div>
+<!--  -->
+
   <!-- JavaScript libraries -->
   <script src="libs/three.min.js"></script>
+  <script src="libs/PointerLockControls.js"></script>
   
   <script src="scripts/functions.js"></script>
   <script src="scripts/forniture.js"></script>
+  <script src="scripts/rooms.js"></script>
   <script src="libs/jquery.min.js"></script> 
   <script src="libs/tween.min.js"></script>
   
@@ -30,8 +51,9 @@
   <script src="libs/dat.gui.min.js"></script>
   <script src="libs/TrackballControls.js"></script>
   <script src="libs/OBJLoader.js"></script>
+
+  <script src="scripts/fpsInteract.js"></script>
   <script src="scripts/init.js"></script>
-  <script src="scripts/rooms.js"></script>
   <script src="scripts/apartment.js"></script>
   
 
@@ -75,9 +97,12 @@
 
 
       // setup the control gui
-      var controls = new function () {};
+      var controlGUI = new function() {
+        this.startFPS = startFPS;
+      };
 
       var gui = new dat.GUI();
+      gui.add(controlGUI, "startFPS");
       
     
       render();
