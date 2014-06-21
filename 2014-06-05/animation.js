@@ -2,7 +2,7 @@ function startAnimation(spotLight, directionalLight, base, text2, joint1, joint2
 
 	//Animazioni luci
 	var yesLight= new TWEEN.Tween(spotLight)
-	.to({shadowDarkness: 0.5, intensity: 1},1)
+	.to({y: 0.5},1)
 	.delay(500);
 	
 	var noLight= new TWEEN.Tween(spotLight)
@@ -112,7 +112,7 @@ function startAnimation(spotLight, directionalLight, base, text2, joint1, joint2
 	.chain(lampJump2)
 	.delay(500);
 
-	//Osservoa Sinistra e Destra
+	//Osservo a Sinistra e Destra
 	var lampObserverRight2 = new TWEEN.Tween(joint1.rotation)
 	.to({y: Math.PI*0.4140}, 1500)
 	.easing(TWEEN.Easing.Bounce.Out)

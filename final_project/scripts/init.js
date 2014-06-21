@@ -18,10 +18,23 @@ scene.add(axisHelper);
 
 
 var webGLRenderer = new THREE.WebGLRenderer();
-webGLRenderer.setClearColor(new THREE.Color(0xeeeeee, 1.0));
+webGLRenderer.setClearColor(new THREE.Color(0xC7C7C7, 1.0));
 webGLRenderer.setSize(window.innerWidth, window.innerHeight);
 
 
 camera.position.set(-30,40,50);
 camera.lookAt(new THREE.Vector3(0, 0, 0));
 var toIntersect=[];
+
+var tex_floor_camera = THREE.ImageUtils.loadTexture("./textures/parquet_letto.jpg");
+var tex_floor_bagno = THREE.ImageUtils.loadTexture("./textures/bagno.jpg");
+var tex_floor_salone = THREE.ImageUtils.loadTexture("./textures/pav_salone.jpg");
+var tex_floor_generico = THREE.ImageUtils.loadTexture("./textures/pav_generico.jpg");
+var tex_wall_generico = THREE.ImageUtils.loadTexture("./textures/muro_generico.jpg");
+var tex_wall_salone = THREE.ImageUtils.loadTexture("./textures/muro_salone.jpg");
+var tex_wall_camera = THREE.ImageUtils.loadTexture("./textures/muro_letto.jpg");
+var tex_wall_bagno = THREE.ImageUtils.loadTexture("./textures/muro_bagno.jpg");
+var tex_wall_cucina = THREE.ImageUtils.loadTexture("./textures/muro_cucina.jpg");
+var tex_wall_cucina_normal = THREE.ImageUtils.loadTexture("./textures/muro_cucina_normal.jpg");
+var tex_wall_esterno = THREE.ImageUtils.loadTexture("./textures/GraniteWall-ColorMap.jpg");
+var tex_wall_esterno_normal = THREE.ImageUtils.loadTexture("./textures/GraniteWall-NormalMap.jpg");

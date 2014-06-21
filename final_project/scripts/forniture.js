@@ -26,10 +26,15 @@ function mk_blind(width, height, depth){
 	port2.open=false;
 	port2.interact=function(){
 		if(!this.open){
-			this.parent.rotation.z=(-Math.PI/2);
+
+			new TWEEN.Tween(this.parent.rotation)
+			.to({z: -Math.PI/2},1000)
+			.start();
 			this.open=true;
 		} else {
-			this.parent.rotation.z=0;
+			new TWEEN.Tween(this.parent.rotation)
+			.to({z: 0},1000)
+			.start();
 			this.open=false;
 		}
 
@@ -52,14 +57,22 @@ function mk_door(width, height, depth, reverse){
 	port.interact=function(){
 		if(!this.open){
 			if (reverse===1){
-				this.parent.rotation.z=(-Math.PI)/2;
+				new TWEEN.Tween(this.parent.rotation)
+				.to({z: -Math.PI/2},1000)
+				.start();
 			} else {
-				this.parent.rotation.z=(Math.PI/2);	
+				new TWEEN.Tween(this.parent.rotation)
+				.to({z: Math.PI/2},1000)
+				.start();
+				// this.parent.rotation.z=(Math.PI/2);	
 			}
 			
 			this.open=true;
 		} else {
-			this.parent.rotation.z=0;
+			new TWEEN.Tween(this.parent.rotation)
+			.to({z: 0},1000)
+			.start();
+			// this.parent.rotation.z=0;
 			this.open=false;
 		}
 	}
@@ -115,10 +128,17 @@ function mk_window(width, height, depth){
     glass1.open=false;
 	glass1.interact=function(){
 		if(!this.open){
-			this.parent.parent.rotation.z=(-Math.PI/2);
+			new TWEEN.Tween(this.parent.parent.rotation)
+			.to({z: -Math.PI/2},1000)
+			.start();
+
+			// this.parent.parent.rotation.z=(-Math.PI/2);
 			this.open=true;
 		} else {
-			this.parent.parent.rotation.z=0;
+			new TWEEN.Tween(this.parent.parent.rotation)
+			.to({z: 0},1000)
+			.start();
+			// this.parent.parent.rotation.z=0;
 			this.open=false;
 		}
 	}
@@ -126,10 +146,15 @@ function mk_window(width, height, depth){
     glass2.open=false;
 	glass2.interact=function(){
 		if(!this.open){
-			this.parent.parent.rotation.z=(Math.PI/2);
+			new TWEEN.Tween(this.parent.parent.rotation)
+			.to({z: Math.PI/2},1000)
+			.start();
+			// this.parent.parent.rotation.z=(Math.PI/2);
 			this.open=true;
 		} else {
-			this.parent.parent.rotation.z=0;
+			new TWEEN.Tween(this.parent.parent.rotation)
+			.to({z: 0},1000)
+			.start();
 			this.open=false;
 		}
 	}
@@ -165,10 +190,16 @@ function mk_big_window(width, height, depth){
     glass.open=false;
 	glass.interact=function(){
 		if(!this.open){
-			this.parent.parent.rotation.x=(Math.PI/6);
+			new TWEEN.Tween(this.parent.parent.rotation)
+			.to({x: Math.PI/6},1000)
+			.start();
+			// this.parent.parent.rotation.x=(Math.PI/6);
 			this.open=true;
 		} else {
-			this.parent.parent.rotation.x=0;
+			new TWEEN.Tween(this.parent.parent.rotation)
+			.to({x: 0},1000)
+			.start();
+			// this.parent.parent.rotation.x=0;
 			this.open=false;
 		}
 	}
@@ -177,10 +208,3 @@ function mk_big_window(width, height, depth){
 	return windows;
 }
 
-function mk_floor(x, y, texture, rx, ry){
-	// x=x/10;
-	// y=y/10;
-	var floorGeometry = new THREE.PlaneGeometry(x,y,10,10);
-	
-	return createMesh(floorGeometry,rx, ry, texture);
-}

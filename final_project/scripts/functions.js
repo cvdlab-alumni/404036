@@ -1,27 +1,57 @@
       function render() {
         stats.update();
         trackballControls.update();
+        TWEEN.update();
 
         
         requestAnimationFrame(render);
         webGLRenderer.render(scene, camera);
       }
-
+      
       function createMesh(geom,rx, ry, imageFile, bump) {
-        var texture = THREE.ImageUtils.loadTexture("" + imageFile)
-        texture.wrapS = texture.wrapT = THREE.RepeatWrapping; 
-        texture.repeat.set( rx, ry );
-        var floorMaterial = new THREE.MeshBasicMaterial( { map: texture, side: THREE.DoubleSide } );
-        // geom.computeVertexNormals();
-        // var mat = new THREE.MeshLambertMaterial({map: texture, side: THREE.DoubleSide});
-        // mat.map = texture;
+        // var texture = THREE.ImageUtils.loadTexture("" + imageFile)
+        var texture = null;
+        var texture_normal;
 
-        if (bump) {
-          var bump = THREE.ImageUtils.loadTexture("" + bump)
-          mat.bumpMap = bump;
-          mat.bumpScale = 0.2;
+        if(imageFile===1) {
+          texture = tex_floor_camera;
+        } else if (imageFile===2){
+          texture = tex_floor_bagno;
+        } else if (imageFile===3){
+          texture = tex_floor_salone;
+        } else if (imageFile===4){
+          texture = tex_floor_generico;
+        } else if (imageFile===5){
+          texture = tex_wall_generico;
+        } else if (imageFile===6){
+          texture = tex_wall_salone;
+        } else if (imageFile===7){
+          texture = tex_wall_camera;
+        } else if (imageFile===8){
+          texture = tex_wall_bagno;
+        } else if (imageFile===9){
+          texture = tex_wall_cucina;
+          texture_normal = tex_wall_cucina_normal
+          // console.log("carico la normal muro cucina");
+        } else if (imageFile===10){
+          texture = tex_wall_esterno;
+          texture_normal = tex_wall_esterno_normal
         }
 
+        texture.wrapS = texture.wrapT = THREE.RepeatWrapping; 
+        texture.repeat.set( rx, ry ); 
+        if (texture_normal!=undefined){
+          var floorMaterial = new THREE.MeshPhongMaterial( { map: texture, side: THREE.DoubleSide, normalMap: texture_normal} ); 
+          // console.log("metto la normal nel material") 
+          // console.log(floorMaterial);
+        } else {
+          var floorMaterial = new THREE.MeshBasicMaterial( { map: texture, side: THREE.DoubleSide} );
+        }
+        if (bump) {
+          var bump = THREE.ImageUtils.loadTexture("" + bump)
+          floorMaterial.bumpMap = bump;
+          floorMaterial.bumpScale = 0.2;
+        }
         var mesh = new THREE.Mesh(geom, floorMaterial);
 
         return mesh;
@@ -50,9 +80,9 @@
         $('body').append(stats.domElement);
         return stats;
       }
-      function mk_wall(b,h,texture, rx,ry) {
-        b = b/10;
-        h= h/10;
+
+      function mk_plane(texture,rx,ry, b,h,list) {
+        var i =0;
 
         var options = {amount: 0.01,bevelThickness: 2,bevelSize: 1,bevelSegments: 3,bevelEnabled: false,curveSegments: 12,steps: 1};
         var shape = new THREE.Shape();
@@ -61,45 +91,27 @@
         shape.lineTo(b,h);
         shape.lineTo(0,h);
 
-        var wallGeometry = new THREE.ExtrudeGeometry( shape, options );
+        if (list.length >0) {
+          var hole;
+          for (i=0;i<list.length;i=i+4){
+            hole = new THREE.Path();
+            hole.moveTo(list[i],list[i+1]);
+            hole.lineTo(list[i]+list[i+2],list[i+1]);
+            hole.lineTo(list[i]+list[i+2],list[i+1]+list[i+3]);
+            hole.lineTo(list[i],list[i+1]+list[i+3]);
+            hole.lineTo(list[i],list[i+1]);
+            shape.holes.push(hole);
+          }
+          
+        }
+        var planeGeometry = new THREE.ExtrudeGeometry( shape, options );
 
-        var wall = createMesh(wallGeometry,rx,ry,texture);
-        wall.rotation.x = Math.PI/2;
-        wall.scale.set(10,10,1);
-        return wall;
+        var plane = createMesh(planeGeometry,rx,ry,texture);
+        return plane;
       }
 
-      // b ed h sono le dimensioni della parete da creare, hx,hz,offX,offZ sono opzionali(potete così creare una parete senza buchi)
-      // hx e hz sono lo spazio tra il pto 0,0 e il punto in cui deve iniziare il buco, offX e offZ sono le dimensioni del buco
-      // la funzione createMesh la trovate in utilities.js
-      // Buon lavoro :)
-      function mk_hole(b,h,hx,hz,offX,offZ, texture, rx,ry) {
-        b = b/10;
-        h= h/10;
-
-        var options = {amount: 0.01,bevelThickness: 2,bevelSize: 1,bevelSegments: 3,bevelEnabled: false,curveSegments: 12,steps: 1};
-        var shape = new THREE.Shape();
-        shape.moveTo(0,0);
-        shape.lineTo(b,0);
-        shape.lineTo(b,h);
-        shape.lineTo(0,h);
-
-        if(hx!==undefined) {
-          hx = hx/10;
-          hz = hz/10;
-          offX = offX/10;
-          offZ = offZ/10;
-          var hole = new THREE.Path();
-          hole.moveTo(hx,hz);
-          hole.lineTo(hx+offX,hz);
-          hole.lineTo(hx+offX,hz+offZ);
-          hole.lineTo(hx,hz+offZ);
-          shape.holes.push(hole);
-        }
-        var wallGeometry = new THREE.ExtrudeGeometry( shape, options );
-
-        var wall = createMesh(wallGeometry,rx,ry,texture);
-        wall.rotation.x = Math.PI/2;
-        wall.scale.set(10,10,1);
-        return wall;
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        webGLRenderer.setSize( window.innerWidth, window.innerHeight );
       }
