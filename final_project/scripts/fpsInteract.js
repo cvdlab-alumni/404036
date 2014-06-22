@@ -12,16 +12,19 @@ var controls;
     var pointerlockchange = function(event) {
 
       if (document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element) {
+        
+        // FPenabled = true; //trackball?
         controls.enabled = true;
-        $("#pointer").fadeIn(500);
+        // camera.position.set(0, 20, 0); //trackball?
+        // controls.getObject().position.set(20, 0, -20);//trackball?
+        $("#pointer").fadeIn(1000);
       } else {
-        controls.enabled = false;
-        $("#pointer").fadeOut(500);
+       location.reload();;
       }
     }
 
     var pointerlockerror = function(event) {
-    // instructions.style.display = '';
+      location.reload();
   }
 
   // Hook pointer lock state change events
@@ -34,6 +37,10 @@ var controls;
   document.addEventListener('webkitpointerlockerror', pointerlockerror, false);
 
   var startFPS = function() {
+    trackballControls.reset();
+    controls = new THREE.PointerLockControls(camera);
+    scene.add(controls.getObject());
+
     element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
     if (/Firefox/i.test(navigator.userAgent)) {
       var fullscreenchange = function(event) {

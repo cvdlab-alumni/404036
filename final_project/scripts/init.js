@@ -5,8 +5,10 @@ var scene = new THREE.Scene();
 
 
 var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.up = new THREE.Vector3(0,1,0);
-camera.position.set(0,20,0);
+camera.up = new THREE.Vector3(0,0,1);
+camera.position.set(-30,40,50);
+// camera.up = new THREE.Vector3(0,1,0);
+// camera.position.set(0,20,0);
 camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 
@@ -19,10 +21,12 @@ var toIntersect=[];
 var trackballControls = new THREE.TrackballControls(camera);
 
 var axisHelper = new THREE.AxisHelper(276);
+// var axisHelper = new THREE.AxisHelper(21.6);
 scene.add(axisHelper);
 
 
 var webGLRenderer = new THREE.WebGLRenderer();
+// var webGLRenderer = new THREE.WebGLRenderer3( { contextAttributes: { antialias: false } } );
 webGLRenderer.setClearColor(new THREE.Color(0xC7C7C7, 1.0));
 webGLRenderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -31,14 +35,16 @@ webGLRenderer.setSize(window.innerWidth, window.innerHeight);
 THREE.ImageUtils.crossOrigin = "anonymous";
 
 
-controls = new THREE.PointerLockControls(camera);
-scene.add(controls.getObject());
+// controls = new THREE.PointerLockControls(camera);
+// scene.add(controls.getObject());
 
-rayMove = new THREE.Raycaster();
-rayMove.ray.direction.set(0, 1, 0);
+// // var FPenabled = false;//aggiunta per trackball?
+// rayMove = new THREE.Raycaster();
+// // rayMove.ray.direction.set(0, 0, -1);
+
+// rayPointer = new THREE.Raycaster();
+
 var projector = new THREE.Projector();
-rayPointer = new THREE.Raycaster();
-
 
 
 // Caricamento unico texture

@@ -5,6 +5,8 @@ var frameMaterial = new THREE.MeshLambertMaterial({map: telaio_texture});
 var porta_texture = THREE.ImageUtils.loadTexture("./textures/rovere_naturale.jpg");
 var portMaterial = new THREE.MeshLambertMaterial({map: porta_texture});
 
+var texture_lamp = THREE.ImageUtils.loadTexture("./textures/lamp2.jpg");
+
 function mk_blind(width, height, depth){
 	var blind_texture = THREE.ImageUtils.loadTexture("./textures/porta_blind.jpg");
 	var blind_normal_texture = THREE.ImageUtils.loadTexture("./textures/porta_blind_normal.jpg");
@@ -208,3 +210,59 @@ function mk_big_window(width, height, depth){
 	return windows;
 }
 
+function mk_lamp_ceiling(radius_lampShade, lColor, distance){
+	var lampShadeGeometry = new THREE.SphereGeometry(radius_lampShade, 8, 8, 0, Math.PI, 0, Math.PI);
+    var lampShadeMaterial = new THREE.MeshPhongMaterial({ color: lColor , shading: THREE.SmoothShading, shininess: 30, metal: false});
+    lampShadeMaterial.side = THREE.DoubleSide;
+    var lampShade = new THREE.Mesh(lampShadeGeometry, lampShadeMaterial);
+    lampShade.scale.z=0.5;
+
+    var spotLight = new THREE.SpotLight(0xffffff);
+    spotLight.angle=Math.PI/2;
+    spotLight.intensity=0;
+    lampShade.add(spotLight);
+ 	lampShade.spotLight=spotLight;
+
+ 	var plight = new THREE.PointLight( 0xFFFFFF, 1, distance );
+ 	lampShade.add(plight);
+ 	lampShade.pointLight =plight;
+ 	plight.intensity=0;
+
+ 	var t = new THREE.Object3D();
+ 	lampShade.add(t);
+ 	t.position.set(0,0,-6);
+ 	lampShade.target = t;
+
+ 	toIntersect.push(lampShade);
+ 	lampShade.on=false;
+ 	// console.log(lampShade);
+	lampShade.interact=function(){
+		if(!this.on){
+			// var lightOn = new TWEEN.Tween(this.children[1])
+			// 	.to({intensity: 0.8},1);
+
+			// new TWEEN.Tween(this.children[0])
+			// .to({intensity: 0.3},1)
+			// .chain(lightOn)
+			// .start();
+
+			this.children[0].intensity=0.3;
+			this.children[1].intensity=0.8;
+			this.on=true;
+		} else {
+			// var lightOff = new TWEEN.Tween(this.children[1])
+			// 	.to({intensity: 0},1);
+			// new TWEEN.Tween(this.children[0])
+			// .to({intensity: 0},100)
+			// .chain(lightOff)
+			// .start();
+			this.children[0].intensity=0;
+			this.children[1].intensity=0;
+			this.on=false;
+		}
+
+	}
+
+
+    return lampShade;
+}

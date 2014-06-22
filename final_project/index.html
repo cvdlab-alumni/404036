@@ -37,24 +37,37 @@
   <div id="pointer"></div>
 <!--  -->
 
-  <!-- JavaScript libraries -->
-  <script src="libs/three.min.js"></script>
-  <script src="libs/PointerLockControls.js"></script>
-  
-  <script src="scripts/functions.js"></script>
-  <script src="scripts/forniture.js"></script>
-  <script src="scripts/rooms.js"></script>
-  <script src="libs/jquery.min.js"></script> 
-  <script src="libs/tween.min.js"></script>
-  
-  <script src="libs/Stats.min.js"></script>
-  <script src="libs/dat.gui.min.js"></script>
-  <script src="libs/TrackballControls.js"></script>
-  <script src="libs/OBJLoader.js"></script>
+<!-- Nuove librerie -->
+ <!-- // <script src="libs/three.js"></script>  -->
+<!-- <script src="libs/jquery-1.9.0.js"></script>  -->
+ <!-- // <script src="libs/WebGLDeferredRenderer.js"></script> -->
+<!-- <script src="libs/ShaderDeferred.js"></script> -->
+<!-- <script src="libs/RenderPass.js"></script>  -->
+<!-- <script src="libs/EffectComposer.js"></script>  -->
+<!-- <script src="libs/CopyShader.js"></script>  -->
+<!-- <script src="libs/ShaderPass.js"></script>  -->
+<!-- <script rc="libs/FXAAShader.js"></script>  -->
+<!-- <script src="libs/MaskPass.js"></script> -->
+<!-- <script src="libs/WebGLRenderer3.js"></script> -->
 
-  <script src="scripts/fpsInteract.js"></script>
-  <script src="scripts/init.js"></script>
-  <script src="scripts/apartment.js"></script>
+<!-- JavaScript libraries -->
+<script src="libs/three.min.js"></script>
+<script src="libs/PointerLockControls.js"></script>
+<script src="scripts/functions.js"></script>
+<script src="scripts/forniture.js"></script>
+<script src="scripts/rooms.js"></script>
+<script src="libs/jquery.min.js"></script>  
+<script src="libs/tween.min.js"></script>
+  
+<script src="libs/Stats.min.js"></script>
+<script src="libs/dat.gui.min.js"></script>
+<script src="libs/TrackballControls.js"></script>
+<script src="libs/OBJLoader.js"></script>
+
+<script src="scripts/fpsInteract.js"></script>
+<script src="scripts/init.js"></script>
+<script src="scripts/apartment.js"></script>
+<script src="scripts/light.js"></script>
   
 
   <!-- Javascript code that runs our Three.js examples --> 
@@ -64,46 +77,61 @@
 
       
 
-      // add spotlights
-      var dir1 = new THREE.DirectionalLight(0xffffff);
-      dir1.position.set(-100, 00, 0);
-      dir1.intensity = 0.5;
-      scene.add(dir1);
 
-      var dir2 = new THREE.DirectionalLight(0xffffff);
-      dir2.position.set(0, 100, 0);
-      dir2.intensity = 0.5;
-      scene.add(dir2);
-
-
-      var dir3 = new THREE.DirectionalLight(0xffffff);
-      dir3.position.set(0, -100, 100);
-      dir3.intensity = 0.5;
-      scene.add(dir3);
-
-      var spotLight1 = new THREE.SpotLight(0xffffff);
-      spotLight1.position.set(0, -15, 3);
-      spotLight1.intensity = 1;
-      spotLight1.lookAt(0,0,0);
-      scene.add(spotLight1);
-
-      // var light = new THREE.PointLight(0xffffff,1,20);
-      // scene.add(light);
-      // light.shadowCameraVisible=true;
-      // light.position.set(10,10,5);
 
       // add the output of the renderer to the html element
       $('body').append(webGLRenderer.domElement);
 
 
       // setup the control gui
-      var controlGUI = new function() {
-        this.startFPS = startFPS;
-      };
+      // var controlGUI = new function() {
+      //   this.startFPS = startFPS;
+      // };
 
-      var gui = new dat.GUI();
-      gui.add(controlGUI, "startFPS");
-      
+      // var gui = new dat.GUI();
+      // gui.add(controlGUI, "startFPS");
+
+    //   var controls = new function () {      
+    //     this.intensity = 1;
+    //     this.distance = 0;
+    //     this.exponent = 30;
+    //     this.angle = 0.1;
+    //     this.debug = false;
+    //     this.castShadow = true;
+    //     this.onlyShadow = false;
+
+    // }
+
+    // var gui = new dat.GUI();
+
+    // gui.add(controls, 'angle', 0, Math.PI * 2).onChange(function (e) {
+    //     light1.spotLight.angle = e;
+    // });
+
+    // gui.add(controls, 'intensity', 0, 5).onChange(function (e) {
+    //     light1.spotLight.intensity = e;
+    // });
+
+    // gui.add(controls, 'distance', 0, 200).onChange(function (e) {
+    //     light1.spotLight.distance = e;
+    // });
+
+    // gui.add(controls, 'exponent', 0, 100).onChange(function (e) {
+    //     light1.spotLight.exponent = e;
+    // });
+
+    // gui.add(controls, 'debug').onChange(function (e) {
+    //     light1.spotLight.shadowCameraVisible = e;
+    // });
+
+    // gui.add(controls, 'castShadow').onChange(function (e) {
+    //     light1.spotLight.castShadow = e;
+    // });
+
+    // gui.add(controls, 'onlyShadow').onChange(function (e) {
+    //     light1.spotLight.onlyShadow = e;
+    // });
+
     
       render();
 
