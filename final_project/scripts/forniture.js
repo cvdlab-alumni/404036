@@ -247,7 +247,7 @@ function mk_lamp_ceiling(radius_lampShade, lColor, distance){
 			// .start();
 
 			this.children[0].intensity=0.3;
-			this.children[1].intensity=0.8;
+			this.children[1].intensity=1;
 			this.on=true;
 		} else {
 			// var lightOff = new TWEEN.Tween(this.children[1])

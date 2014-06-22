@@ -5,10 +5,10 @@ var scene = new THREE.Scene();
 
 
 var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.up = new THREE.Vector3(0,0,1);
-camera.position.set(-30,40,50);
-// camera.up = new THREE.Vector3(0,1,0);
-// camera.position.set(0,20,0);
+// camera.up = new THREE.Vector3(0,0,1);
+// camera.position.set(-30,40,50);
+camera.up = new THREE.Vector3(0,1,0);
+camera.position.set(0,20,0);
 camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 
@@ -35,14 +35,14 @@ webGLRenderer.setSize(window.innerWidth, window.innerHeight);
 THREE.ImageUtils.crossOrigin = "anonymous";
 
 
-// controls = new THREE.PointerLockControls(camera);
-// scene.add(controls.getObject());
+controls = new THREE.PointerLockControls(camera);
+scene.add(controls.getObject());
 
-// // var FPenabled = false;//aggiunta per trackball?
-// rayMove = new THREE.Raycaster();
-// // rayMove.ray.direction.set(0, 0, -1);
+// var FPenabled = false;//aggiunta per trackball?
+rayMove = new THREE.Raycaster();
+// rayMove.ray.direction.set(0, 0, -1);
 
-// rayPointer = new THREE.Raycaster();
+rayPointer = new THREE.Raycaster();
 
 var projector = new THREE.Projector();
 

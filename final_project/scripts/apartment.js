@@ -33,8 +33,7 @@ var mesh;
 
 
 
-      // apartment.position.set(-123,0,-180);
-      // // apartment.position.set(-12.3,-10.8,0);
-      // apartment.scale.set(10,10,10);
-      // apartment.rotation.x=-Math.PI/2;
+      apartment.position.set(-123,0,-180);
+      apartment.scale.set(10,10,10);
+      apartment.rotation.x=-Math.PI/2;
       scene.add(apartment);

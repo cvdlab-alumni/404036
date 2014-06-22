@@ -1,6 +1,6 @@
 function render() {
   stats.update();
-  trackballControls.update();
+  // trackballControls.update();
   TWEEN.update();
 
   requestAnimationFrame(render);
@@ -10,18 +10,16 @@ function render() {
 
 
   // Comandi per fps
-  // controls.isOnObject( false );        
-  // rayMove.ray.origin.copy( controls.getObject().position );
-  // console.log(rayMove.ray.origin);
-  // rayMove.ray.origin.y -= 10;
-  // var intersections = rayMove.intersectObjects( objects );
-  // if ( intersections.length > 0 ) {
-  //   var distance = intersections[ 0 ].distance;
-  //   if ( distance > 0 && distance < 10 ) {
-  //     controls.isOnObject( true );
-  //   }
-  // }
-  // controls.update();
+  controls.isOnObject( false );        
+  rayMove.ray.origin.copy( controls.getObject().position );
+  var intersections = rayMove.intersectObjects( objects );
+  if ( intersections.length > 0 ) {
+    var distance = intersections[ 0 ].distance;
+    if ( distance > 0 && distance < 10 ) {
+      controls.isOnObject( true );
+    }
+  }
+  controls.update();
 }
 
 function createMesh(geom,rx, ry, imageFile, bump) {
@@ -58,8 +56,7 @@ function createMesh(geom,rx, ry, imageFile, bump) {
   texture.repeat.set( rx, ry ); 
   if (texture_normal!=undefined){
     var floorMaterial = new THREE.MeshPhongMaterial( { map: texture, side: THREE.DoubleSide, normalMap: texture_normal} ); 
-    // console.log("metto la normal nel material") 
-    // console.log(floorMaterial);
+
   } else {
     var floorMaterial = new THREE.MeshPhongMaterial( { map: texture, side: THREE.DoubleSide} );
   }
@@ -77,25 +74,25 @@ function onDocumentMouseDown(event) {
   event.preventDefault();
 
   // map viewport coordinates in ([-1,1], [-1,1], 0.5)
-  var vector = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0.5);
+  // var vector = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0.5);
+  // projector.unprojectVector(vector, camera);
+  // var raycaster = new THREE.Raycaster(camera.position, 
+  // vector.sub(camera.position).normalize());
+  // var intersects = raycaster.intersectObjects(toIntersect);
+  // if (intersects.length > 0) {
+  // intersects[ 0 ].object.interact && intersects[ 0 ].object.interact(); 
+  // }
+
+
+  var vector = new THREE.Vector3(0, 0, 0.5);
   projector.unprojectVector(vector, camera);
-  var raycaster = new THREE.Raycaster(camera.position, 
-  vector.sub(camera.position).normalize());
+  var dir = controls.getDirection(new THREE.Vector3(0, 0, 0)).clone();
+  var raycaster = new THREE.Raycaster(vector, dir);
+  // scene.add(new THREE.ArrowHelper(raycaster.ray.direction, raycaster.ray.origin, 50, 0x000000));
   var intersects = raycaster.intersectObjects(toIntersect);
   if (intersects.length > 0) {
     intersects[ 0 ].object.interact && intersects[ 0 ].object.interact(); 
   }
-
-
-  // var vector = new THREE.Vector3(0, 0, 0.5);
-  // projector.unprojectVector(vector, camera);
-  // var dir = controls.getDirection(new THREE.Vector3(0, 0, 0)).clone();
-  // var raycaster = new THREE.Raycaster(vector, dir);
-  // // scene.add(new THREE.ArrowHelper(raycaster.ray.direction, raycaster.ray.origin, 50, 0x000000));
-  // var intersects = raycaster.intersectObjects(toIntersect);
-  // if (intersects.length > 0) {
-  //   intersects[ 0 ].object.interact && intersects[ 0 ].object.interact(); 
-  // }
 }
 
 function initStats() {

@@ -21,38 +21,38 @@
       scene.add(dir4);
 
       // Disimpegno
-      var light1 = mk_lamp_ceiling(0.3, 0x00FF00, 5);
+      var light1 = mk_lamp_ceiling(0.3, 0x00FF00, 7);
       apartment.add(light1);
       light1.position.set(12.8,12.3,6);
-      light1.pointLight.position.set(0,0,-1);
+      light1.pointLight.position.set(0,0,0);
       light1.spotLight.target=(light1.target);
 
       // Ingresso
-      var light2 = mk_lamp_ceiling(0.3, 0x00FF00, 4);
+      var light2 = mk_lamp_ceiling(0.3, 0x00FF00, 7);
       apartment.add(light2);
       light2.position.set(12.8,4.3,6);
-      light2.pointLight.position.set(0,0,-2);
+      light2.pointLight.position.set(0,0,0);
       light2.spotLight.target=(light2.target);
 
       //Corridoip
-      var light3 = mk_lamp_ceiling(0.3, 0x00FF00, 4);
+      var light3 = mk_lamp_ceiling(0.3, 0x00FF00, 7);
       apartment.add(light3);
       light3.position.set(12.8,18.3,6);
-      light3.pointLight.position.set(0,0,-2)
+      light3.pointLight.position.set(0,0,0)
       light3.spotLight.target=(light3.target);
 
       //Camera
       var light4 = mk_lamp_ceiling(0.3, 0x00FF00, 5);
       apartment.add(light4);
       light4.position.set(19.6,3.5,6);
-      light4.pointLight.position.set(0,0,-2);
+      light4.pointLight.position.set(0,0,0);
       light4.spotLight.target=(light4.target);
 
       //Bagno
-      var light5 = mk_lamp_ceiling(0.3, 0x00FF00, 5);
+      var light5 = mk_lamp_ceiling(0.3, 0x00FF00, 7);
       apartment.add(light5);
       light5.position.set(20.8,9.3,6);
-      light5.pointLight.position.set(0,0,-2);
+      light5.pointLight.position.set(0,0,0);
       light5.spotLight.target=(light5.target);
 
 
