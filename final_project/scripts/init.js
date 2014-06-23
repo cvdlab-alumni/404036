@@ -8,7 +8,7 @@ var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHei
 // camera.up = new THREE.Vector3(0,0,1);
 // camera.position.set(-30,40,50);
 camera.up = new THREE.Vector3(0,1,0);
-camera.position.set(0,20,0);
+camera.position.set(0,30,0);
 camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 

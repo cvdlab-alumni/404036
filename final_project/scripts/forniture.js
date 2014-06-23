@@ -6,6 +6,7 @@ var porta_texture = THREE.ImageUtils.loadTexture("./textures/rovere_naturale.jpg
 var portMaterial = new THREE.MeshLambertMaterial({map: porta_texture});
 
 var texture_lamp = THREE.ImageUtils.loadTexture("./textures/lamp2.jpg");
+var texture_desk = THREE.ImageUtils.loadTexture("./textures/wood_texture1.jpg");
 
 function mk_blind(width, height, depth){
 	var blind_texture = THREE.ImageUtils.loadTexture("./textures/porta_blind.jpg");
@@ -265,4 +266,23 @@ function mk_lamp_ceiling(radius_lampShade, lColor, distance){
 
 
     return lampShade;
+}
+
+
+function mk_desk(){
+	var tavolo = new THREE.Object3D();
+	var deskMaterial = new THREE.MeshLambertMaterial({map: texture_desk});
+	var surfaceGeometry = new THREE.BoxGeometry(3,1.8,0.2);
+	var legGeometry = new THREE.BoxGeometry(0.1,1.4,2);
+
+	var desk = new THREE.Mesh(surfaceGeometry, deskMaterial);
+	var leg1 = new THREE.Mesh(legGeometry, deskMaterial);
+	var leg2 = leg1.clone();
+	tavolo.add(desk);
+	tavolo.add(leg1);
+	tavolo.add(leg2);
+	desk.position.set(0,0,1.1);
+	leg1.position.set(1.2,0,0);
+	leg2.position.set(-1.2,0,0);
+	return tavolo;
 }

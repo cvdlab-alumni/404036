@@ -20,6 +20,15 @@ function render() {
     }
   }
   controls.update();
+
+
+  if ( video.readyState === video.HAVE_ENOUGH_DATA ) 
+  {
+    videoImageContext.drawImage( video, 0, 0, videoImage.width, videoImage.height );
+    if ( videoTexture ) 
+      videoTexture.needsUpdate = true;
+  }
+
 }
 
 function createMesh(geom,rx, ry, imageFile, bump) {
@@ -88,7 +97,7 @@ function onDocumentMouseDown(event) {
   projector.unprojectVector(vector, camera);
   var dir = controls.getDirection(new THREE.Vector3(0, 0, 0)).clone();
   var raycaster = new THREE.Raycaster(vector, dir);
-  // scene.add(new THREE.ArrowHelper(raycaster.ray.direction, raycaster.ray.origin, 50, 0x000000));
+  scene.add(new THREE.ArrowHelper(raycaster.ray.direction, raycaster.ray.origin, 50, 0x000000));
   var intersects = raycaster.intersectObjects(toIntersect);
   if (intersects.length > 0) {
     intersects[ 0 ].object.interact && intersects[ 0 ].object.interact(); 
