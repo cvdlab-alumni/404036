@@ -273,7 +273,7 @@ function mk_desk(){
 	var tavolo = new THREE.Object3D();
 	var deskMaterial = new THREE.MeshLambertMaterial({map: texture_desk});
 	var surfaceGeometry = new THREE.BoxGeometry(3,1.8,0.2);
-	var legGeometry = new THREE.BoxGeometry(0.1,1.4,2);
+	var legGeometry = new THREE.BoxGeometry(0.1,1.4,1.6);
 
 	var desk = new THREE.Mesh(surfaceGeometry, deskMaterial);
 	var leg1 = new THREE.Mesh(legGeometry, deskMaterial);
@@ -281,7 +281,7 @@ function mk_desk(){
 	tavolo.add(desk);
 	tavolo.add(leg1);
 	tavolo.add(leg2);
-	desk.position.set(0,0,1.1);
+	desk.position.set(0,0,0.9);
 	leg1.position.set(1.2,0,0);
 	leg2.position.set(-1.2,0,0);
 	return tavolo;

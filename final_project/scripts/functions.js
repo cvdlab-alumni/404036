@@ -1,26 +1,13 @@
 function render() {
   stats.update();
-  // trackballControls.update();
   TWEEN.update();
-
+  trackballControls.update();
   requestAnimationFrame(render);
   webGLRenderer.render(scene, camera);
 
-
-
-
-  // Comandi per fps
-  controls.isOnObject( false );        
-  rayMove.ray.origin.copy( controls.getObject().position );
-  var intersections = rayMove.intersectObjects( objects );
-  if ( intersections.length > 0 ) {
-    var distance = intersections[ 0 ].distance;
-    if ( distance > 0 && distance < 10 ) {
-      controls.isOnObject( true );
-    }
+  if (FPenabled === true) {
+    computeFPControls();
   }
-  controls.update();
-
 
   if ( video.readyState === video.HAVE_ENOUGH_DATA ) 
   {
@@ -29,37 +16,81 @@ function render() {
       videoTexture.needsUpdate = true;
   }
 
+  // ******* Controllo video TV *********
+  if (film.readyState === film.HAVE_ENOUGH_DATA) {
+    if (isOn) {
+      if (textureSW) textureSW.needsUpdate = true;
+      film.play();
+    } else {
+      film.pause();
+    }
+  }
 }
 
 function createMesh(geom,rx, ry, imageFile, bump) {
-  // var texture = THREE.ImageUtils.loadTexture("" + imageFile)
   var texture = null;
   var texture_normal;
 
-  if(imageFile===1) {
+  switch(imageFile) {
+    case 1:
     texture = tex_floor_camera;
-  } else if (imageFile===2){
+    break;
+    case 2:
     texture = tex_floor_bagno;
-  } else if (imageFile===3){
+    break;
+    case 3:
     texture = tex_floor_salone;
-  } else if (imageFile===4){
+    break;
+    case 4:
     texture = tex_floor_generico;
-  } else if (imageFile===5){
+    break;
+    case 5:
     texture = tex_wall_generico;
-  } else if (imageFile===6){
+    break;
+    case 6:
     texture = tex_wall_salone;
-  } else if (imageFile===7){
+    break;
+    case 7:
     texture = tex_wall_camera;
-  } else if (imageFile===8){
+    break;
+    case 8:
     texture = tex_wall_bagno;
-  } else if (imageFile===9){
+    break;
+    case 9:
     texture = tex_wall_cucina;
     texture_normal = tex_wall_cucina_normal
-    // console.log("carico la normal muro cucina");
-  } else if (imageFile===10){
+    break;
+    case 10:
     texture = tex_wall_esterno;
     texture_normal = tex_wall_esterno_normal
+    break;
+    // default:
+    // default code block
   }
+  // if(imageFile===1) {
+  //   texture = tex_floor_camera;
+  // } else if (imageFile===2){
+  //   texture = tex_floor_bagno;
+  // } else if (imageFile===3){
+  //   texture = tex_floor_salone;
+  // } else if (imageFile===4){
+  //   texture = tex_floor_generico;
+  // } else if (imageFile===5){
+  //   texture = tex_wall_generico;
+  // } else if (imageFile===6){
+  //   texture = tex_wall_salone;
+  // } else if (imageFile===7){
+  //   texture = tex_wall_camera;
+  // } else if (imageFile===8){
+  //   texture = tex_wall_bagno;
+  // } else if (imageFile===9){
+  //   texture = tex_wall_cucina;
+  //   texture_normal = tex_wall_cucina_normal
+  //   // console.log("carico la normal muro cucina");
+  // } else if (imageFile===10){
+  //   texture = tex_wall_esterno;
+  //   texture_normal = tex_wall_esterno_normal
+  // }
 
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping; 
   texture.repeat.set( rx, ry ); 
@@ -81,26 +112,21 @@ function createMesh(geom,rx, ry, imageFile, bump) {
 
 function onDocumentMouseDown(event) {
   event.preventDefault();
+  if (document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element) {
+    var vector = new THREE.Vector3(0, 0, 2);
+    projector.unprojectVector(vector, camera);
+    var raycaster = new THREE.Raycaster(vector,
+      controls.getDirection(new THREE.Vector3(0, 0, 0)).clone());
+  } else {
+    var vector = new THREE.Vector3((event.clientX / window.innerWidth) * 2 - 1, -(event.clientY / window.innerHeight) * 2 + 1, 0.5);
+    projector.unprojectVector(vector, camera);
+    var raycaster = new THREE.Raycaster(camera.position,
+      vector.sub(camera.position).normalize());
 
-  // map viewport coordinates in ([-1,1], [-1,1], 0.5)
-  // var vector = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0.5);
-  // projector.unprojectVector(vector, camera);
-  // var raycaster = new THREE.Raycaster(camera.position, 
-  // vector.sub(camera.position).normalize());
-  // var intersects = raycaster.intersectObjects(toIntersect);
-  // if (intersects.length > 0) {
-  // intersects[ 0 ].object.interact && intersects[ 0 ].object.interact(); 
-  // }
-
-
-  var vector = new THREE.Vector3(0, 0, 0.5);
-  projector.unprojectVector(vector, camera);
-  var dir = controls.getDirection(new THREE.Vector3(0, 0, 0)).clone();
-  var raycaster = new THREE.Raycaster(vector, dir);
-  scene.add(new THREE.ArrowHelper(raycaster.ray.direction, raycaster.ray.origin, 50, 0x000000));
+  }
   var intersects = raycaster.intersectObjects(toIntersect);
   if (intersects.length > 0) {
-    intersects[ 0 ].object.interact && intersects[ 0 ].object.interact(); 
+    intersects[0].object.interact && intersects[0].object.interact();
   }
 }
 

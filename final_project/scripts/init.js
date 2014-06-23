@@ -1,18 +1,12 @@
 var stats = initStats();
 
-
 var scene = new THREE.Scene();
 
-
 var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-// camera.up = new THREE.Vector3(0,0,1);
-// camera.position.set(-30,40,50);
 camera.up = new THREE.Vector3(0,1,0);
-camera.position.set(0,30,0);
-camera.lookAt(new THREE.Vector3(0, 0, 0));
+camera.position.set(-90,130,-90);
+camera.lookAt(scene.position);
 
-
-var projector = new THREE.Projector();
 document.addEventListener('mousedown', onDocumentMouseDown, false);
 window.addEventListener('resize', onWindowResize, false);
 var toIntersect=[];
@@ -21,31 +15,24 @@ var toIntersect=[];
 var trackballControls = new THREE.TrackballControls(camera);
 
 var axisHelper = new THREE.AxisHelper(276);
-// var axisHelper = new THREE.AxisHelper(21.6);
 scene.add(axisHelper);
 
 
 var webGLRenderer = new THREE.WebGLRenderer();
-// var webGLRenderer = new THREE.WebGLRenderer3( { contextAttributes: { antialias: false } } );
 webGLRenderer.setClearColor(new THREE.Color(0xC7C7C7, 1.0));
 webGLRenderer.setSize(window.innerWidth, window.innerHeight);
 
-
-
 THREE.ImageUtils.crossOrigin = "anonymous";
 
-
-controls = new THREE.PointerLockControls(camera);
-scene.add(controls.getObject());
-
-// var FPenabled = false;//aggiunta per trackball?
-rayMove = new THREE.Raycaster();
-// rayMove.ray.direction.set(0, 0, -1);
-
-rayPointer = new THREE.Raycaster();
+// first person controls
+var FPenabled = false;
+var controls;
+var objects = [];
+var rayMove = new THREE.Raycaster();
+rayMove.ray.direction.set(0, 0, -1);
+var rayPointer = new THREE.Raycaster();
 
 var projector = new THREE.Projector();
-
 
 // Caricamento unico texture
 var tex_floor_camera = THREE.ImageUtils.loadTexture("./textures/parquet_letto.jpg");
