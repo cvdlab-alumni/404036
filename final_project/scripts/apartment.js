@@ -1,8 +1,8 @@
 var mesh;
 var apartment = new THREE.Object3D();
 
-var plane = new THREE.Mesh(new THREE.BoxGeometry(1000,1000,1),new THREE.MeshLambertMaterial({color: 0x00ff00, side: THREE.DoubleSide}) );
-scene.add(plane);
+var plane = new THREE.Mesh(new THREE.BoxGeometry(1000,1000,1),new THREE.MeshLambertMaterial({color: 0x00ff00, side: THREE.DoubleSide, transparent:true, opacity:0}) );
+// scene.add(plane);
 plane.rotation.x=Math.PI/2;
 plane.position.set(0,-0.5,0);
 
@@ -32,6 +32,21 @@ apartment = mk_all_floors(apartment);
 apartment = mk_all_int_walls(apartment);
 
 apartment = mk_all_ext_walls(apartment);
+
+
+var frame_bump = mk_frame("bump");
+apartment.add(frame_bump);
+frame_bump.position.set(10.18,7,3);
+
+var frame = mk_frame();
+apartment.add(frame);
+frame.position.set(10.18,10,3);
+
+var frame_normal = mk_frame("normal");
+apartment.add(frame_normal);
+frame_normal.position.set(10.18,13,3);
+
+
 
 apartment.position.set(-123,0,108);
 apartment.scale.set(10,10,10);

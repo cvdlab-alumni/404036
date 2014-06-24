@@ -305,6 +305,7 @@ function mk_all_ext_walls(apartment){
       apartment.add(muro_ext_4);
       muro_ext_4.rotation.y = Math.PI/2;
       muro_ext_4.position.set(-0.01,0,0);
+      apartment.muro_esterno = muro_ext_4;
       
       return apartment;
 }

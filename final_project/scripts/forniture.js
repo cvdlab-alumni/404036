@@ -8,6 +8,12 @@ var portMaterial = new THREE.MeshLambertMaterial({map: porta_texture});
 var texture_lamp = THREE.ImageUtils.loadTexture("./textures/lamp2.jpg");
 var texture_desk = THREE.ImageUtils.loadTexture("./textures/wood_texture1.jpg");
 
+var texture_frame = THREE.ImageUtils.loadTexture("textures/frame.jpg");
+var texture_frame_bump = THREE.ImageUtils.loadTexture("textures/frame_bump.jpg");
+var texture_frame_normal = THREE.ImageUtils.loadTexture("textures/frame_normal.jpg");
+var texture_photo = THREE.ImageUtils.loadTexture("textures/photo.jpg");
+
+
 function mk_blind(width, height, depth){
 	var blind_texture = THREE.ImageUtils.loadTexture("./textures/porta_blind.jpg");
 	var blind_normal_texture = THREE.ImageUtils.loadTexture("./textures/porta_blind_normal.jpg");
@@ -239,24 +245,10 @@ function mk_lamp_ceiling(radius_lampShade, lColor, distance){
  	// console.log(lampShade);
 	lampShade.interact=function(){
 		if(!this.on){
-			// var lightOn = new TWEEN.Tween(this.children[1])
-			// 	.to({intensity: 0.8},1);
-
-			// new TWEEN.Tween(this.children[0])
-			// .to({intensity: 0.3},1)
-			// .chain(lightOn)
-			// .start();
-
 			this.children[0].intensity=0.3;
 			this.children[1].intensity=1;
 			this.on=true;
 		} else {
-			// var lightOff = new TWEEN.Tween(this.children[1])
-			// 	.to({intensity: 0},1);
-			// new TWEEN.Tween(this.children[0])
-			// .to({intensity: 0},100)
-			// .chain(lightOff)
-			// .start();
 			this.children[0].intensity=0;
 			this.children[1].intensity=0;
 			this.on=false;
@@ -285,4 +277,51 @@ function mk_desk(){
 	leg1.position.set(1.2,0,0);
 	leg2.position.set(-1.2,0,0);
 	return tavolo;
+}
+
+function mk_frame(tipo){
+	var picture = new THREE.Object3D();
+	var fGeometry = new THREE.PlaneGeometry(5,5, 5,5);
+
+	if(tipo==="bump"){ var fMaterial = new THREE.MeshPhongMaterial({ map: texture_frame, bumpMap: texture_frame_bump, bumpScale: 0.0, side: THREE.DoubleSide});} 
+	else if (tipo==="normal"){var fMaterial = new THREE.MeshPhongMaterial({ map: texture_frame, normalMap: texture_frame_normal, side: THREE.DoubleSide});}
+	else { var fMaterial = new THREE.MeshPhongMaterial({ map: texture_frame, side: THREE.DoubleSide});}
+	
+	var frame = new THREE.Mesh(fGeometry, fMaterial);
+	picture.add(frame);
+	frame.scale.set(1,0.9,1);
+
+	var photoGeometry = new THREE.PlaneGeometry(3.3,2.9, 5,5);
+	var photoMaterial = new THREE.MeshLambertMaterial({ map: texture_photo, side: THREE.DoubleSide});
+	var photo = new THREE.Mesh(photoGeometry, photoMaterial);
+	photo.position.set(0,-0.01,0.01)
+	photo.scale.set(0.88,1,1);
+	
+	picture.add(photo);
+	
+	picture.rotation.x=Math.PI/2;
+	picture.rotation.y=-Math.PI/2;
+	picture.scale.set(0.3,0.3,0.3);
+	return picture;
+}
+
+function mk_controller_tv(width, height){
+	var control1 = new THREE.Mesh(new THREE.PlaneGeometry(width/2,height/2), new THREE.MeshBasicMaterial({color: 0x000000, side: THREE.DoubleSide, transparent:true, opacity:0}));
+	var control2 = new THREE.Mesh(new THREE.PlaneGeometry(width/2,height/2), new THREE.MeshBasicMaterial({color: 0xff0000, side: THREE.DoubleSide, transparent:true, opacity:0}));
+	var control3 = new THREE.Mesh(new THREE.PlaneGeometry(width/2,height/2), new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.DoubleSide, transparent:true, opacity:0}));
+	var control4 = new THREE.Mesh(new THREE.PlaneGeometry(width/2,height/2), new THREE.MeshBasicMaterial({color: 0x0000ff, side: THREE.DoubleSide, transparent:true, opacity:0}));
+	var controller = new THREE.Object3D();
+	controller.add(control1);
+	controller.add(control2);
+	controller.add(control3);
+	controller.add(control4);
+	control1.position.set(width/2,height,0);
+	control2.position.set(width,height,0);
+	control3.position.set(width/2,height/2,0);
+	control4.position.set(width,height/2,0);
+	controller.control1=control1;
+	controller.control2=control2;
+	controller.control3=control3;
+	controller.control4=control4;
+	return controller;
 }

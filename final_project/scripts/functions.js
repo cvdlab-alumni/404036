@@ -55,47 +55,27 @@ function createMesh(geom,rx, ry, imageFile, bump) {
     break;
     case 8:
     texture = tex_wall_bagno;
+    // texture_normal = tex_wall_bagno_normal;
     break;
     case 9:
     texture = tex_wall_cucina;
-    texture_normal = tex_wall_cucina_normal
+    // texture_normal = tex_wall_cucina_normal
     break;
     case 10:
     texture = tex_wall_esterno;
     texture_normal = tex_wall_esterno_normal
+    // geom.computeVertexNormals();
     break;
-    // default:
-    // default code block
+    
   }
-  // if(imageFile===1) {
-  //   texture = tex_floor_camera;
-  // } else if (imageFile===2){
-  //   texture = tex_floor_bagno;
-  // } else if (imageFile===3){
-  //   texture = tex_floor_salone;
-  // } else if (imageFile===4){
-  //   texture = tex_floor_generico;
-  // } else if (imageFile===5){
-  //   texture = tex_wall_generico;
-  // } else if (imageFile===6){
-  //   texture = tex_wall_salone;
-  // } else if (imageFile===7){
-  //   texture = tex_wall_camera;
-  // } else if (imageFile===8){
-  //   texture = tex_wall_bagno;
-  // } else if (imageFile===9){
-  //   texture = tex_wall_cucina;
-  //   texture_normal = tex_wall_cucina_normal
-  //   // console.log("carico la normal muro cucina");
-  // } else if (imageFile===10){
-  //   texture = tex_wall_esterno;
-  //   texture_normal = tex_wall_esterno_normal
-  // }
-
+  
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping; 
   texture.repeat.set( rx, ry ); 
   if (texture_normal!=undefined){
+    
     var floorMaterial = new THREE.MeshPhongMaterial( { map: texture, side: THREE.DoubleSide, normalMap: texture_normal} ); 
+    floorMaterial.normalScale.set(+1,+1);
+    // console.log(imageFile, texture, texture_normal, floorMaterial);
 
   } else {
     var floorMaterial = new THREE.MeshPhongMaterial( { map: texture, side: THREE.DoubleSide} );
@@ -124,6 +104,7 @@ function onDocumentMouseDown(event) {
       vector.sub(camera.position).normalize());
 
   }
+  // scene.add(new THREE.ArrowHelper(raycaster.ray.direction, raycaster.ray.origin, 10, 0x000000));
   var intersects = raycaster.intersectObjects(toIntersect);
   if (intersects.length > 0) {
     intersects[0].object.interact && intersects[0].object.interact();
