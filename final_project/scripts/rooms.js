@@ -1,41 +1,41 @@
 function mk_all_doors(apartment){
       apartment.position.set(-12.3,-10.8,0);
-      var door = mk_blind(3.4,4.4,0.3);
-      apartment.add(door);
-      door.position.set(11,0.3,3);
+      var door_ingresso = mk_blind(3.4,4.4,0.3);
+      apartment.add(door_ingresso);
+      door_ingresso.position.set(11,0.3,3);
 
-      var door1=mk_door(1.6,4.2,0.15);
-      apartment.add(door1);
-      door1.position.set(11.9,7.55,2.9);
+      var door_dis=mk_door(1.6,4.2,0.15);
+      apartment.add(door_dis);
+      door_dis.position.set(11.9,7.55,2.9);
 
-      var door2=mk_door(1.6,4.2,0.15);
-      door2.rotation.z=Math.PI/2;
-      apartment.add(door2);
-      door2.position.set(15.05,2.7,2.9);
+      var door_cam=mk_door(1.6,4.2,0.15);
+      door_cam.rotation.z=Math.PI/2;
+      apartment.add(door_cam);
+      door_cam.position.set(15.05,2.7,2.9);
 
-      var door3=mk_door(1.6,4.2,0.15, 1);
-      door3.rotation.z=Math.PI/2;
-      apartment.add(door3);
-      door3.position.set(10.35,2.7,2.9);
+      var door_sal1=mk_door(1.6,4.2,0.15, 1);
+      door_sal1.rotation.z=Math.PI/2;
+      apartment.add(door_sal1);
+      door_sal1.position.set(10.35,2.7,2.9);
 
-      var door4=mk_door(1.6,4.2,0.15, 1);
-      door4.rotation.z=Math.PI/2;
-      apartment.add(door4);
-      door4.position.set(15.05,8.6,2.9);
+      var door_cuc1=mk_door(1.6,4.2,0.15, 1);
+      door_cuc1.rotation.z=Math.PI/2;
+      apartment.add(door_cuc1);
+      door_cuc1.position.set(15.05,8.6,2.9);
 
-      var door5=mk_door(1.6,4.2,0.15);
-      door5.rotation.z=Math.PI/2;
-      apartment.add(door5);
-      door5.position.set(15.05,17.7,2.9);
+      var door_cuc2=mk_door(1.6,4.2,0.15);
+      door_cuc2.rotation.z=Math.PI/2;
+      apartment.add(door_cuc2);
+      door_cuc2.position.set(15.05,17.7,2.9);
 
-      var door6=mk_door(1.6,4.2,0.15, 1);
-      door6.rotation.z=Math.PI/2;
-      apartment.add(door6);
-      door6.position.set(10.35,17.7,2.9);
+      var door_sal2=mk_door(1.6,4.2,0.15, 1);
+      door_sal2.rotation.z=Math.PI/2;
+      apartment.add(door_sal2);
+      door_sal2.position.set(10.35,17.7,2.9);
 
-      var door7=mk_door(1.6,4.2,0.15);
-      apartment.add(door7);
-      door7.position.set(20.0,6.35,2.9);
+      var door_bagno=mk_door(1.6,4.2,0.15);
+      apartment.add(door_bagno);
+      door_bagno.position.set(20.0,6.35,2.9);
       return apartment;
 }
 

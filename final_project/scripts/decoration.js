@@ -98,21 +98,7 @@ var countClick=0;
 
 
 var screenTV = new THREE.Mesh(new THREE.PlaneGeometry(1.6,0.86), new THREE.MeshLambertMaterial({map: texture_tvOff, side: THREE.DoubleSide}));
-// toIntersect.push(screenTV);
 screenTV.on = false;
-//       screenTV.interact = function () {
-//         if(!screenTV.on) {
-//             isOn = true;
-//             screenTV.on = true;
-//             screenTV.material.map=textureSW;
-//             countClick++;
-//         } else {
-//             isOn = false;
-//             screenTV.on = false;
-//             screenTV.material.map=texture_tvOff;
-//             if(countClick%3==1){ film.src="movies/star_wars_4.ogv"} else if (countClick%3==2){film.src="movies/Dragon_ball.ogv"} else {film.src="movies/Big_Buck_Bunny_small.ogv"}
-//             }
-//         }
     
 apartment.add(screenTV);
 
@@ -120,50 +106,10 @@ var controller = mk_controller_tv(1.6,0.86);
 screenTV.add(controller);
 controller.position.set(-1.2,-0.63,0.01);
 
-toIntersect.push(controller.control1);
-toIntersect.push(controller.control2);
-toIntersect.push(controller.control3);
-toIntersect.push(controller.control4);
-controller.control1.interact=function(){
-      if(screenTV.on) {
-            isOn = false;
-            screenTV.on = false;
-            screenTV.material.map=texture_tvOff;
-      } else {
-        screenTV.on = true;
-        screenTV.material.map=texture_tvColor;
-      }
-}
-controller.control2.interact=function(){
-      if(screenTV.on) {
-            isOn = true;
-            screenTV.on = true;
-            screenTV.material.map=textureSW;
-      }
-      film.src="movies/star_wars_4.ogv";
-}
-controller.control3.interact=function(){
-      if(screenTV.on) {
-            isOn = true;
-            screenTV.on = true;
-            screenTV.material.map=textureSW;
-      }
-      film.src="movies/Dragon_ball.ogv";
-}
-controller.control4.interact=function(){
-      if(screenTV.on) {
-            isOn = true;
-            screenTV.on = true;
-            screenTV.material.map=textureSW;
-      }
-      film.src="movies/Big_Buck_Bunny_small.ogv";
-}
-
-
-
 screenTV.rotation.x=Math.PI/2;
 screenTV.position.set(4.9,19.4,2.99);
 
+// ***** forno cucina *****
 loader4.load('models/kitchen/fkc.obj', function (obj) {
       var material = new THREE.MeshPhongMaterial({map: texture_cucina, normalMap:texture_cucina_normal, metal: false});
       obj.traverse(function (child) {
@@ -171,25 +117,24 @@ loader4.load('models/kitchen/fkc.obj', function (obj) {
             child.material = material;
             }
       });
-      // console.log(obj);
       obj.scale.set(0.07, 0.07, 0.07);
       obj.rotation.x = Math.PI/2;
       apartment.add(obj);
       obj.position.set(21.45,19.83,0.8);
 });
 
+// ***** Tavolo per la tv *****
 loader5.addEventListener('load', function (event) {
 
     var object = event.content;
     object.scale.set(2, 2, 2.5);
-    // letto = object;
-    // object.rotation.x=Math.PI/2;
     apartment.add(object);
     object.position.set(5,19.5,2.20);
 
 });
 loader5.load('models/table_cheap/table.obj', 'models/table_cheap/table.mtl', {side: THREE.DoubleSide});
 
+// ***** divano *****
 loader4.load('models/sofa/modern_sofa.obj', function (obj) {
       var material = new THREE.MeshPhongMaterial({map: texture_sofa, metal: false});
       obj.traverse(function (child) {

@@ -6,7 +6,7 @@ d 1
 illum 2
 Ka 0 0 0
 Ks 0.2 0.2 0.2
-map_Kd Texture.JPG
+map_Kd ../../textures/texture_letto.jpg
 newmtl Default
 Kd 0.8 0.8 0.8
 Ns 256
@@ -14,7 +14,7 @@ d 1
 illum 2
 Ka 0 0 0
 Ks 0.2 0.2 0.2
-map_Kd Texture.JPG
+map_Kd ../../textures/texture_letto.jpg
 newmtl Wood
 Kd 0.8 0.8 0.8
 Ns 256
@@ -22,4 +22,4 @@ d 1
 illum 2
 Ka 0 0 0
 Ks 0.2 0.2 0.2
-map_Kd Texture.JPG
+map_Kd ../../textures/texture_letto.jpg

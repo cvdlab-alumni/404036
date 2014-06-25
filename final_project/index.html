@@ -1,7 +1,6 @@
-
 <!DOCTYPE html>
 <html>
- <head> 
+<head> 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Final Project - Daniele Conti</title> 
   <style>
@@ -15,69 +14,69 @@
       left: 0px;
       top: 0px;
     }
-/*roba aggiunta da me*/
+    /*roba aggiunta da me*/
     #pointer {
-       position: fixed;
-       top: 50%;
-       left: 50%;
-       margin-top: -15px;
-       margin-left: -15px;
-       width: 30px;
-       height: 30px;
-       display: none;
-       background-image: url("images/pointer.png");
-       background-repeat: no-repeat;
-       background-size: contain;
-     }
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     margin-top: -15px;
+     margin-left: -15px;
+     width: 30px;
+     height: 30px;
+     display: none;
+     background-image: url("images/pointer.png");
+     background-repeat: no-repeat;
+     background-size: contain;
+   }
 
-     #film{
-      display: none; 
-      position: absolute; 
-      left: 0px;
-      top: 0px;
-    }
-    #monitor{
-      display: none; 
-      position: absolute; 
-      left: 0px;
-      top: 0px;
-    }
-    #videoImage{
-      display: none; 
-      position: absolute; 
-      left: 0px;
-      top: 0px;
-    }
-
-      /**/
-  </style> 
-  </head>
-  <body>
-
-<!-- Roba per la webcam -->
-<video id="monitor" autoplay width="160" height="120" style="visibility: hidden; float:left;"></video>
-<canvas id="videoImage" width="160" height="120" style="visibility: hidden; float:left;"></canvas>
-<video id="film" src="movies/Big_Buck_Bunny_small.ogv" controls="true" autoplay="false"></video> 
-<script>
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-window.URL = window.URL || window.webkitURL;
-
-var camvideo = document.getElementById('monitor');
-
-  if (!navigator.getUserMedia) 
-  {
-    document.getElementById('errorMessage').innerHTML = 
-      'Sorry. <code>navigator.getUserMedia()</code> is not available.';
-  } else {
-    navigator.getUserMedia({video: true}, gotStream, noStream);
+   #film{
+    display: none; 
+    position: absolute; 
+    left: 0px;
+    top: 0px;
+  }
+  #monitor{
+    display: none; 
+    position: absolute; 
+    left: 0px;
+    top: 0px;
+  }
+  #videoImage{
+    display: none; 
+    position: absolute; 
+    left: 0px;
+    top: 0px;
   }
 
-function gotStream(stream) 
-{
-  if (window.URL) 
-  {   camvideo.src = window.URL.createObjectURL(stream);   } 
+  /**/
+</style> 
+</head>
+<body>
+
+  <!-- Roba per la webcam -->
+  <video id="monitor" autoplay width="160" height="120" style="visibility: hidden; float:left;"></video>
+  <canvas id="videoImage" width="160" height="120" style="visibility: hidden; float:left;"></canvas>
+  <video id="film" src="movies/Big_Buck_Bunny_small.ogv" controls="true" autoplay="false"></video> 
+  <script>
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    window.URL = window.URL || window.webkitURL;
+
+    var camvideo = document.getElementById('monitor');
+
+    if (!navigator.getUserMedia) 
+    {
+      document.getElementById('errorMessage').innerHTML = 
+      'Sorry. <code>navigator.getUserMedia()</code> is not available.';
+    } else {
+      navigator.getUserMedia({video: true}, gotStream, noStream);
+    }
+
+    function gotStream(stream) 
+    {
+      if (window.URL) 
+        {   camvideo.src = window.URL.createObjectURL(stream);   } 
   else // Opera
-  {   camvideo.src = stream;   }
+    {   camvideo.src = stream;   }
 
   camvideo.onerror = function(e) 
   {   stream.stop();   };
@@ -89,13 +88,13 @@ function noStream(e)
 {
   var msg = 'No camera available.';
   if (e.code == 1) 
-  {   msg = 'User denied access to use camera.';   }
+    {   msg = 'User denied access to use camera.';   }
   // document.getElementById('errorMessage').textContent = msg;
 }
 </script>
 
 <!--  roba aggiunta da me -->
-  <div id="pointer"></div>
+<div id="pointer"></div>
 <!--  -->
 
 <!-- JavaScript libraries -->
@@ -120,10 +119,12 @@ function noStream(e)
 <script src="scripts/apartment.js"></script>
 <script src="scripts/light.js"></script>
 <script src="scripts/decoration.js"></script>
-  
+<script src="scripts/SpecialFX.js"></script>
+<script src="scripts/gui.js"></script>
 
-  <!-- Javascript code that runs our Three.js examples --> 
-  <script>
+
+<!-- Javascript code that runs our Three.js examples --> 
+<script>
     // once everything is loaded, we run our Three.js stuff.
     $(function () {
 
@@ -131,133 +132,60 @@ function noStream(e)
       $('body').append(webGLRenderer.domElement);
 
 
-      // setup the control gui
-      var controlGUI = new function() {
-        this.startFP = startFP;
-        this.bumpScale = 0.0;
-        this.normalScale = 0.0;
-        this.updateBump = function (e) {
-          frame_bump.children[0].material.bumpScale = e;
-        }
-        this.updateNormal = function(e) {
-          frame_normal.children[0].material.normalScale.set(e,e);
-        }
-        this.collision = false;
-        this.rain = false;
-      };
-
-      var gui = new dat.GUI();
-      gui.add(controlGUI, "startFP");
-      gui.add(controlGUI, "bumpScale", -2, 2).onChange(controlGUI.updateBump);
-      gui.add(controlGUI, "normalScale", -2, 2).onChange(controlGUI.updateNormal);
-      gui.add(controlGUI, "collision").onChange(function (e){
-        collisione =e;
-      });
-      gui.add(controlGUI, "rain").onChange(function (e){
-        if (e){
-          rain=e;
-          scene.add(particleSystem);
-        } else {
-          rain = e;
-          scene.remove(particleSystem);
-        }
-      });
-      // var helper = new THREE.CameraHelper(camera);
-      // scene.add(helper);
-    
-      apartment.traverse(function (child) {
-          if (child instanceof THREE.Mesh) {
-            objects.push(child);
-          }
-        });
-      //*******************************************************************************************************************
-      //************************************************** Test particle **************************************************
-      //*******************************************************************************************************************
-      var particleCount = 10000,
-      particles = new THREE.Geometry(),
-      pMaterial = new THREE.ParticleBasicMaterial({
-        color: 0xFFFFFF,
-        size: 5,
-        map: THREE.ImageUtils.loadTexture("textures/raindrop-2.png"),
-        blending: THREE.AdditiveBlending,
-        transparent: true
-      });
-
-
-      // now create the individual particles
-      for (var p = 0; p < particleCount; p++) {
-
-        // create a particle with random
-        // position values, -250 -> 250
-        var pX = Math.random() * 1000 - 500,
-        pY = Math.random() * 1000 - 500,
-        pZ = Math.random() * 1000 - 500,
-        particle = new THREE.Vector3(pX, pY, pZ);
-
-        // add it to the geometry
-        particle.velocityY = 5 + Math.random() / 5;
-        particle.velocityX = (Math.random() - 0.5) / 3;
-        particles.vertices.push(particle);
-      }
-
-      // create the particle system
-      var particleSystem = new THREE.ParticleSystem(
-        particles,
-        pMaterial);
-      particleSystem.sortParticles = true;
-
-      // add it to the scene
       
-
-
-
-
+      // Per la Collision detection pongo tutti gli oggetti in un array
+      apartment.traverse(function (child) {
+        if (child instanceof THREE.Mesh) {
+          objects.push(child);
+        }
+      });
 
 
       render();
 
-  function render() {
-  stats.update();
-  TWEEN.update();
-  trackballControls.update();
-  requestAnimationFrame(render);
-  webGLRenderer.render(scene, camera);
+      function render() {
+        stats.update();
+        TWEEN.update();
+        trackballControls.update();
+        requestAnimationFrame(render);
+        webGLRenderer.render(scene, camera);
 
-  // particleSystem.rotation.z += 0.01;
-  var vertices = particleSystem.geometry.vertices;
-            vertices.forEach(function (v) {
-                v.y = v.y - (v.velocityY);
-                v.x = v.x - (v.velocityX);
+        // Pioggia
+        if(rain){
+          var vertices = particleSystem.geometry.vertices;
+          vertices.forEach(function (v) {
+            v.y = v.y - (v.velocityY);
+            v.x = v.x - (v.velocityX);
 
-                if (v.y <= 0) v.y = 60;
-                if (v.x <= -20 || v.x >= 20) v.velocityX = v.velocityX * -1;
-            });
+            if (v.y <= 0) v.y = 500;
+            if (v.x <= -20 || v.x >= 20) v.velocityX = v.velocityX * -1;
+          });
+        }
 
 
-  if (FPenabled === true) {
-    computeFPControls();
-    if(collisione) {detectCollision();}
-  }
+        if (FPenabled === true) {
+          computeFPControls();
+          if(collisione) {detectCollision();}
+        }
+        // **** Controllo WebCam ****
+        if ( video.readyState === video.HAVE_ENOUGH_DATA ) 
+        {
+          videoImageContext.drawImage( video, 0, 0, videoImage.width, videoImage.height );
+          if ( videoTexture ) 
+            videoTexture.needsUpdate = true;
+        }
 
-  if ( video.readyState === video.HAVE_ENOUGH_DATA ) 
-  {
-    videoImageContext.drawImage( video, 0, 0, videoImage.width, videoImage.height );
-    if ( videoTexture ) 
-      videoTexture.needsUpdate = true;
-  }
-
-  // ******* Controllo video TV *********
-  if (film.readyState === film.HAVE_ENOUGH_DATA) {
-    if (isOn) {
-      if (textureSW) textureSW.needsUpdate = true;
-      film.play();
-    } else {
-      film.pause();
-    }
-  }
-}
-
-    });
-  </script>  
- </body>
+        // ******* Controllo video TV *********
+        if (film.readyState === film.HAVE_ENOUGH_DATA) {
+          if (isOn) {
+            if (textureSW) textureSW.needsUpdate = true;
+            film.play();
+          } else {
+           film.pause();
+         }
+       }
+     }
+   });
+</script>  
+</body>
 </html>

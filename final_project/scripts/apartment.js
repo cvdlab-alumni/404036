@@ -1,13 +1,13 @@
 var mesh;
 var apartment = new THREE.Object3D();
 
-var plane = new THREE.Mesh(new THREE.BoxGeometry(1000,1000,1),new THREE.MeshLambertMaterial({color: 0x00ff00, side: THREE.DoubleSide, transparent:true, opacity:0}) );
+// var plane = new THREE.Mesh(new THREE.BoxGeometry(1000,1000,1),new THREE.MeshLambertMaterial({color: 0x00ff00, side: THREE.DoubleSide, transparent:true, opacity:0}) );
 // scene.add(plane);
-plane.rotation.x=Math.PI/2;
-plane.position.set(0,-0.5,0);
+// plane.rotation.x=Math.PI/2;
+// plane.position.set(0,-0.5,0);
 
-objects.push(plane);
-objects.push(apartment);
+// objects.push(plane);
+// objects.push(apartment);
 
 
 var loader = new THREE.OBJLoader();

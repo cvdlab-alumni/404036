@@ -1,5 +1,3 @@
-
-
 function createMesh(geom,rx, ry, imageFile, bump) {
   var texture = null;
   var texture_normal;
@@ -130,14 +128,14 @@ function detectCollision() {
   var x=0, z=0;
   var vector;
   var projector2 = new THREE.Projector();
-  // console.log(z,x);
-  // console.log(controls.getMoveForward(), controls.getMoveBackward(), controls.getMoveLeft(), controls.getMoveRight());
-  if (controls.getMoveLeft()) x =-1;
-  if (controls.getMoveRight()) x = 1;
-  if (controls.getMoveBackward()) z = -1;
-  if (controls.getMoveForward()) z = 1;
-  // console.log(z,x);
-  vector = new THREE.Vector3( x, 0, z );
+  // // console.log(z,x);
+  // // console.log(controls.getMoveForward(), controls.getMoveBackward(), controls.getMoveLeft(), controls.getMoveRight());
+  // if (controls.getMoveLeft()) x =-1;
+  // if (controls.getMoveRight()) x = 1;
+  // if (controls.getMoveBackward()) z = -1;
+  // if (controls.getMoveForward()) z = 1;
+  // // console.log(z,x);
+  vector = new THREE.Vector3( 0, 0, 1 );
 
   // console.log(vector);
   projector2.unprojectVector(vector, camera);
@@ -145,7 +143,7 @@ function detectCollision() {
   var rayCaster = new THREE.Raycaster(controls.getObject().position, vector.sub(controls.getObject().position).normalize());
 
   var intersects = rayCaster.intersectObjects(objects);
-  console.log(intersects.length);
+  // console.log(intersects.length);
 
   if (intersects.length > 0 && intersects[0].distance < 10) {
 

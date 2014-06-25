@@ -323,5 +323,44 @@ function mk_controller_tv(width, height){
 	controller.control2=control2;
 	controller.control3=control3;
 	controller.control4=control4;
+
+	toIntersect.push(controller.control1);
+	toIntersect.push(controller.control2);
+	toIntersect.push(controller.control3);
+	toIntersect.push(controller.control4);
+	controller.control1.interact=function(){
+		if(screenTV.on) {
+			isOn = false;
+			screenTV.on = false;
+			screenTV.material.map=texture_tvOff;
+		} else {
+			screenTV.on = true;
+			screenTV.material.map=texture_tvColor;
+		}
+	}
+	controller.control2.interact=function(){
+		if(screenTV.on) {
+			isOn = true;
+			screenTV.on = true;
+			screenTV.material.map=textureSW;
+		}
+		film.src="movies/star_wars_4.ogv";
+	}
+	controller.control3.interact=function(){
+		if(screenTV.on) {
+			isOn = true;
+			screenTV.on = true;
+			screenTV.material.map=textureSW;
+		}
+		film.src="movies/Dragon_ball.ogv";
+	}
+	controller.control4.interact=function(){
+		if(screenTV.on) {
+			isOn = true;
+			screenTV.on = true;
+			screenTV.material.map=textureSW;
+		}
+		film.src="movies/Big_Buck_Bunny_small.ogv";
+	}
 	return controller;
 }
