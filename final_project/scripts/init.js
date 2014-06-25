@@ -76,3 +76,5 @@ var wallpaperGeometry = new THREE.BoxGeometry(1000,1000,1000);
 var wallpaper= new THREE.Mesh(wallpaperGeometry, skyMaterial);
 scene.add(wallpaper);
 
+var collisione = false;
+

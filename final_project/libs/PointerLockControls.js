@@ -5,6 +5,7 @@
 THREE.PointerLockControls = function ( camera ) {
 
         var scope = this;
+        var freeze = false;
 
         camera.rotation.set( 0, 0, 0 );
 
@@ -42,6 +43,31 @@ THREE.PointerLockControls = function ( camera ) {
                 pitchObject.rotation.x = Math.max( - PI_2, Math.min( PI_2, pitchObject.rotation.x ) );
 
         };
+
+        this.getMoveForward= function(){
+                return moveForward;
+        };
+
+        this.getMoveBackward= function(){
+                return moveBackward;
+        };
+
+        this.getMoveLeft= function(){
+                return moveLeft;
+        };
+
+        this.getMoveRight= function(){
+                return moveRight;
+        };
+
+        // this.setMoveForward= function(b){
+        //         moveForward=b;
+        // };
+
+        this.setFreeze= function(b){
+                freeze=b;
+        }
+
 
         var onKeyDown = function ( event ) {
 
@@ -153,16 +179,18 @@ THREE.PointerLockControls = function ( camera ) {
 
                 velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
 
-                if ( moveForward ) velocity.z -= 1600.0 * delta;
-                if ( moveBackward ) velocity.z += 1600.0 * delta;
+                if(!freeze){
+                        if ( moveForward ) velocity.z -= 1600.0 * delta;
+                        if ( moveBackward ) velocity.z += 1600.0 * delta;
 
-                if ( moveLeft ) velocity.x -= 1600.0 * delta;
-                if ( moveRight ) velocity.x += 1600.0 * delta;
+                        if ( moveLeft ) velocity.x -= 1600.0 * delta;
+                        if ( moveRight ) velocity.x += 1600.0 * delta;
 
-                if ( isOnObject === true ) {
+                        if ( isOnObject === true ) {
 
-                        velocity.y = Math.max( 0, velocity.y );
+                                velocity.y = Math.max( 0, velocity.y );
 
+                        }
                 }
 
                 yawObject.translateX( velocity.x * delta );

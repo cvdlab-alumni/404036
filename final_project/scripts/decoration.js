@@ -3,7 +3,8 @@ var videoTexture = new THREE.Texture( videoImage );
 videoTexture.minFilter = THREE.LinearFilter;
 videoTexture.magFilter = THREE.LinearFilter;
 
-var texture_tvOff = THREE.ImageUtils.loadTexture("textures/Texture_TV_by_Alipse.jpg");
+var texture_tvColor = THREE.ImageUtils.loadTexture("textures/Texture_TV_by_Alipse.jpg");
+var texture_tvOff = THREE.ImageUtils.loadTexture("textures/tv_nera.jpg");
 
 var texture_cucina = THREE.ImageUtils.loadTexture("models/kitchen/defuse.jpg");
 var texture_cucina_normal = THREE.ImageUtils.loadTexture("models/kitchen/normal_normals.jpg");
@@ -128,10 +129,13 @@ controller.control1.interact=function(){
             isOn = false;
             screenTV.on = false;
             screenTV.material.map=texture_tvOff;
+      } else {
+        screenTV.on = true;
+        screenTV.material.map=texture_tvColor;
       }
 }
 controller.control2.interact=function(){
-      if(!screenTV.on) {
+      if(screenTV.on) {
             isOn = true;
             screenTV.on = true;
             screenTV.material.map=textureSW;
@@ -139,7 +143,7 @@ controller.control2.interact=function(){
       film.src="movies/star_wars_4.ogv";
 }
 controller.control3.interact=function(){
-      if(!screenTV.on) {
+      if(screenTV.on) {
             isOn = true;
             screenTV.on = true;
             screenTV.material.map=textureSW;
@@ -147,7 +151,7 @@ controller.control3.interact=function(){
       film.src="movies/Dragon_ball.ogv";
 }
 controller.control4.interact=function(){
-      if(!screenTV.on) {
+      if(screenTV.on) {
             isOn = true;
             screenTV.on = true;
             screenTV.material.map=textureSW;

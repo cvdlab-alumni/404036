@@ -5,8 +5,10 @@ function render() {
   requestAnimationFrame(render);
   webGLRenderer.render(scene, camera);
 
+
   if (FPenabled === true) {
     computeFPControls();
+    if(collisione) {detectCollision();}
   }
 
   if ( video.readyState === video.HAVE_ENOUGH_DATA ) 
@@ -151,4 +153,34 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   webGLRenderer.setSize( window.innerWidth, window.innerHeight );
+}
+
+function detectCollision() {
+  var x=0, z=0;
+  var vector;
+  var projector2 = new THREE.Projector();
+  // console.log(z,x);
+  // console.log(controls.getMoveForward(), controls.getMoveBackward(), controls.getMoveLeft(), controls.getMoveRight());
+  if (controls.getMoveLeft()) x =-1;
+  if (controls.getMoveRight()) x = 1;
+  if (controls.getMoveBackward()) z = -1;
+  if (controls.getMoveForward()) z = 1;
+  // console.log(z,x);
+  vector = new THREE.Vector3( x, 0, z );
+
+  // console.log(vector);
+  projector2.unprojectVector(vector, camera);
+
+  var rayCaster = new THREE.Raycaster(controls.getObject().position, vector.sub(controls.getObject().position).normalize());
+
+  var intersects = rayCaster.intersectObjects(objects);
+  console.log(intersects.length);
+
+  if (intersects.length > 0 && intersects[0].distance < 10) {
+
+    console.log(intersects[0].distance);
+
+    controls.setFreeze(true);
+
+  } else {controls.setFreeze(false)}
 }
