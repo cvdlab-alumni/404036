@@ -78,3 +78,5 @@ scene.add(wallpaper);
 
 var collisione = false;
 
+var rain = false;
+

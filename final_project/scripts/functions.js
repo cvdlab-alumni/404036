@@ -1,33 +1,4 @@
-function render() {
-  stats.update();
-  TWEEN.update();
-  trackballControls.update();
-  requestAnimationFrame(render);
-  webGLRenderer.render(scene, camera);
 
-
-  if (FPenabled === true) {
-    computeFPControls();
-    if(collisione) {detectCollision();}
-  }
-
-  if ( video.readyState === video.HAVE_ENOUGH_DATA ) 
-  {
-    videoImageContext.drawImage( video, 0, 0, videoImage.width, videoImage.height );
-    if ( videoTexture ) 
-      videoTexture.needsUpdate = true;
-  }
-
-  // ******* Controllo video TV *********
-  if (film.readyState === film.HAVE_ENOUGH_DATA) {
-    if (isOn) {
-      if (textureSW) textureSW.needsUpdate = true;
-      film.play();
-    } else {
-      film.pause();
-    }
-  }
-}
 
 function createMesh(geom,rx, ry, imageFile, bump) {
   var texture = null;

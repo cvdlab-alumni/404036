@@ -143,6 +143,7 @@ function noStream(e)
           frame_normal.children[0].material.normalScale.set(e,e);
         }
         this.collision = false;
+        this.rain = false;
       };
 
       var gui = new dat.GUI();
@@ -152,7 +153,15 @@ function noStream(e)
       gui.add(controlGUI, "collision").onChange(function (e){
         collisione =e;
       });
-
+      gui.add(controlGUI, "rain").onChange(function (e){
+        if (e){
+          rain=e;
+          scene.add(particleSystem);
+        } else {
+          rain = e;
+          scene.remove(particleSystem);
+        }
+      });
       // var helper = new THREE.CameraHelper(camera);
       // scene.add(helper);
     
@@ -161,9 +170,92 @@ function noStream(e)
             objects.push(child);
           }
         });
+      //*******************************************************************************************************************
+      //************************************************** Test particle **************************************************
+      //*******************************************************************************************************************
+      var particleCount = 10000,
+      particles = new THREE.Geometry(),
+      pMaterial = new THREE.ParticleBasicMaterial({
+        color: 0xFFFFFF,
+        size: 5,
+        map: THREE.ImageUtils.loadTexture("textures/raindrop-2.png"),
+        blending: THREE.AdditiveBlending,
+        transparent: true
+      });
+
+
+      // now create the individual particles
+      for (var p = 0; p < particleCount; p++) {
+
+        // create a particle with random
+        // position values, -250 -> 250
+        var pX = Math.random() * 1000 - 500,
+        pY = Math.random() * 1000 - 500,
+        pZ = Math.random() * 1000 - 500,
+        particle = new THREE.Vector3(pX, pY, pZ);
+
+        // add it to the geometry
+        particle.velocityY = 5 + Math.random() / 5;
+        particle.velocityX = (Math.random() - 0.5) / 3;
+        particles.vertices.push(particle);
+      }
+
+      // create the particle system
+      var particleSystem = new THREE.ParticleSystem(
+        particles,
+        pMaterial);
+      particleSystem.sortParticles = true;
+
+      // add it to the scene
+      
+
+
+
+
 
 
       render();
+
+  function render() {
+  stats.update();
+  TWEEN.update();
+  trackballControls.update();
+  requestAnimationFrame(render);
+  webGLRenderer.render(scene, camera);
+
+  // particleSystem.rotation.z += 0.01;
+  var vertices = particleSystem.geometry.vertices;
+            vertices.forEach(function (v) {
+                v.y = v.y - (v.velocityY);
+                v.x = v.x - (v.velocityX);
+
+                if (v.y <= 0) v.y = 60;
+                if (v.x <= -20 || v.x >= 20) v.velocityX = v.velocityX * -1;
+            });
+
+
+  if (FPenabled === true) {
+    computeFPControls();
+    if(collisione) {detectCollision();}
+  }
+
+  if ( video.readyState === video.HAVE_ENOUGH_DATA ) 
+  {
+    videoImageContext.drawImage( video, 0, 0, videoImage.width, videoImage.height );
+    if ( videoTexture ) 
+      videoTexture.needsUpdate = true;
+  }
+
+  // ******* Controllo video TV *********
+  if (film.readyState === film.HAVE_ENOUGH_DATA) {
+    if (isOn) {
+      if (textureSW) textureSW.needsUpdate = true;
+      film.play();
+    } else {
+      film.pause();
+    }
+  }
+}
 
     });
   </script>  
