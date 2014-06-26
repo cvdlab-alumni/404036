@@ -13,11 +13,13 @@ var texture_sofa = THREE.ImageUtils.loadTexture("models/sofa/Furnishings.Fabrics
 
 
 
-var loader1 = new THREE.OBJMTLLoader();
-var loader2 = new THREE.OBJMTLLoader();
-var loader3 = new THREE.OBJMTLLoader();
-var loader4 = new THREE.OBJLoader();
-var loader5 = new THREE.OBJMTLLoader();
+var loader1 = new THREE.OBJLoader();
+
+function loading (pathOBJ, pathMTL, f){
+  var loader = new THREE.OBJMTLLoader();
+  loader.addEventListener('load', f);
+  loader.load(pathOBJ, pathMTL, {side: THREE.DoubleSide});
+}
 
 //****** Desk ******//
 var desk = mk_desk();
@@ -25,17 +27,14 @@ apartment.add(desk);
 desk.position.set(17,1.8,1.9);
 
 //***** Letto ****//
-loader1.addEventListener('load', function (event) {
-
+loading('models/bed/Bed.obj','models/bed/Bed.mtl',function (event) {
     var object = event.content;
     object.scale.set(1, 1, 1);
     // letto = object;
     object.rotation.x=Math.PI/2;
     apartment.add(object);
     object.position.set(22.7,4.2,1.55);
-
 });
-loader1.load('models/bed/Bed.obj', 'models/bed/Bed.mtl', {side: THREE.DoubleSide});
 
 // ***** Imac *****
 var screenMac = new THREE.Mesh(new THREE.PlaneGeometry(0.7,0.47), new THREE.MeshLambertMaterial({map: texture_screen, side: THREE.DoubleSide}));
@@ -56,8 +55,7 @@ screenMac.rotation.y=Math.PI;
 screenMac.rotation.x=Math.PI*0.562;
 screenMac.position.set(16.985,2.137,3.632);
 
-loader2.addEventListener('load', function (event) {
-
+loading('models/iMac_desktop/iMac_desktop.obj', 'models/iMac_desktop/iMac_desktop.mtl',function (event) {
     var object = event.content;
     object.scale.set(0.1, 0.1, 0.1);
     object.rotation.x=Math.PI/2;
@@ -65,23 +63,19 @@ loader2.addEventListener('load', function (event) {
     apartment.add(object);
     object.position.set(17,1.8,2.87);
 });
-loader2.load('models/iMac_desktop/iMac_desktop.obj', 'models/iMac_desktop/iMac_desktop.mtl', {side: THREE.DoubleSide});
+
 
 //Tavolo in salone
-loader3.addEventListener('load', function (event) {
-
+loading('models/table/Table.obj', 'models/table/Table.mtl',function (event) {
     var object = event.content;
     object.scale.set(12, 10, 12);
     object.rotation.x=Math.PI/2;
     object.rotation.y=Math.PI/2;
     apartment.add(object);
     object.position.set(5,5,1.6);
-
 });
-loader3.load('models/table/Table.obj', 'models/table/Table.mtl', {side: THREE.DoubleSide});
 
-//Televisione 
-loader4.load('models/lcd_tv.obj', function (obj) {
+loader1.load('models/lcd_tv.obj', function (obj) {
       var material = new THREE.MeshPhongMaterial({color: 0xCCCCCC, metal: false});
       obj.traverse(function (child) {
           if (child instanceof THREE.Mesh) {
@@ -110,7 +104,7 @@ screenTV.rotation.x=Math.PI/2;
 screenTV.position.set(4.9,19.4,2.99);
 
 // ***** forno cucina *****
-loader4.load('models/kitchen/fkc.obj', function (obj) {
+loader1.load('models/kitchen/fkc.obj', function (obj) {
       var material = new THREE.MeshPhongMaterial({map: texture_cucina, normalMap:texture_cucina_normal, metal: false});
       obj.traverse(function (child) {
           if (child instanceof THREE.Mesh) {
@@ -124,29 +118,50 @@ loader4.load('models/kitchen/fkc.obj', function (obj) {
 });
 
 // ***** Tavolo per la tv *****
-loader5.addEventListener('load', function (event) {
-
+loading('models/table_cheap/table.obj', 'models/table_cheap/table.mtl',function (event) {
     var object = event.content;
     object.scale.set(2, 2, 2.5);
     apartment.add(object);
     object.position.set(5,19.5,2.20);
+});
+
+// ***** Divano *****
+loading('models/Couch/Couch.obj', 'models/Couch/Couch.mtl',function (event) {
+
+    var object = event.content;
+    object.scale.set(1, 1, 1);
+    object.rotation.x = Math.PI/2;
+    object.rotation.y = Math.PI;
+    apartment.add(object);
+    object.position.set(5,13,0.8);
 
 });
-loader5.load('models/table_cheap/table.obj', 'models/table_cheap/table.mtl', {side: THREE.DoubleSide});
 
-// ***** divano *****
-loader4.load('models/sofa/modern_sofa.obj', function (obj) {
-      var material = new THREE.MeshPhongMaterial({map: texture_sofa, metal: false});
+// ***** Divano *****
+loading('models/toilet/SA_LD_Toilet.obj', 'models/toilet/SA_LD_Toilet.mtl',function (event) {
+
+    var object = event.content;
+    object.scale.set(0.3, 0.3, 0.3);
+    object.rotation.x = Math.PI/2;
+    // object.rotation.y = Math.PI;
+    apartment.add(object);
+    object.position.set(23,11.21,1.9);
+
+});
+
+// ***** Lavandino *****
+loader1.load('models/washbowl/washbowl.obj', function (obj) {
+      var material = new THREE.MeshLambertMaterial({color: 0xffffff, metal: false});
       obj.traverse(function (child) {
           if (child instanceof THREE.Mesh) {
             child.material = material;
             }
       });
-      // console.log(obj);
-      obj.scale.set(0.05, 0.05, 0.05);
-      obj.rotation.x = Math.PI/2;
-
+      obj.scale.set(0.018, 0.018, 0.018);
+      // obj.rotation.x = Math.PI/2;
       apartment.add(obj);
-      obj.rotation.y = Math.PI;
-      obj.position.set(5,13,0.8);
+      obj.position.set(20,11.31,0.88);
 });
+
+
+

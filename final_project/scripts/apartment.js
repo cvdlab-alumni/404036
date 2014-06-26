@@ -46,6 +46,16 @@ var frame_normal = mk_frame("normal");
 apartment.add(frame_normal);
 frame_normal.position.set(10.18,13,3);
 
+var shower = mk_shower();
+apartment.add(shower);
+shower.position.set(18.81,7.71,0.8);
+
+// scene.add(showerParticleSystem);
+var streamShower = castShower();
+// apartment.add(streamShower);
+// streamShower.position.set(18.3,7.71,0.8);
+
+
 
 
 apartment.position.set(-123,0,108);

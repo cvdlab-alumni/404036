@@ -260,7 +260,6 @@ function mk_lamp_ceiling(radius_lampShade, lColor, distance){
     return lampShade;
 }
 
-
 function mk_desk(){
 	var tavolo = new THREE.Object3D();
 	var deskMaterial = new THREE.MeshLambertMaterial({map: texture_desk});
@@ -363,4 +362,96 @@ function mk_controller_tv(width, height){
 		film.src="movies/Big_Buck_Bunny_small.ogv";
 	}
 	return controller;
+}
+
+function mk_shower(){
+	var shower_box = new THREE.Object3D();
+	var base = new THREE.Mesh(new THREE.BoxGeometry(2,2.4,0.30), new THREE.MeshLambertMaterial({color: 0xFFFFF0}));
+	shower_box.add(base);
+	base.position.set(0,0,0.15)
+
+	var foot1 = new THREE.Mesh(new THREE.BoxGeometry(1.9,0.1,0.1), new THREE.MeshLambertMaterial({color: 0xFFFFF0}));
+	var foot2 = new THREE.Mesh(new THREE.BoxGeometry(0.1,2.4,0.1), new THREE.MeshLambertMaterial({color: 0xFFFFF0}));
+	shower_box.add(foot1);
+	foot1.position.set(-0.05,1.15,0.35);
+	shower_box.add(foot2);
+	foot2.position.set(0.95,0,0.35);
+
+	var fixed_door = new THREE.Mesh(new THREE.BoxGeometry(1.95,0.01,4), new THREE.MeshLambertMaterial({color: 0xFFFFFF, transparent: true, opacity: 0.5}));
+	shower_box.add(fixed_door);
+	fixed_door.position.set(-0.025,1.15,2.35);
+
+	var fixed_door2 = new THREE.Mesh(new THREE.BoxGeometry(0.01,1.2,4), new THREE.MeshLambertMaterial({color: 0xFFFFFF, transparent: true, opacity: 0.5}));
+	shower_box.add(fixed_door2);
+	fixed_door2.position.set(0.95,-0.6,2.35);
+
+	var moving_door = new THREE.Mesh(new THREE.BoxGeometry(0.01,1.16,4), new THREE.MeshLambertMaterial({color: 0xFFFFFF, transparent: true, opacity: 0.5}));
+	shower_box.add(moving_door);
+	moving_door.position.set(0.96,0.58,2.35);
+
+	toIntersect.push(moving_door);
+	moving_door.open = false;
+	moving_door.interact = function(){
+		if (moving_door.open){
+			new TWEEN.Tween(moving_door.position)
+			.to({y: "+0.9"},1000)
+			.start();
+			moving_door.open=false;
+		} else { 
+			new TWEEN.Tween(moving_door.position)
+			.to({y: "-0.9"},1000)
+			.start();
+			moving_door.open=true;
+		}
+	}
+
+	var torus = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.05, 8, 6, Math.PI/2), new THREE.MeshLambertMaterial({color: 0xBBBBBB}));
+	torus.side = THREE.DoubleSide;
+	shower_box.add(torus);
+	torus.rotation.x=Math.PI/2;
+	torus.position.set(-1,0,3.5);
+
+	var cylinder = new THREE.Mesh( new THREE.CylinderGeometry( 0.05, 0.2, 0.2, 32 ), new THREE.MeshLambertMaterial( {color: 0xBBBBBB}));
+	cylinder.rotation.x=Math.PI/2;
+	shower_box.add(cylinder);
+	cylinder.position.set(-0.51,0,3.5);
+
+	var valveBase = new THREE.Mesh(new THREE.BoxGeometry(0.01,0.5,0.5), new THREE.MeshLambertMaterial({color: 0x336699}));
+	shower_box.add(valveBase);
+	valveBase.position.set(-0.998,0,2.5);
+
+	var valve = new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.02,0.1), new THREE.MeshLambertMaterial({color: 0xBBBBBB}));
+	valve.rotation.z=Math.PI/2;
+	valveBase.add(valve);
+	valve.position.set(0.05,0,0);
+
+	var grip = new THREE.Mesh( new THREE.CylinderGeometry( 0.1, 0.1, 0.02, 6 ), new THREE.MeshLambertMaterial( {color: 0xBBBBBB}));
+	grip.rotation.y=Math.PI/2;
+	valve.add(grip);
+	grip.position.set(0,-0.05,0);
+
+	toIntersect.push(grip);
+	grip.on = false;
+	grip.interact= function(){
+		if (grip.on){
+			new TWEEN.Tween(grip.rotation)
+			.to({y: Math.PI/2},1000)
+			.start();
+			apartment.remove(streamShower);
+			grip.on=false;
+		} else {
+			new TWEEN.Tween(grip.rotation)
+			.to({y: -Math.PI/2},1000)
+			.start();
+			
+			apartment.add(streamShower);
+			streamShower.position.set(18.3,7.71,0.8);
+
+			grip.on=true;
+		}
+
+	};
+
+	shower_box.grip = grip;
+	return shower_box;
 }

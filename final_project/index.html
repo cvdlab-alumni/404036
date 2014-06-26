@@ -115,11 +115,14 @@ function noStream(e)
 <script src="scripts/rooms.js"></script>
 <script src="scripts/fpsInteract.js"></script>
 
+
 <script src="scripts/init.js"></script>
+<script src="scripts/SpecialFX.js"></script>
 <script src="scripts/apartment.js"></script>
 <script src="scripts/light.js"></script>
 <script src="scripts/decoration.js"></script>
-<script src="scripts/SpecialFX.js"></script>
+
+
 <script src="scripts/gui.js"></script>
 
 
@@ -159,6 +162,18 @@ function noStream(e)
 
             if (v.y <= 0) v.y = 500;
             if (v.x <= -20 || v.x >= 20) v.velocityX = v.velocityX * -1;
+          });
+        }
+
+        if(shower.grip.on){
+          var gocce = streamShower.geometry.vertices;
+          // console.log(gocce);
+          gocce.forEach(function(v){
+          v.z = v.z - (v.velocityZ);
+          if(v.z <=0) v.z = 3.3;
+
+          // console.log(v.z);
+
           });
         }
 
