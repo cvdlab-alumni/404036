@@ -50,6 +50,8 @@ var shower = mk_shower();
 apartment.add(shower);
 shower.position.set(18.81,7.71,0.8);
 
+objects.push(shower);
+
 // scene.add(showerParticleSystem);
 var streamShower = castShower();
 // apartment.add(streamShower);

@@ -139,9 +139,11 @@ function noStream(e)
       // Per la Collision detection pongo tutti gli oggetti in un array
       apartment.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
+          if(child.id===235) console.log("Cucna trovata!!!!!!!");
           objects.push(child);
         }
       });
+      console.log("Numero di oggetti in objects: ", objects.length);
 
 
       render();

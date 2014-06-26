@@ -114,6 +114,7 @@ loader1.load('models/kitchen/fkc.obj', function (obj) {
       obj.scale.set(0.07, 0.07, 0.07);
       obj.rotation.x = Math.PI/2;
       apartment.add(obj);
+      console.log(obj);
       obj.position.set(21.45,19.83,0.8);
 });
 
@@ -151,7 +152,7 @@ loading('models/toilet/SA_LD_Toilet.obj', 'models/toilet/SA_LD_Toilet.mtl',funct
 
 // ***** Lavandino *****
 loader1.load('models/washbowl/washbowl.obj', function (obj) {
-      var material = new THREE.MeshLambertMaterial({color: 0xffffff, metal: false});
+      var material = new THREE.MeshLambertMaterial({color: 0xffffff, metal: false, shading: THREE.SmoothShading});
       obj.traverse(function (child) {
           if (child instanceof THREE.Mesh) {
             child.material = material;
@@ -176,7 +177,7 @@ loader1.load('models/washbowl/washbowl.obj', function (obj) {
 // });
 
 loader1.load('models/bidet/bidet.obj', function (obj) {
-      var material = new THREE.MeshLambertMaterial({color: 0xffffff, metal: false});
+      var material = new THREE.MeshLambertMaterial({color: 0xffffff, metal: false, shading: THREE.SmoothShading});
       obj.traverse(function (child) {
           if (child instanceof THREE.Mesh) {
             child.material = material;
@@ -187,5 +188,33 @@ loader1.load('models/bidet/bidet.obj', function (obj) {
       obj.rotation.y = Math.PI;
       apartment.add(obj);
       obj.position.set(22.8,6.7,0.86);
+      console.log(apartment.children.length);
+      objects.push(apartment.children[77]);
+});
+
+loading('models/Microwave/Microwave.obj','models/Microwave/Microwave.mtl', function (event) {
+
+    var object = event.content;
+    // object.scale.set(0.3, 0.3, 0.3);
+    object.rotation.x = Math.PI/2;
+    // object.rotation.y = Math.PI;
+    apartment.add(object);
+    // console.log(object);
+    object.position.set(18.45,19.83,2.85);
+
+});
+
+loader1.load('models/Hitachi.obj', function (obj) {
+      var material = new THREE.MeshLambertMaterial({color: 0xffffff, metal: false});
+      obj.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.material = material;
+            }
+      });
+      obj.scale.set(0.05, 0.05, 0.05);
+      obj.rotation.x = Math.PI/2;
+      obj.rotation.y = -Math.PI/2;
+      apartment.add(obj);
+      obj.position.set(19,13,0.8);
 });
 

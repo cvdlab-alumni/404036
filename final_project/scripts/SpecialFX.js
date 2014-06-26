@@ -70,35 +70,3 @@ function castShower(){
 }
 
 
-// var showerCount = 500;
-// var showerParticles = new THREE.Geometry();
-// var showerPMaterial = new THREE.ParticleBasicMaterial({
-//   color: 0xFFFFFF,
-//   size: 10,
-//   map: THREE.ImageUtils.loadTexture("textures/raindrop-2.png"),
-//   blending: THREE.AdditiveBlending,
-//   transparent: true
-// });
-
-// // now create the individual particles
-// for (var p = 0; p < showerCount; p++) {
-
-//   // create a particle with random
-//   // position values, -250 -> 250
-//   // var pX = Math.random() * 1000 - 500,
-//   var pX = 2 * Math.cos(Math.random()*2* Math.PI);
-//   var pY = 2 * Math.sin(Math.random()*2* Math.PI);
-//   var pZ = Math.random() * 3.5;
-
-//   var particle = new THREE.Vector3(pX, pY, pZ);
-
-//   // add it to the geometry
-//   particle.velocityZ = 1 + Math.random() / 5;
-//   particle.velocityX = (Math.random() - 0.5) / 3;
-//   showerParticles.vertices.push(particle);
-// }
-
-// // create the particle system
-// var showerParticleSystem = new THREE.ParticleSystem( showerParticles, showerPMaterial);
-// particleSystem.sortParticles = true;
-
