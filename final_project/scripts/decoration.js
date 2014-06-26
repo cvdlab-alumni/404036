@@ -137,7 +137,7 @@ loading('models/Couch/Couch.obj', 'models/Couch/Couch.mtl',function (event) {
 
 });
 
-// ***** Divano *****
+// ***** toilet *****
 loading('models/toilet/SA_LD_Toilet.obj', 'models/toilet/SA_LD_Toilet.mtl',function (event) {
 
     var object = event.content;
@@ -163,5 +163,29 @@ loader1.load('models/washbowl/washbowl.obj', function (obj) {
       obj.position.set(20,11.31,0.88);
 });
 
+// ***** bidet *****
+// loading('models/bidet/bidet.obj','models/bidet/bidet.obj', function (event) {
 
+//     var object = event.content;
+//     object.scale.set(3, 3, 3);
+//     // object.rotation.x = Math.PI/2;
+//     // object.rotation.y = Math.PI;
+//     apartment.add(object);
+//     object.position.set(0,0,4);
+
+// });
+
+loader1.load('models/bidet/bidet.obj', function (obj) {
+      var material = new THREE.MeshLambertMaterial({color: 0xffffff, metal: false});
+      obj.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.material = material;
+            }
+      });
+      obj.scale.set(0.0018, 0.0018, 0.0018);
+      obj.rotation.x = Math.PI/2;
+      obj.rotation.y = Math.PI;
+      apartment.add(obj);
+      obj.position.set(22.8,6.7,0.86);
+});
 
