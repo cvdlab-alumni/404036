@@ -1,70 +1,63 @@
-var findCollision = function (child) {
-  if (child instanceof THREE.Mesh) {
-    if(child.id===235) console.log("Cucna trovata!!!!!!!");
-    objects.push(child);
+function mk_Texture_Material(map, norm, norm_map, wrapping) {
+  console.log(map);
+  var texture = THREE.ImageUtils.loadTexture(map);
+  var material = new THREE.MeshPhongMaterial({
+    map: texture,
+  })
+  if (norm) {
+    var normal = THREE.ImageUtils.loadTexture(norm_map);
+    material.normalMap = normal;
   }
+  if (wrapping) {
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    if (norm) {
+      normal.wrapS = normal.wrapT = THREE.RepeatWrapping;
+    }
+  }
+  return material;
 }
 
-function createMesh(geom,rx, ry, imageFile, bump) {
-  var texture = null;
-  var texture_normal;
+function createMesh(geom,rx, ry, imageFile) {
+  var mat;
 
   switch(imageFile) {
     case 1:
-    texture = tex_floor_camera;
+    mat = mat_floor_camera;
     break;
     case 2:
-    texture = tex_floor_bagno;
+    mat = mat_floor_bagno;
     break;
     case 3:
-    texture = tex_floor_salone;
+    mat = mat_floor_salone;
     break;
     case 4:
-    texture = tex_floor_generico;
+    mat = mat_floor_generico;
     break;
     case 5:
-    texture = tex_wall_generico;
+    mat = mat_wall_generico;
     break;
     case 6:
-    texture = tex_wall_salone;
+    mat = mat_wall_salone;
     break;
     case 7:
-    texture = tex_wall_camera;
+    mat = mat_wall_camera;
     break;
     case 8:
-    texture = tex_wall_bagno;
-    // texture_normal = tex_wall_bagno_normal;
+    mat = mat_wall_bagno;
+    geom.computeVertexNormals();
     break;
     case 9:
-    texture = tex_wall_cucina;
-    // texture_normal = tex_wall_cucina_normal
+    mat = mat_wall_cucina;
+    geom.computeVertexNormals();
     break;
     case 10:
-    texture = tex_wall_esterno;
-    texture_normal = tex_wall_esterno_normal
-    texture_normal.wrapS = texture_normal.wrapT = THREE.RepeatWrapping;
+    mat = mat_wall_esterno;
     geom.computeVertexNormals();
     break;
     
   }
   
-  texture.wrapS = texture.wrapT = THREE.RepeatWrapping; 
-  // texture.repeat.set( rx, ry ); 
-  if (texture_normal!=undefined){
-    
-    var floorMaterial = new THREE.MeshPhongMaterial( { map: texture, side: THREE.DoubleSide, normalMap: texture_normal} ); 
-    floorMaterial.normalScale.set(+1,+1);
-    // console.log(imageFile, texture, texture_normal, floorMaterial);
-
-  } else {
-    var floorMaterial = new THREE.MeshPhongMaterial( { map: texture, side: THREE.DoubleSide} );
-  }
-  if (bump) {
-    var bump = THREE.ImageUtils.loadTexture("" + bump)
-    floorMaterial.bumpMap = bump;
-    floorMaterial.bumpScale = 0.2;
-  }
-  var mesh = new THREE.Mesh(geom, floorMaterial);
+  var mesh = new THREE.Mesh(geom, mat);
 
   return mesh;
 }
@@ -100,7 +93,7 @@ function initStats() {
 function mk_plane(texture,rx,ry, b,h,list) {
   var i =0;
 
-  var options = {amount: 0.01,bevelThickness: 2,bevelSize: 1,bevelSegments: 3,bevelEnabled: false,curveSegments: 12,steps: 1};
+  var options = {amount: 0,bevelThickness: 2,bevelSize: 1,bevelSegments: 3,bevelEnabled: false,curveSegments: 12,steps: 1};
   var shape = new THREE.Shape();
   shape.moveTo(0,0);
   shape.lineTo(b,0);
@@ -130,34 +123,4 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   webGLRenderer.setSize( window.innerWidth, window.innerHeight );
-}
-
-function detectCollision() {
-  var x=0, z=0;
-  var vector;
-  var projector2 = new THREE.Projector();
-  // // console.log(z,x);
-  // // console.log(controls.getMoveForward(), controls.getMoveBackward(), controls.getMoveLeft(), controls.getMoveRight());
-  // if (controls.getMoveLeft()) x =-1;
-  // if (controls.getMoveRight()) x = 1;
-  // if (controls.getMoveBackward()) z = -1;
-  // if (controls.getMoveForward()) z = 1;
-  // // console.log(z,x);
-  vector = new THREE.Vector3( 0, 0, 1 );
-
-  // console.log(vector);
-  projector2.unprojectVector(vector, camera);
-
-  var rayCaster = new THREE.Raycaster(controls.getObject().position, vector.sub(controls.getObject().position).normalize());
-
-  var intersects = rayCaster.intersectObjects(objects);
-  // console.log(intersects.length);
-
-  if (intersects.length > 0 && intersects[0].distance < 15) {
-
-    console.log(intersects[0].distance);
-
-    // controls.setFreeze(true);
-
-  } else {controls.setFreeze(false)}
 }

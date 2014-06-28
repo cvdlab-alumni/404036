@@ -10,22 +10,17 @@ function render() {
           var vertices = particleSystem.geometry.vertices;
           vertices.forEach(function (v) {
             v.y = v.y - (v.velocityY);
-            // v.x = v.x - (v.velocityX);
 
             if (v.y <= 0) v.y = Math.random() * 1000 - 500;
-
-            // if (v.x <= -20 || v.x >= 20) v.velocityX = v.velocityX * -1;
           });
         }
 
         if(shower.grip.on){
           var gocce = streamShower.geometry.vertices;
-          // console.log(gocce);
           gocce.forEach(function(v){
           v.z = v.z - (v.velocityZ);
           if(v.z <=0) v.z = 3.3;
 
-          // console.log(v.z);
 
           });
         }

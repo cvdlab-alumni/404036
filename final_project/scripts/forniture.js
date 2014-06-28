@@ -73,7 +73,6 @@ function mk_door(width, height, depth, reverse){
 				new TWEEN.Tween(this.parent.rotation)
 				.to({z: Math.PI/2},1000)
 				.start();
-				// this.parent.rotation.z=(Math.PI/2);	
 			}
 			
 			this.open=true;
@@ -81,7 +80,6 @@ function mk_door(width, height, depth, reverse){
 			new TWEEN.Tween(this.parent.rotation)
 			.to({z: 0},1000)
 			.start();
-			// this.parent.rotation.z=0;
 			this.open=false;
 		}
 	}
@@ -89,8 +87,6 @@ function mk_door(width, height, depth, reverse){
 }
 
 function mk_window(width, height, depth){
-	// if(typeof(reverse)==='undefined') reverse = 0;
-
 	
 	var windows = new THREE.Object3D();
 
@@ -140,14 +136,11 @@ function mk_window(width, height, depth){
 			new TWEEN.Tween(this.parent.parent.rotation)
 			.to({z: -Math.PI/2},1000)
 			.start();
-
-			// this.parent.parent.rotation.z=(-Math.PI/2);
 			this.open=true;
 		} else {
 			new TWEEN.Tween(this.parent.parent.rotation)
 			.to({z: 0},1000)
 			.start();
-			// this.parent.parent.rotation.z=0;
 			this.open=false;
 		}
 	}
@@ -158,7 +151,6 @@ function mk_window(width, height, depth){
 			new TWEEN.Tween(this.parent.parent.rotation)
 			.to({z: Math.PI/2},1000)
 			.start();
-			// this.parent.parent.rotation.z=(Math.PI/2);
 			this.open=true;
 		} else {
 			new TWEEN.Tween(this.parent.parent.rotation)
@@ -202,13 +194,11 @@ function mk_big_window(width, height, depth){
 			new TWEEN.Tween(this.parent.parent.rotation)
 			.to({x: Math.PI/6},1000)
 			.start();
-			// this.parent.parent.rotation.x=(Math.PI/6);
 			this.open=true;
 		} else {
 			new TWEEN.Tween(this.parent.parent.rotation)
 			.to({x: 0},1000)
 			.start();
-			// this.parent.parent.rotation.x=0;
 			this.open=false;
 		}
 	}
@@ -242,7 +232,6 @@ function mk_lamp_ceiling(radius_lampShade, lColor, distance){
 
  	toIntersect.push(lampShade);
  	lampShade.on=false;
- 	// console.log(lampShade);
 	lampShade.interact=function(){
 		if(!this.on){
 			this.children[0].intensity=0.3;

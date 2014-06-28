@@ -5,7 +5,10 @@
 THREE.PointerLockControls = function ( camera ) {
 
         var scope = this;
-        var freeze = false;
+        var freezeForward = false;
+        var freezeBackward = false;
+        var freezeRight = false;
+        var freezeLeft = false;
 
         camera.rotation.set( 0, 0, 0 );
 
@@ -64,10 +67,19 @@ THREE.PointerLockControls = function ( camera ) {
         //         moveForward=b;
         // };
 
-        this.setFreeze= function(b){
-                freeze=b;
+        this.setFreezeForward= function(b){
+                freezeForward=b;
         }
 
+        this.setFreezeBackward= function(b){
+                freezeBackward=b;
+        }
+        this.setFreezeRight= function(b){
+                freezeRight=b;
+        }
+        this.setFreezeLeft= function(b){
+                freezeLeft=b;
+        }
 
         var onKeyDown = function ( event ) {
 
@@ -179,19 +191,27 @@ THREE.PointerLockControls = function ( camera ) {
 
                 velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
 
-                if(!freeze){
+                if(!freezeForward){
                         if ( moveForward ) velocity.z -= 1600.0 * delta;
+                }
+                
+                if(!freezeBackward){
                         if ( moveBackward ) velocity.z += 1600.0 * delta;
-
+                }
+                
+                if(!freezeLeft){
                         if ( moveLeft ) velocity.x -= 1600.0 * delta;
-                        if ( moveRight ) velocity.x += 1600.0 * delta;
+                }
 
+                if(!freezeRight){
+                        if ( moveRight ) velocity.x += 1600.0 * delta;
+                }
                         if ( isOnObject === true ) {
 
                                 velocity.y = Math.max( 0, velocity.y );
 
                         }
-                }
+                
 
                 yawObject.translateX( velocity.x * delta );
                 yawObject.translateY( velocity.y * delta ); 

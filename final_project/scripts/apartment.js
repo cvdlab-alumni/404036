@@ -1,15 +1,6 @@
 var mesh;
 var apartment = new THREE.Object3D();
 
-// var plane = new THREE.Mesh(new THREE.BoxGeometry(1000,1000,1),new THREE.MeshLambertMaterial({color: 0x00ff00, side: THREE.DoubleSide, transparent:true, opacity:0}) );
-// scene.add(plane);
-// plane.rotation.x=Math.PI/2;
-// plane.position.set(0,-0.5,0);
-
-// objects.push(plane);
-// objects.push(apartment);
-
-
 var loader = new THREE.OBJLoader();
 loader.load('models/proj.obj', function (obj) {
     global_o = obj;
@@ -33,10 +24,6 @@ apartment = mk_all_int_walls(apartment);
 
 apartment = mk_all_ext_walls(apartment);
 
-// var letto = loading('models/bed/Bed.obj','models/bed/Bed.mtl', (22.7,4.2,1.55),());
-
-// apartment.add(letto);
-
 
 var frame_bump = mk_frame("bump");
 apartment.add(frame_bump);
@@ -54,19 +41,7 @@ var shower = mk_shower();
 apartment.add(shower);
 shower.position.set(18.81,7.71,0.8);
 
-// objects.push(shower);
-
-// scene.add(showerParticleSystem);
 var streamShower = castShower();
-// apartment.add(streamShower);
-// streamShower.position.set(18.3,7.71,0.8);
-
-// var paperino = new THREE.Mesh(new THREE.BoxGeometry(5,5,5),new THREE.MeshBasicMaterial({color: 0x000000}) );
-// paperino.position.set(-75,20,-80);
-// scene.add(paperino);
-
-
-
 
 apartment.position.set(-123,0,108);
 apartment.scale.set(10,10,10);

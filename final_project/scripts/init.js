@@ -33,32 +33,22 @@ var rayPointer = new THREE.Raycaster();
 
 var projector = new THREE.Projector();
 
-var objects = [];
-
 
 
 // Caricamento unico texture
-var tex_floor_camera = THREE.ImageUtils.loadTexture("./textures/camera/parquet_letto.jpg");
-var tex_floor_bagno = THREE.ImageUtils.loadTexture("./textures/bagno/pavimento_bagno.jpg");
-var tex_floor_salone = THREE.ImageUtils.loadTexture("./textures/salone/pav_salone.jpg");
-var tex_floor_generico = THREE.ImageUtils.loadTexture("./textures/stanza/pav_generico.jpg");
+var mat_floor_camera = mk_Texture_Material("textures/camera/parquet_letto.jpg", false, 0, true);
+var mat_floor_bagno = mk_Texture_Material("textures/bagno/pavimento_bagno.jpg", false, 0, true);
+var mat_floor_salone = mk_Texture_Material("textures/salone/pav_salone.jpg", false, 0, true);
+var mat_floor_generico = mk_Texture_Material("textures/stanza/pav_generico.jpg", false, 0, true);
 
-var tex_wall_generico = THREE.ImageUtils.loadTexture("./textures/stanza/muro_generico.jpg");
-var tex_wall_salone = THREE.ImageUtils.loadTexture("./textures/salone/muro_salone.jpg");
-var tex_wall_camera = THREE.ImageUtils.loadTexture("./textures/camera/muro_letto.jpg");
-var tex_wall_camera2 = THREE.ImageUtils.loadTexture("./textures/camera/muro_letto2.jpg");
+var mat_wall_generico = mk_Texture_Material("./textures/stanza/muro_generico.jpg", false, 0, true);
+var mat_wall_salone = mk_Texture_Material("textures/salone/muro_salone.jpg", false, 0, true);
+var mat_wall_camera = mk_Texture_Material("textures/camera/muro_letto.jpg", false, 0, true);
 
-var tex_wall_bagno = THREE.ImageUtils.loadTexture("./textures/bagno/muro_bagno.jpg");
-var tex_wall_bagno_normal = THREE.ImageUtils.loadTexture("./textures/bagno/muro_bagno_normal.jpg");
+var mat_wall_bagno = mk_Texture_Material("./textures/bagno/muro_bagno.jpg", true, "./textures/bagno/muro_bagno_normal.jpg", true);
+var mat_wall_cucina = mk_Texture_Material("./textures/cucina/muro_cucina.jpg", true, "./textures/cucina/muro_cucina_normal.jpg", true);
+var mat_wall_esterno = mk_Texture_Material("./textures/rock-diffuse.jpg", true, "./textures/rock-normal.jpg", true);
 
-var tex_wall_cucina = THREE.ImageUtils.loadTexture("./textures/cucina/muro_cucina.jpg");
-var tex_wall_cucina_normal = THREE.ImageUtils.loadTexture("./textures/cucina/muro_cucina_normal.jpg");
-
-// var tex_wall_esterno = THREE.ImageUtils.loadTexture("./textures/GraniteWall-ColorMap.jpg");
-// var tex_wall_esterno_normal = THREE.ImageUtils.loadTexture("./textures/GraniteWall-NormalMap.jpg");
-
-var tex_wall_esterno = THREE.ImageUtils.loadTexture("./textures/rock-diffuse.jpg");
-var tex_wall_esterno_normal = THREE.ImageUtils.loadTexture("./textures/rock-normal.jpg");
 
 //SkyBox
 var urls = [

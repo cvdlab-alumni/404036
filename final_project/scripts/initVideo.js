@@ -25,7 +25,6 @@ film.update = function ( camera ) {
 }
 
 film.pause();
-console.log(film);
 textureSW = new THREE.Texture(film);
 textureSW.minFilter = THREE.LinearFilter;
 textureSW.magFilter = THREE.LinearFilter;

@@ -9,7 +9,6 @@ var texture_tvOff = THREE.ImageUtils.loadTexture("textures/tv_nera.jpg");
 var texture_cucina = THREE.ImageUtils.loadTexture("models/kitchen/defuse.jpg");
 var texture_cucina_normal = THREE.ImageUtils.loadTexture("models/kitchen/normal_normals.jpg");
 
-var texture_sofa = THREE.ImageUtils.loadTexture("models/sofa/Furnishings.Fabrics.Linen.White.jpg");
 
 
 
@@ -24,8 +23,6 @@ function loading (pathOBJ, pathMTL){
     arredo.add(object);
   });
   loader.load(pathOBJ, pathMTL, {side: THREE.DoubleSide});
-
-  // objects.push(arredo);
   return arredo;
 }
 
@@ -39,8 +36,6 @@ var letto = loading('models/bed/Bed.obj','models/bed/Bed.mtl');
 apartment.add(letto);
 letto.position.set(22.7,4.2,1.55);
 letto.rotation.set(Math.PI/2,0,0);
-// console.log(letto);
-// letto.children[0].traverse(findCollision);
 
 
 // ***** Imac *****
@@ -159,6 +154,7 @@ bidet.rotation.set(Math.PI/2,Math.PI,0);
 apartment.add(bidet);
 bidet.position.set(22,7.08,0.86);
 
+// *****  microonde *****
 var microonde = loading('models/Microwave/Microwave.obj','models/Microwave/Microwave.mtl');
     microonde.rotation.set(Math.PI/2,0,0);
     apartment.add(microonde);
@@ -171,7 +167,6 @@ loader1.load('models/Hitachi.obj', function (obj) {
             child.material = material;
             }
       });
-      console.log(obj);
       obj.scale.set(0.05, 0.05, 0.05);
       obj.rotation.x = Math.PI/2;
       obj.rotation.y = -Math.PI/2;
@@ -179,12 +174,14 @@ loader1.load('models/Hitachi.obj', function (obj) {
       obj.position.set(19,13,0.8);
 });
 
+// ***** Libro java ***** 
 var java_book = loading('models/java/livreJava.obj','models/java/livreJava.mtl');
 java_book.scale.set(0.016,0.016,0.016);
 java_book.rotation.set(Math.PI/2,Math.PI,0);
 apartment.add(java_book);
 java_book.position.set(17.9,2,2.685);
 
+// ***** Sedia in camera *****
 var chair = loading('models/office_chair/office_chair.obj','models/office_chair/office_chair.mtl');
 chair.scale.set(2,1.85,2);
 chair.rotation.set(Math.PI/2,0,0);
