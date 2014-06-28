@@ -121,9 +121,10 @@ function noStream(e)
 <script src="scripts/apartment.js"></script>
 <script src="scripts/light.js"></script>
 <script src="scripts/decoration.js"></script>
-
+<script src="scripts/collision.js"></script>
 
 <script src="scripts/gui.js"></script>
+<script src="scripts/render.js"></script>
 
 
 <!-- Javascript code that runs our Three.js examples --> 
@@ -137,71 +138,18 @@ function noStream(e)
 
       
       // Per la Collision detection pongo tutti gli oggetti in un array
-      apartment.traverse(function (child) {
-        if (child instanceof THREE.Mesh) {
-          if(child.id===235) console.log("Cucna trovata!!!!!!!");
-          objects.push(child);
-        }
-      });
-      console.log("Numero di oggetti in objects: ", objects.length);
+      // apartment.traverse(function (child) {
+      //   if (child instanceof THREE.Mesh) {
+      //     if(child.id===235) console.log("Cucna trovata!!!!!!!");
+      //     objects.push(child);
+      //   }
+      // });
+
 
 
       render();
 
-      function render() {
-        stats.update();
-        TWEEN.update();
-        trackballControls.update();
-        requestAnimationFrame(render);
-        webGLRenderer.render(scene, camera);
-
-        // Pioggia
-        if(rain){
-          var vertices = particleSystem.geometry.vertices;
-          vertices.forEach(function (v) {
-            v.y = v.y - (v.velocityY);
-            v.x = v.x - (v.velocityX);
-
-            if (v.y <= 0) v.y = 500;
-            if (v.x <= -20 || v.x >= 20) v.velocityX = v.velocityX * -1;
-          });
-        }
-
-        if(shower.grip.on){
-          var gocce = streamShower.geometry.vertices;
-          // console.log(gocce);
-          gocce.forEach(function(v){
-          v.z = v.z - (v.velocityZ);
-          if(v.z <=0) v.z = 3.3;
-
-          // console.log(v.z);
-
-          });
-        }
-
-
-        if (FPenabled === true) {
-          computeFPControls();
-          if(collisione) {detectCollision();}
-        }
-        // **** Controllo WebCam ****
-        if ( video.readyState === video.HAVE_ENOUGH_DATA ) 
-        {
-          videoImageContext.drawImage( video, 0, 0, videoImage.width, videoImage.height );
-          if ( videoTexture ) 
-            videoTexture.needsUpdate = true;
-        }
-
-        // ******* Controllo video TV *********
-        if (film.readyState === film.HAVE_ENOUGH_DATA) {
-          if (isOn) {
-            if (textureSW) textureSW.needsUpdate = true;
-            film.play();
-          } else {
-           film.pause();
-         }
-       }
-     }
+      
    });
 </script>  
 </body>

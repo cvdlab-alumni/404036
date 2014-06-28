@@ -26,14 +26,16 @@ THREE.ImageUtils.crossOrigin = "anonymous";
 // first person controls
 var FPenabled = false;
 var controls;
-var objects = [];
+
 var rayMove = new THREE.Raycaster();
 rayMove.ray.direction.set(0, 0, -1);
 var rayPointer = new THREE.Raycaster();
 
 var projector = new THREE.Projector();
 
-var collisione = false;
+var objects = [];
+
+
 
 // Caricamento unico texture
 var tex_floor_camera = THREE.ImageUtils.loadTexture("./textures/camera/parquet_letto.jpg");
@@ -44,6 +46,7 @@ var tex_floor_generico = THREE.ImageUtils.loadTexture("./textures/stanza/pav_gen
 var tex_wall_generico = THREE.ImageUtils.loadTexture("./textures/stanza/muro_generico.jpg");
 var tex_wall_salone = THREE.ImageUtils.loadTexture("./textures/salone/muro_salone.jpg");
 var tex_wall_camera = THREE.ImageUtils.loadTexture("./textures/camera/muro_letto.jpg");
+var tex_wall_camera2 = THREE.ImageUtils.loadTexture("./textures/camera/muro_letto2.jpg");
 
 var tex_wall_bagno = THREE.ImageUtils.loadTexture("./textures/bagno/muro_bagno.jpg");
 var tex_wall_bagno_normal = THREE.ImageUtils.loadTexture("./textures/bagno/muro_bagno_normal.jpg");
@@ -51,8 +54,11 @@ var tex_wall_bagno_normal = THREE.ImageUtils.loadTexture("./textures/bagno/muro_
 var tex_wall_cucina = THREE.ImageUtils.loadTexture("./textures/cucina/muro_cucina.jpg");
 var tex_wall_cucina_normal = THREE.ImageUtils.loadTexture("./textures/cucina/muro_cucina_normal.jpg");
 
-var tex_wall_esterno = THREE.ImageUtils.loadTexture("./textures/GraniteWall-ColorMap.jpg");
-var tex_wall_esterno_normal = THREE.ImageUtils.loadTexture("./textures/GraniteWall-NormalMap.jpg");
+// var tex_wall_esterno = THREE.ImageUtils.loadTexture("./textures/GraniteWall-ColorMap.jpg");
+// var tex_wall_esterno_normal = THREE.ImageUtils.loadTexture("./textures/GraniteWall-NormalMap.jpg");
+
+var tex_wall_esterno = THREE.ImageUtils.loadTexture("./textures/rock-diffuse.jpg");
+var tex_wall_esterno_normal = THREE.ImageUtils.loadTexture("./textures/rock-normal.jpg");
 
 //SkyBox
 var urls = [

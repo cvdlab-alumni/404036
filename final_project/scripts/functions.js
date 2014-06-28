@@ -1,3 +1,10 @@
+var findCollision = function (child) {
+  if (child instanceof THREE.Mesh) {
+    if(child.id===235) console.log("Cucna trovata!!!!!!!");
+    objects.push(child);
+  }
+}
+
 function createMesh(geom,rx, ry, imageFile, bump) {
   var texture = null;
   var texture_normal;
@@ -35,13 +42,14 @@ function createMesh(geom,rx, ry, imageFile, bump) {
     case 10:
     texture = tex_wall_esterno;
     texture_normal = tex_wall_esterno_normal
-    // geom.computeVertexNormals();
+    texture_normal.wrapS = texture_normal.wrapT = THREE.RepeatWrapping;
+    geom.computeVertexNormals();
     break;
     
   }
   
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping; 
-  texture.repeat.set( rx, ry ); 
+  // texture.repeat.set( rx, ry ); 
   if (texture_normal!=undefined){
     
     var floorMaterial = new THREE.MeshPhongMaterial( { map: texture, side: THREE.DoubleSide, normalMap: texture_normal} ); 
@@ -145,11 +153,11 @@ function detectCollision() {
   var intersects = rayCaster.intersectObjects(objects);
   // console.log(intersects.length);
 
-  if (intersects.length > 0 && intersects[0].distance < 10) {
+  if (intersects.length > 0 && intersects[0].distance < 15) {
 
     console.log(intersects[0].distance);
 
-    controls.setFreeze(true);
+    // controls.setFreeze(true);
 
   } else {controls.setFreeze(false)}
 }

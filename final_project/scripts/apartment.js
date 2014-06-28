@@ -33,6 +33,10 @@ apartment = mk_all_int_walls(apartment);
 
 apartment = mk_all_ext_walls(apartment);
 
+// var letto = loading('models/bed/Bed.obj','models/bed/Bed.mtl', (22.7,4.2,1.55),());
+
+// apartment.add(letto);
+
 
 var frame_bump = mk_frame("bump");
 apartment.add(frame_bump);
@@ -50,12 +54,16 @@ var shower = mk_shower();
 apartment.add(shower);
 shower.position.set(18.81,7.71,0.8);
 
-objects.push(shower);
+// objects.push(shower);
 
 // scene.add(showerParticleSystem);
 var streamShower = castShower();
 // apartment.add(streamShower);
 // streamShower.position.set(18.3,7.71,0.8);
+
+// var paperino = new THREE.Mesh(new THREE.BoxGeometry(5,5,5),new THREE.MeshBasicMaterial({color: 0x000000}) );
+// paperino.position.set(-75,20,-80);
+// scene.add(paperino);
 
 
 

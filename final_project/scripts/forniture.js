@@ -304,11 +304,11 @@ function mk_frame(tipo){
 	return picture;
 }
 
-function mk_controller_tv(width, height){
-	var control1 = new THREE.Mesh(new THREE.PlaneGeometry(width/2,height/2), new THREE.MeshBasicMaterial({color: 0x000000, side: THREE.DoubleSide, transparent:true, opacity:0}));
-	var control2 = new THREE.Mesh(new THREE.PlaneGeometry(width/2,height/2), new THREE.MeshBasicMaterial({color: 0xff0000, side: THREE.DoubleSide, transparent:true, opacity:0}));
-	var control3 = new THREE.Mesh(new THREE.PlaneGeometry(width/2,height/2), new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.DoubleSide, transparent:true, opacity:0}));
-	var control4 = new THREE.Mesh(new THREE.PlaneGeometry(width/2,height/2), new THREE.MeshBasicMaterial({color: 0x0000ff, side: THREE.DoubleSide, transparent:true, opacity:0}));
+function mk_controller_tv(width, height, opacity){
+	var control1 = new THREE.Mesh(new THREE.PlaneGeometry(width/2,height/2), new THREE.MeshBasicMaterial({color: 0x000000, side: THREE.DoubleSide, transparent:true, opacity:opacity}));
+	var control2 = new THREE.Mesh(new THREE.PlaneGeometry(width/2,height/2), new THREE.MeshBasicMaterial({color: 0xff0000, side: THREE.DoubleSide, transparent:true, opacity:opacity}));
+	var control3 = new THREE.Mesh(new THREE.PlaneGeometry(width/2,height/2), new THREE.MeshBasicMaterial({color: 0x00ff00, side: THREE.DoubleSide, transparent:true, opacity:opacity}));
+	var control4 = new THREE.Mesh(new THREE.PlaneGeometry(width/2,height/2), new THREE.MeshBasicMaterial({color: 0x0000ff, side: THREE.DoubleSide, transparent:true, opacity:opacity}));
 	var controller = new THREE.Object3D();
 	controller.add(control1);
 	controller.add(control2);

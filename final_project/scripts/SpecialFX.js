@@ -3,7 +3,7 @@
 //*******************************************************************************************************************
 var rain = false;
 
-var particleCount = 10000;
+var particleCount = 8000;
 var particles = new THREE.Geometry();
 var pMaterial = new THREE.ParticleBasicMaterial({
   color: 0xFFFFFF,
@@ -25,7 +25,7 @@ for (var p = 0; p < particleCount; p++) {
   var pZ = Math.random() * 1000 - 500;
   //IMpedisce di piovere in casa
   if(pZ>-108 && pZ<108){
-    if(pX>0 && pX < 123) {pX = pX+123;} else if (pX<0 && pX >-123) {pX = pX -123}
+    if(pX>0 && pX < 123) {pX = pX+(Math.random()+123);} else if (pX<0 && pX >-123) {pX = pX + (-Math.random()-123);}
   }
 
   particle = new THREE.Vector3(pX, pY, pZ);

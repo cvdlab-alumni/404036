@@ -1,0 +1,31 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v3.0.1270)
+
+newmtl metall
+kd 0 0 0
+ka 0 0 0
+ks 0.768628 0.768628 0.768628
+Ns 512
+illum 2
+
+newmtl white
+kd 0.941177 0.941177 0.941177
+ka 0 0 0
+ks 0.54902 0.54902 0.54902
+Ns 362.039
+illum 2
+
+newmtl 08 - Default
+kd 0.00392157 0.00392157 0.00392157
+ka 0 0 0
+ks 0.54902 0.54902 0.54902
+Ns 362.039
+illum 2
+
+newmtl farfor
+kd 0.5 0.5 0.5
+ka 0 0 0
+ks 0.901961 0.901961 0.901961
+Ns 256
+illum 2
+
