@@ -30,11 +30,11 @@
       dir4.intensity = 0.5;
       scene.add(dir4);
 
-      // Disimpegno
-      // var light1 = mk_lamp_ceiling(0.3, 0x00FF00, 7);
+      // // Disimpegno
+      // var light1 = mk_lamp_ceiling(0.3, 7);
       // apartment.add(light1);
-      // light1.position.set(12.8,12.3,6);
-      // light1.pointLight.position.set(0,0,0);
+      // light1.position.set(12.8,12.3,7);
+      // // light1.pointLight.position.set(0,0,0);
       // light1.spotLight.target=(light1.target);
 
       // // Ingresso

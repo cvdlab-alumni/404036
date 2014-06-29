@@ -1,21 +1,14 @@
+var opac = 0.0;
+
+
 var vector1 = new THREE.Vector3( 0, 0, 0 );
 var vector2 = new THREE.Vector3( 0, 0, 0 );
 var vector3 = new THREE.Vector3( 0, 0, 0 );
 var vector4 = new THREE.Vector3( 0, 0, 0 );
 function detectCollision() {
-	var x=0, z=0;
-	var vector;
+	var vector = new THREE.Vector3( 0, 0, 1 );
 	var projector2 = new THREE.Projector();
-  	// // console.log(z,x);
-  	// // console.log(controls.getMoveForward(), controls.getMoveBackward(), controls.getMoveLeft(), controls.getMoveRight());
-	// if (controls.getMoveLeft()) x =-1;
-	// if (controls.getMoveRight()) x = 1;
-	// if (controls.getMoveBackward()) z = -1;
-	// if (controls.getMoveForward()) z = 1;
-	// // console.log(z,x);
-	vector = new THREE.Vector3( 0, 0, 1 );
 
-	// console.log(vector);
 	//unproject passa da 2D->3D
 	//project fa l'opposto 3D->2D
 	projector2.unprojectVector(vector, camera);
@@ -37,7 +30,7 @@ function detectCollision() {
 
 		var intersects = rayCaster.intersectObjects(objects);
 	  	// console.log(intersects.length);
-	  	if (intersects.length > 0 && intersects[0].distance < 10) {
+	  	if (intersects.length > 0 && intersects[0].distance < 6) {
 		    // console.log(intersects[0].distance);
 		    if(i===0) {
 		   		console.log("In avanti collido con: ", intersects.length);
@@ -87,11 +80,42 @@ var findCollision = function (child) {
 	}
 }
 
-// setTimeout(function() {apartment.traverse(findCollision);}, 5000);
-apartment.traverse(findCollision);
-// setTimeout(function () {
-// 	// console.log(letto);
-// 	letto.traverse(findCollision);
-// 	console.log("Numero di oggetti in objects: ", objects.length);
-// },3000);
+//Creo oggetti con cui collidere
+var col_bed = new THREE.Mesh(new THREE.BoxGeometry(1.9,3.6,3), new THREE.MeshBasicMaterial({color: 0x999999, transparent: true, opacity: opac}));
+apartment.add(col_bed);
+col_bed.position.set(22.8,4.2,2.5);
 
+var col_mac = new THREE.Mesh(new THREE.BoxGeometry(3,1.8,3), new THREE.MeshBasicMaterial({color: 0x999999, transparent: true, opacity: opac}));
+apartment.add(col_mac);
+col_mac.position.set(17,1.8,2.5);
+
+var col_bidet = new THREE.Mesh(new THREE.BoxGeometry(1.1,1,3), new THREE.MeshBasicMaterial({color: 0x999999, transparent: true, opacity: opac}));
+apartment.add(col_bidet);
+col_bidet.position.set(23.2, 7.1,2.5);
+
+col_water = new THREE.Mesh(new THREE.BoxGeometry(1.1,1.4,3), new THREE.MeshBasicMaterial({color: 0x999999, transparent: true, opacity: opac}));
+apartment.add(col_water);
+col_water.position.set(23.2 , 11.1, 2.5);
+
+col_lavandino = new THREE.Mesh(new THREE.BoxGeometry(1.3,1.1,3), new THREE.MeshBasicMaterial({color: 0x999999, transparent: true, opacity: opac}));
+apartment.add(col_lavandino);
+col_lavandino.position.set(20 , 11.4, 2.5);
+
+col_forno = new THREE.Mesh(new THREE.BoxGeometry(6,2,3), new THREE.MeshBasicMaterial({color: 0x999999, transparent: true, opacity: opac}));
+apartment.add(col_forno);
+col_forno.position.set(20.8,19.85,2.5);
+
+col_frigo = new THREE.Mesh(new THREE.BoxGeometry(1.6,1.6,3), new THREE.MeshBasicMaterial({color: 0x999999, transparent: true, opacity: opac}));
+apartment.add(col_frigo);
+col_frigo.position.set(19,12.9,2.5);
+
+col_tavolo = new THREE.Mesh(new THREE.BoxGeometry(2.2,5.9,3), new THREE.MeshBasicMaterial({color: 0x999999, transparent: true, opacity: opac}));
+apartment.add(col_tavolo);
+col_tavolo.position.set(5,5,2.5);
+
+col_divano = new THREE.Mesh(new THREE.BoxGeometry(4.7,2,3), new THREE.MeshBasicMaterial({color: 0x999999, transparent: true, opacity: opac}));
+apartment.add(col_divano);
+col_divano.position.set(4.4,14.3,2.5);
+
+objects.concat(shower, col_bed, col_mac, col_water,col_bidet, col_lavandino,col_forno, col_frigo, col_tavolo, col_divano);
+apartment.traverse(findCollision);

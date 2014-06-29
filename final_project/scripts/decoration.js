@@ -113,6 +113,35 @@ loader1.load('models/kitchen/fkc.obj', function (obj) {
       apartment.add(obj);
       obj.position.set(21.45,19.83,0.8);
 });
+var fire1 = castFire(100,0.26,0.05,0.5);
+apartment.add(fire1);
+fire1.position.set(21.78,19.245,1.169);
+animateFire(fire1, 0.25);
+
+var fire2 = castFire(100,0.21,0.05,0.5);
+apartment.add(fire2);
+fire2.position.set(21.03,19.285,1.169);
+animateFire(fire2, 0.2);
+
+var fire3 = castFire(100,0.2,0.05,0.5);
+apartment.add(fire3);
+fire3.position.set(21.77,20.374,1.169);
+animateFire(fire3, 0.19);
+
+var fire4 = castFire(100,0.25,0.05,0.5);
+apartment.add(fire4);
+fire4.position.set(21.06,20.41,1.169);
+animateFire(fire4, 0.24);
+
+
+
+var buttons = mk_buttons();
+apartment.add(buttons);
+// var button1 = new THREE.Mesh(new THREE.CircleGeometry(0.05), new THREE.MeshLambertMaterial({color:0xAACCFF, transparent: true, opacity:0.5}));
+// apartment.add(button1);
+buttons.position.set(22.169,19.14,2.71);
+
+
 
 // ***** Tavolo per la tv *****
 var tavolo_tv = loading('models/table_cheap/table.obj', 'models/table_cheap/table.mtl');

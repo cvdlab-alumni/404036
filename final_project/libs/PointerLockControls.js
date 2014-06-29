@@ -47,21 +47,6 @@ THREE.PointerLockControls = function ( camera ) {
 
         };
 
-        this.getMoveForward= function(){
-                return moveForward;
-        };
-
-        this.getMoveBackward= function(){
-                return moveBackward;
-        };
-
-        this.getMoveLeft= function(){
-                return moveLeft;
-        };
-
-        this.getMoveRight= function(){
-                return moveRight;
-        };
 
         // this.setMoveForward= function(b){
         //         moveForward=b;

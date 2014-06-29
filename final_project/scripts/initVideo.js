@@ -30,3 +30,38 @@ textureSW.minFilter = THREE.LinearFilter;
 textureSW.magFilter = THREE.LinearFilter;
 textureSW.format = THREE.RGBFormat;
 textureSW.generateMipmaps = false;
+
+
+// ***** Audio *****
+var soundsToUpdate = []
+
+var Sound = function(src) {
+	var audio = document.createElement('audio');
+	var source = document.createElement('source');
+	source.src = src;
+	audio.appendChild(source);
+
+	this.play = function() {
+		audio.play();
+	}
+	this.pause = function() {
+		audio.pause();
+	}
+	this.stop = function() {
+		audio.pause();
+		audio.currentTime = 0;
+	}
+	// this.updateVolume = function() {
+	// 	var distance = this.position.distanceTo((!FPenabled) ? camera.position : controls.getObject().position);
+	// 	if (distance <= radius) {
+	// 		audio.volume = volume * (1 - distance / radius);
+	// 	} else {
+	// 		audio.volume = 0;
+	// 	}
+	// }
+	// if (toUpdate) {
+	// 	soundsToUpdate.push(this);
+	// }
+}
+
+var crash_sound = new Sound(['sound/household042.mp3'], 15, 0.5, true);

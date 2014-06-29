@@ -24,7 +24,7 @@ function render() {
 
           });
         }
-
+      
 
         if (FPenabled === true) {
           computeFPControls();

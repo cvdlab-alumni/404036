@@ -42,8 +42,17 @@ var mat_floor_salone = mk_Texture_Material("textures/salone/pav_salone.jpg", fal
 var mat_floor_generico = mk_Texture_Material("textures/stanza/pav_generico.jpg", false, 0, true);
 
 var mat_wall_generico = mk_Texture_Material("./textures/stanza/muro_generico.jpg", false, 0, true);
+var texture_wall_generico = mat_wall_generico.map;
+var texture_wall_generico2 =THREE.ImageUtils.loadTexture("textures/stanza/muro_generico2.jpg");
+texture_wall_generico2.wrapS = texture_wall_generico2.wrapT = THREE.RepeatWrapping;
 var mat_wall_salone = mk_Texture_Material("textures/salone/muro_salone.jpg", false, 0, true);
+var texture_wall_salone = mat_wall_salone.map;
+var texture_wall_salone2 =THREE.ImageUtils.loadTexture("textures/salone/muro_salone2.jpg");
+texture_wall_salone2.wrapS = texture_wall_salone2.wrapT = THREE.RepeatWrapping;
 var mat_wall_camera = mk_Texture_Material("textures/camera/muro_letto.jpg", false, 0, true);
+var texture_wall_camera = mat_wall_camera.map;
+var texture_wall_camera2 = THREE.ImageUtils.loadTexture("textures/camera/muro_letto2.jpg");
+texture_wall_camera2.wrapS = texture_wall_camera2.wrapT = THREE.RepeatWrapping;
 
 var mat_wall_bagno = mk_Texture_Material("./textures/bagno/muro_bagno.jpg", true, "./textures/bagno/muro_bagno_normal.jpg", true);
 var mat_wall_cucina = mk_Texture_Material("./textures/cucina/muro_cucina.jpg", true, "./textures/cucina/muro_cucina_normal.jpg", true);

@@ -251,7 +251,7 @@ function mk_all_int_walls(apartment){
       var muro_cuc_1 = mk_plane(9,2,2, 6.3,4.5, []);
       muro_cuc_1.rotation.x = Math.PI/2;
       apartment.add(muro_cuc_1);
-      muro_cuc_1.position.set(17.5,12.21,0.8);
+      muro_cuc_1.position.set(17.5,12.202,0.8);
 
       var muro_cuc_2 = mk_plane(9,2,2, 2.3,4.5, []);
       muro_cuc_2.rotation.x = Math.PI/2;
@@ -273,13 +273,17 @@ function mk_all_int_walls(apartment){
       muro_cuc_5.rotation.x = Math.PI/2;
       apartment.add(muro_cuc_5);
       muro_cuc_5.rotation.y = Math.PI/2;
-      muro_cuc_5.position.set(17.49,6.50,0.8);
+      muro_cuc_5.position.set(17.498,6.50,0.8);
 
       var muro_cuc_6 = mk_plane(9,2,2, 14.3,4.5, [2.1,0, 1.6,4.2, 11.2,0, 1.6,4.2]);
       muro_cuc_6.rotation.x = Math.PI/2;
       apartment.add(muro_cuc_6);
       muro_cuc_6.rotation.y = Math.PI/2;
       muro_cuc_6.position.set(15.21,6.50,0.8);
+
+      apartment.camera = [muro_cam_1, muro_cam_2, muro_cam_3, muro_cam_4];
+      apartment.salone = [muro_sal_1, muro_sal_2, muro_sal_3, muro_sal_4];
+      apartment.stanza = [muro_ingr_1, muro_ingr_2, muro_ingr_3, muro_ingr_4, muro_dis_1, muro_dis_2, muro_dis_3, muro_dis_4, muro_cor_1, muro_cor_2, muro_cor_3, muro_cor_4];
       return apartment;
 }
 

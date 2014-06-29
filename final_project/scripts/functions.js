@@ -1,5 +1,5 @@
 function mk_Texture_Material(map, norm, norm_map, wrapping) {
-  console.log(map);
+  // console.log(map);
   var texture = THREE.ImageUtils.loadTexture(map);
   var material = new THREE.MeshPhongMaterial({
     map: texture,
@@ -124,3 +124,22 @@ function onWindowResize() {
   camera.updateProjectionMatrix();
   webGLRenderer.setSize( window.innerWidth, window.innerHeight );
 }
+
+function animateFire( sF, rf){      
+    var counter = 1;
+    var singleFire = sF.geometry.vertices;
+    // fire.geometry.verticesNeedUpdate = true;
+    var alfa=0;
+    singleFire.forEach(function(v){
+      alfa += 2/100;
+        if(counter%2===0){
+          new TWEEN.Tween(v)
+          .to({x:(rf*1.06 * Math.cos(alfa*2* Math.PI)), y: (rf*1.06 * Math.sin(alfa*2* Math.PI)), z: 1.58},200)
+          .repeat(Infinity)
+          .easing(TWEEN.Easing.Linear.None)
+          .yoyo(true)
+          .start();
+        }
+        counter++;
+    });
+  }

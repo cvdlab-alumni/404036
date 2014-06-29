@@ -32,6 +32,13 @@ frame_bump.position.set(10.18,7,3);
 var frame = mk_frame();
 apartment.add(frame);
 frame.position.set(10.18,10,3);
+toIntersect.push(frame.children[1]);
+console.log(frame);
+frame.children[1].interact = function(){
+	console.log(texture_photo2);
+	crash_sound.play();
+	frame.children[1].material.map = texture_photo2;
+}
 
 var frame_normal = mk_frame("normal");
 apartment.add(frame_normal);

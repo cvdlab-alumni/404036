@@ -12,7 +12,10 @@ var texture_frame = THREE.ImageUtils.loadTexture("textures/frame.jpg");
 var texture_frame_bump = THREE.ImageUtils.loadTexture("textures/frame_bump.jpg");
 var texture_frame_normal = THREE.ImageUtils.loadTexture("textures/frame_normal.jpg");
 var texture_photo = THREE.ImageUtils.loadTexture("textures/photo.jpg");
+var texture_photo2 = THREE.ImageUtils.loadTexture("textures/photo2.jpg");
 
+
+var lampShadeMaterial = new THREE.MeshPhongMaterial({ color: 0x00FF00 , shading: THREE.SmoothShading, shininess: 30, metal: false, side: THREE.DoubleSide});
 
 function mk_blind(width, height, depth){
 	var blind_texture = THREE.ImageUtils.loadTexture("./textures/porta_blind.jpg");
@@ -207,10 +210,10 @@ function mk_big_window(width, height, depth){
 	return windows;
 }
 
-function mk_lamp_ceiling(radius_lampShade, lColor, distance){
+function mk_lamp_ceiling(radius_lampShade, distance){
 	var lampShadeGeometry = new THREE.SphereGeometry(radius_lampShade, 8, 8, 0, Math.PI, 0, Math.PI);
-    var lampShadeMaterial = new THREE.MeshPhongMaterial({ color: lColor , shading: THREE.SmoothShading, shininess: 30, metal: false});
-    lampShadeMaterial.side = THREE.DoubleSide;
+    
+    // lampShadeMaterial.side = THREE.DoubleSide;
     var lampShade = new THREE.Mesh(lampShadeGeometry, lampShadeMaterial);
     lampShade.scale.z=0.5;
 
@@ -220,7 +223,7 @@ function mk_lamp_ceiling(radius_lampShade, lColor, distance){
     lampShade.add(spotLight);
  	lampShade.spotLight=spotLight;
 
- 	var plight = new THREE.PointLight( 0xFFFFFF, 1, distance );
+ 	var plight = new THREE.PointLight( 0xFFFFFF, 1, radius_lampShade );
  	lampShade.add(plight);
  	lampShade.pointLight =plight;
  	plight.intensity=0;
@@ -234,7 +237,7 @@ function mk_lamp_ceiling(radius_lampShade, lColor, distance){
  	lampShade.on=false;
 	lampShade.interact=function(){
 		if(!this.on){
-			this.children[0].intensity=0.3;
+			this.children[0].intensity=4;
 			this.children[1].intensity=1;
 			this.on=true;
 		} else {
@@ -271,9 +274,12 @@ function mk_frame(tipo){
 	var picture = new THREE.Object3D();
 	var fGeometry = new THREE.PlaneGeometry(5,5, 5,5);
 
-	if(tipo==="bump"){ var fMaterial = new THREE.MeshPhongMaterial({ map: texture_frame, bumpMap: texture_frame_bump, bumpScale: 0.0, side: THREE.DoubleSide});} 
-	else if (tipo==="normal"){var fMaterial = new THREE.MeshPhongMaterial({ map: texture_frame, normalMap: texture_frame_normal, side: THREE.DoubleSide});}
-	else { var fMaterial = new THREE.MeshPhongMaterial({ map: texture_frame, side: THREE.DoubleSide});}
+	if(tipo==="bump"){ 
+		var fMaterial = new THREE.MeshPhongMaterial({ map: texture_frame, bumpMap: texture_frame_bump, bumpScale: 0.0, side: THREE.DoubleSide});
+	} else if (tipo==="normal"){
+		var fMaterial = new THREE.MeshPhongMaterial({ map: texture_frame, normalMap: texture_frame_normal, side: THREE.DoubleSide});
+		fGeometry.computeVertexNormals();
+	} else { var fMaterial = new THREE.MeshPhongMaterial({ map: texture_frame, side: THREE.DoubleSide});}
 	
 	var frame = new THREE.Mesh(fGeometry, fMaterial);
 	picture.add(frame);
@@ -443,4 +449,53 @@ function mk_shower(){
 
 	shower_box.grip = grip;
 	return shower_box;
+}
+
+function mk_buttons(){
+	var buttons = new THREE.Object3D();
+	var button1 = new THREE.Mesh(new THREE.CircleGeometry(0.05), new THREE.MeshLambertMaterial({color:0xAACCFF, transparent: true, opacity:0.0}));
+	var button2 = button1.clone();
+	var button3 = button1.clone();
+	var button4 = button1.clone();
+	buttons.add(button1);
+	buttons.add(button2);
+	buttons.add(button3);
+	buttons.add(button4);
+	buttons.button1= button1;
+	buttons.button2= button2;
+	buttons.button3= button3;
+	buttons.button4= button4;
+
+	button2.position.set(0,0.41,0.0);
+	button3.position.set(0,0.84,0);
+	button4.position.set(0,1.19,0.0);
+
+
+	toIntersect.push(buttons.button1);
+	buttons.button1.interact = function(){
+		if(fire1.visible){	fire1.visible=false;
+		} else {	fire1.visible=true;
+		}
+	}
+
+	toIntersect.push(buttons.button2);
+	buttons.button2.interact = function(){
+		if(fire2.visible){	fire2.visible=false;
+		} else {	fire2.visible=true;
+		}
+	}
+	toIntersect.push(buttons.button3);
+	buttons.button3.interact = function(){
+		if(fire3.visible){	fire3.visible=false;
+		} else {	fire3.visible=true;
+		}
+	}
+	toIntersect.push(buttons.button4);
+	buttons.button4.interact = function(){
+		if(fire4.visible){	fire4.visible=false;
+		} else {	fire4.visible=true;
+		}
+	}
+
+	return buttons;
 }
