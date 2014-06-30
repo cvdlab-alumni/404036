@@ -1,13 +1,13 @@
-var texture_screen = THREE.ImageUtils.loadTexture("models/iMac_desktop/screen.jpg");
-var videoTexture = new THREE.Texture( videoImage );
-videoTexture.minFilter = THREE.LinearFilter;
-videoTexture.magFilter = THREE.LinearFilter;
+// var texture_screen = THREE.ImageUtils.loadTexture("models/iMac_desktop/screen.jpg");
+// var videoTexture = new THREE.Texture( videoImage );
+// videoTexture.minFilter = THREE.LinearFilter;
+// videoTexture.magFilter = THREE.LinearFilter;
 
-var texture_tvColor = THREE.ImageUtils.loadTexture("textures/Texture_TV_by_Alipse.jpg");
-var texture_tvOff = THREE.ImageUtils.loadTexture("textures/tv_nera.jpg");
+// var texture_tvColor = THREE.ImageUtils.loadTexture("textures/Texture_TV_by_Alipse.jpg");
+// var texture_tvOff = THREE.ImageUtils.loadTexture("textures/tv_nera.jpg");
 
-var texture_cucina = THREE.ImageUtils.loadTexture("models/kitchen/defuse.jpg");
-var texture_cucina_normal = THREE.ImageUtils.loadTexture("models/kitchen/normal_normals.jpg");
+// var texture_cucina = THREE.ImageUtils.loadTexture("models/kitchen/defuse.jpg");
+// var texture_cucina_normal = THREE.ImageUtils.loadTexture("models/kitchen/normal_normals.jpg");
 
 
 

@@ -1,21 +1,21 @@
 
-var telaio_texture = THREE.ImageUtils.loadTexture("./textures/lego_medio.jpg");
-var frameMaterial = new THREE.MeshLambertMaterial({map: telaio_texture});
+// var telaio_texture = THREE.ImageUtils.loadTexture("./textures/lego_medio.jpg");
+// var frameMaterial = new THREE.MeshLambertMaterial({map: telaio_texture});
 
-var porta_texture = THREE.ImageUtils.loadTexture("./textures/rovere_naturale.jpg");
-var portMaterial = new THREE.MeshLambertMaterial({map: porta_texture});
+// var porta_texture = THREE.ImageUtils.loadTexture("./textures/rovere_naturale.jpg");
+// var portMaterial = new THREE.MeshLambertMaterial({map: porta_texture});
 
-var texture_lamp = THREE.ImageUtils.loadTexture("./textures/lamp2.jpg");
-var texture_desk = THREE.ImageUtils.loadTexture("./textures/wood_texture1.jpg");
+// var texture_lamp = THREE.ImageUtils.loadTexture("./textures/lamp2.jpg");
+// var texture_desk = THREE.ImageUtils.loadTexture("./textures/wood_texture1.jpg");
 
-var texture_frame = THREE.ImageUtils.loadTexture("textures/frame.jpg");
-var texture_frame_bump = THREE.ImageUtils.loadTexture("textures/frame_bump.jpg");
-var texture_frame_normal = THREE.ImageUtils.loadTexture("textures/frame_normal.jpg");
-var texture_photo = THREE.ImageUtils.loadTexture("textures/photo.jpg");
-var texture_photo2 = THREE.ImageUtils.loadTexture("textures/photo2.jpg");
+// var texture_frame = THREE.ImageUtils.loadTexture("textures/frame.jpg");
+// var texture_frame_bump = THREE.ImageUtils.loadTexture("textures/frame_bump.jpg");
+// var texture_frame_normal = THREE.ImageUtils.loadTexture("textures/frame_normal.jpg");
+// var texture_photo = THREE.ImageUtils.loadTexture("textures/photo.jpg");
+// var texture_photo2 = THREE.ImageUtils.loadTexture("textures/photo2.jpg");
 
 
-var lampShadeMaterial = new THREE.MeshPhongMaterial({ color: 0x00FF00 , shading: THREE.SmoothShading, shininess: 30, metal: false, side: THREE.DoubleSide});
+// var lampShadeMaterial = new THREE.MeshPhongMaterial({ color: 0x00FF00 , shading: THREE.SmoothShading, shininess: 30, metal: false, side: THREE.DoubleSide});
 
 function mk_blind(width, height, depth){
 	var blind_texture = THREE.ImageUtils.loadTexture("./textures/porta_blind.jpg");
@@ -498,4 +498,32 @@ function mk_buttons(){
 	}
 
 	return buttons;
+}
+
+function mk_blackboard(){
+	bb_Geometry = new THREE.BoxGeometry(2,1.4,0.1);
+	bb_Material = new THREE.MeshLambertMaterial({color: 0xEBCFB0, map: texture_blackBoard, side: THREE.DoubleSide});
+	var bb_mats = [
+	new THREE.MeshLambertMaterial({color: 0xEBCFB0, side: THREE.DoubleSide}),
+	new THREE.MeshLambertMaterial({color: 0xEBCFB0,  side: THREE.DoubleSide}),
+	new THREE.MeshLambertMaterial({color: 0xEBCFB0,  side: THREE.DoubleSide}),
+	new THREE.MeshLambertMaterial({color: 0xEBCFB0,  side: THREE.DoubleSide}),
+	bb_Material,
+	bb_Material,
+	];
+	var bb = new THREE.Mesh(bb_Geometry, new THREE.MeshFaceMaterial(bb_mats));
+	
+	var options = { size: 0.2, height: 0.001, weight: "normal", font: "helvetiker", bevelThickness: 0, bevelSize: 0,
+     bevelSegments: 0, bevelEnabled: false, curveSegments: 0, steps: 0 };
+    text1 = createText(new THREE.TextGeometry("Conti Daniele", options));
+    text1.position.set(0.8,0.3,-0.051 );
+    text2 = createText(new THREE.TextGeometry("Final Project", options));
+    text2.position.set(0.7,-0.1,-0.051 );
+    text3 = createText(new THREE.TextGeometry("2013/2014", options));
+    text3.position.set(0.7,-0.5,-0.051 );
+    bb.add(text1);
+    bb.add(text2);
+    bb.add(text3);
+
+	return bb;
 }

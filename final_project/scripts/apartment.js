@@ -50,6 +50,12 @@ shower.position.set(18.81,7.71,0.8);
 
 var streamShower = castShower();
 
+var board = mk_blackboard();
+apartment.add(board);
+board.position.set(18,0.855,4);
+board.rotation.x=Math.PI/2;
+
+
 apartment.position.set(-123,0,108);
 apartment.scale.set(10,10,10);
 apartment.rotation.x=-Math.PI/2;

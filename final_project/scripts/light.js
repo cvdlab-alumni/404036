@@ -9,25 +9,25 @@
       var dir1 = new THREE.DirectionalLight(0xffffff);
       // dir1.position.set(50, 100, -50);
       dir1.position.set(50, 10, 0);
-      dir1.intensity = 0.5;
+      dir1.intensity = 0.7;
       scene.add(dir1);
 
       var dir2 = new THREE.DirectionalLight(0xffffff);
       // dir2.position.set(-50, 100, 50);
       dir2.position.set(-50, 10, 0);
-      dir2.intensity = 0.5;
+      dir2.intensity = 0.7;
       scene.add(dir2);
 
       var dir3 = new THREE.DirectionalLight(0xffffff);
       // dir3.position.set(50, 100, 50);
       dir3.position.set(0, 10, 50);
-      dir3.intensity = 0.5;
+      dir3.intensity = 0.7;
       scene.add(dir3);
 
       var dir4 = new THREE.DirectionalLight(0xffffff);
       // dir4.position.set(-50, 100, -50);
       dir4.position.set(0, 10, -50);
-      dir4.intensity = 0.5;
+      dir4.intensity = 0.7;
       scene.add(dir4);
 
       // // Disimpegno

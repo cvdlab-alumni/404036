@@ -143,3 +143,12 @@ function animateFire( sF, rf){
         counter++;
     });
   }
+
+function createText(geom) {
+  var meshMaterial = new THREE.MeshLambertMaterial({color: 0xffffff, shading: THREE.SmoothShading, specular: 0xffffff, shininess: 1000, metal: true});
+  var plane = THREE.SceneUtils.createMultiMaterialObject(geom, [meshMaterial]);
+  // plane.rotation.x=Math.PI/2;
+  // plane.rotation.y=-Math.PI/2;
+  plane.rotation.y=Math.PI;
+  return plane;
+}

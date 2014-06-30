@@ -36,47 +36,27 @@ var projector = new THREE.Projector();
 
 
 // Caricamento unico texture
-var mat_floor_camera = mk_Texture_Material("textures/camera/parquet_letto.jpg", false, 0, true);
-var mat_floor_bagno = mk_Texture_Material("textures/bagno/pavimento_bagno.jpg", false, 0, true);
-var mat_floor_salone = mk_Texture_Material("textures/salone/pav_salone.jpg", false, 0, true);
-var mat_floor_generico = mk_Texture_Material("textures/stanza/pav_generico.jpg", false, 0, true);
+// var mat_floor_camera = mk_Texture_Material("textures/camera/parquet_letto.jpg", false, 0, true);
+// var mat_floor_bagno = mk_Texture_Material("textures/bagno/pavimento_bagno.jpg", false, 0, true);
+// var mat_floor_salone = mk_Texture_Material("textures/salone/pav_salone.jpg", false, 0, true);
+// var mat_floor_generico = mk_Texture_Material("textures/stanza/pav_generico.jpg", false, 0, true);
 
-var mat_wall_generico = mk_Texture_Material("./textures/stanza/muro_generico.jpg", false, 0, true);
-var texture_wall_generico = mat_wall_generico.map;
-var texture_wall_generico2 =THREE.ImageUtils.loadTexture("textures/stanza/muro_generico2.jpg");
-texture_wall_generico2.wrapS = texture_wall_generico2.wrapT = THREE.RepeatWrapping;
-var mat_wall_salone = mk_Texture_Material("textures/salone/muro_salone.jpg", false, 0, true);
-var texture_wall_salone = mat_wall_salone.map;
-var texture_wall_salone2 =THREE.ImageUtils.loadTexture("textures/salone/muro_salone2.jpg");
-texture_wall_salone2.wrapS = texture_wall_salone2.wrapT = THREE.RepeatWrapping;
-var mat_wall_camera = mk_Texture_Material("textures/camera/muro_letto.jpg", false, 0, true);
-var texture_wall_camera = mat_wall_camera.map;
-var texture_wall_camera2 = THREE.ImageUtils.loadTexture("textures/camera/muro_letto2.jpg");
-texture_wall_camera2.wrapS = texture_wall_camera2.wrapT = THREE.RepeatWrapping;
+// var mat_wall_generico = mk_Texture_Material("./textures/stanza/muro_generico.jpg", false, 0, true);
+// var texture_wall_generico = mat_wall_generico.map;
+// var texture_wall_generico2 =THREE.ImageUtils.loadTexture("textures/stanza/muro_generico2.jpg");
+// texture_wall_generico2.wrapS = texture_wall_generico2.wrapT = THREE.RepeatWrapping;
+// var mat_wall_salone = mk_Texture_Material("textures/salone/muro_salone.jpg", false, 0, true);
+// var texture_wall_salone = mat_wall_salone.map;
+// var texture_wall_salone2 =THREE.ImageUtils.loadTexture("textures/salone/muro_salone2.jpg");
+// texture_wall_salone2.wrapS = texture_wall_salone2.wrapT = THREE.RepeatWrapping;
+// var mat_wall_camera = mk_Texture_Material("textures/camera/muro_letto.jpg", false, 0, true);
+// var texture_wall_camera = mat_wall_camera.map;
+// var texture_wall_camera2 = THREE.ImageUtils.loadTexture("textures/camera/muro_letto2.jpg");
+// texture_wall_camera2.wrapS = texture_wall_camera2.wrapT = THREE.RepeatWrapping;
 
-var mat_wall_bagno = mk_Texture_Material("./textures/bagno/muro_bagno.jpg", true, "./textures/bagno/muro_bagno_normal.jpg", true);
-var mat_wall_cucina = mk_Texture_Material("./textures/cucina/muro_cucina.jpg", true, "./textures/cucina/muro_cucina_normal.jpg", true);
-var mat_wall_esterno = mk_Texture_Material("./textures/rock-diffuse.jpg", true, "./textures/rock-normal.jpg", true);
+// var mat_wall_bagno = mk_Texture_Material("./textures/bagno/muro_bagno.jpg", true, "./textures/bagno/muro_bagno_normal.jpg", true);
+// var mat_wall_cucina = mk_Texture_Material("./textures/cucina/muro_cucina.jpg", true, "./textures/cucina/muro_cucina_normal.jpg", true);
+// var mat_wall_esterno = mk_Texture_Material("./textures/rock-diffuse.jpg", true, "./textures/rock-normal.jpg", true);
 
-
-//SkyBox
-var urls = [
-  'textures/box/pos-x.png',
-  'textures/box/neg-x.png',
-  'textures/box/pos-y.png',
-  'textures/box/neg-y.png',
-  'textures/box/pos-z.png',
-  'textures/box/neg-z.png'
-];
-// wrap it up into the object that we need
-cubemap = THREE.ImageUtils.loadTextureCube(urls);
-
-// set the format, likely RGB unless you've gone crazy
-cubemap.format = THREE.RGBFormat;
-var materialArray = [];
-	for (var i = 0; i < 6; i++)
-		materialArray.push( new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture( urls[i]), side: THREE.BackSide }));
-var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
-var wallpaperGeometry = new THREE.BoxGeometry(1000,1000,1000);
-var wallpaper= new THREE.Mesh(wallpaperGeometry, skyMaterial);
-scene.add(wallpaper);
+// var texture_prato = THREE.ImageUtils.loadTexture("textures/prato.jpg");
+// var texture_blackBoard = THREE.ImageUtils.loadTexture("textures/blackBoard.png");
