@@ -77,7 +77,7 @@ function castFire(count, radius, delta, h){
   var fireDrop = new THREE.Geometry();
   var fireDropMaterial = new THREE.ParticleBasicMaterial({
     color: 0xff0000,
-    size: 1,
+    size: 0.5,
     map: THREE.ImageUtils.loadTexture("textures/smokeparticle.png"),
     blending: THREE.AdditiveBlending,
     transparent: true

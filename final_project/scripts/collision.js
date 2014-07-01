@@ -101,9 +101,9 @@ col_lavandino = new THREE.Mesh(new THREE.BoxGeometry(1.3,1.1,3), new THREE.MeshB
 apartment.add(col_lavandino);
 col_lavandino.position.set(20 , 11.4, 2.5);
 
-col_forno = new THREE.Mesh(new THREE.BoxGeometry(6,2,3), new THREE.MeshBasicMaterial({color: 0x999999, transparent: true, opacity: opac}));
+col_forno = new THREE.Mesh(new THREE.BoxGeometry(4.8,2,3), new THREE.MeshBasicMaterial({color: 0x999999, transparent: true, opacity: opac}));
 apartment.add(col_forno);
-col_forno.position.set(20.8,19.85,2.5);
+col_forno.position.set(20,19.85,2.5);
 
 col_frigo = new THREE.Mesh(new THREE.BoxGeometry(1.6,1.6,3), new THREE.MeshBasicMaterial({color: 0x999999, transparent: true, opacity: opac}));
 apartment.add(col_frigo);

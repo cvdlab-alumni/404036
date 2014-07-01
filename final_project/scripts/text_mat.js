@@ -26,7 +26,7 @@ var texture_photo = THREE.ImageUtils.loadTexture("textures/photo.jpg");
 var texture_photo2 = THREE.ImageUtils.loadTexture("textures/photo2.jpg");
 
 
-var lampShadeMaterial = new THREE.MeshPhongMaterial({ color: 0x00FF00 , shading: THREE.SmoothShading, shininess: 30, metal: false, side: THREE.DoubleSide});
+var lampShadeMaterial = new THREE.MeshPhongMaterial({ color: 0xB0C4DE , shading: THREE.SmoothShading, shininess: 30, metal: false, side: THREE.DoubleSide});
 
 var mat_floor_camera = mk_Texture_Material("textures/camera/parquet_letto.jpg", false, 0, true);
 var mat_floor_bagno = mk_Texture_Material("textures/bagno/pavimento_bagno.jpg", false, 0, true);

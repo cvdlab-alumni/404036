@@ -1,22 +1,3 @@
-
-// var telaio_texture = THREE.ImageUtils.loadTexture("./textures/lego_medio.jpg");
-// var frameMaterial = new THREE.MeshLambertMaterial({map: telaio_texture});
-
-// var porta_texture = THREE.ImageUtils.loadTexture("./textures/rovere_naturale.jpg");
-// var portMaterial = new THREE.MeshLambertMaterial({map: porta_texture});
-
-// var texture_lamp = THREE.ImageUtils.loadTexture("./textures/lamp2.jpg");
-// var texture_desk = THREE.ImageUtils.loadTexture("./textures/wood_texture1.jpg");
-
-// var texture_frame = THREE.ImageUtils.loadTexture("textures/frame.jpg");
-// var texture_frame_bump = THREE.ImageUtils.loadTexture("textures/frame_bump.jpg");
-// var texture_frame_normal = THREE.ImageUtils.loadTexture("textures/frame_normal.jpg");
-// var texture_photo = THREE.ImageUtils.loadTexture("textures/photo.jpg");
-// var texture_photo2 = THREE.ImageUtils.loadTexture("textures/photo2.jpg");
-
-
-// var lampShadeMaterial = new THREE.MeshPhongMaterial({ color: 0x00FF00 , shading: THREE.SmoothShading, shininess: 30, metal: false, side: THREE.DoubleSide});
-
 function mk_blind(width, height, depth){
 	var blind_texture = THREE.ImageUtils.loadTexture("./textures/porta_blind.jpg");
 	var blind_normal_texture = THREE.ImageUtils.loadTexture("./textures/porta_blind_normal.jpg");
@@ -217,16 +198,17 @@ function mk_lamp_ceiling(radius_lampShade, distance){
     var lampShade = new THREE.Mesh(lampShadeGeometry, lampShadeMaterial);
     lampShade.scale.z=0.5;
 
-    var spotLight = new THREE.SpotLight(0xffffff);
-    spotLight.angle=Math.PI/2;
-    spotLight.intensity=0;
-    lampShade.add(spotLight);
- 	lampShade.spotLight=spotLight;
+  //   var spotLight = new THREE.SpotLight(0xffffff);
+  //   spotLight.angle=Math.PI/2;
+  //   spotLight.intensity=0;
+  //   lampShade.add(spotLight);
+ 	// lampShade.spotLight=spotLight;
 
- 	var plight = new THREE.PointLight( 0xFFFFFF, 1, radius_lampShade );
+ 	var plight = new THREE.PointLight( 0xFFFFFF, 0, distance );
  	lampShade.add(plight);
  	lampShade.pointLight =plight;
- 	plight.intensity=0;
+ 	// plight.intensity=0;
+ 	plight.position.set(0,0,-1);
 
  	var t = new THREE.Object3D();
  	lampShade.add(t);
@@ -237,12 +219,12 @@ function mk_lamp_ceiling(radius_lampShade, distance){
  	lampShade.on=false;
 	lampShade.interact=function(){
 		if(!this.on){
-			this.children[0].intensity=4;
-			this.children[1].intensity=1;
+			this.pointLight.intensity=2;
+			// this.children[1].intensity=2;
 			this.on=true;
 		} else {
-			this.children[0].intensity=0;
-			this.children[1].intensity=0;
+			this.pointLight.intensity=0;
+			// this.children[1].intensity=0;
 			this.on=false;
 		}
 
@@ -453,7 +435,7 @@ function mk_shower(){
 
 function mk_buttons(){
 	var buttons = new THREE.Object3D();
-	var button1 = new THREE.Mesh(new THREE.CircleGeometry(0.05), new THREE.MeshLambertMaterial({color:0xAACCFF, transparent: true, opacity:0.0}));
+	var button1 = new THREE.Mesh(new THREE.BoxGeometry(0.05,0.05,0.05), new THREE.MeshLambertMaterial({color:0xAACCFF, transparent: true, opacity:0}));
 	var button2 = button1.clone();
 	var button3 = button1.clone();
 	var button4 = button1.clone();
@@ -466,9 +448,9 @@ function mk_buttons(){
 	buttons.button3= button3;
 	buttons.button4= button4;
 
-	button2.position.set(0,0.41,0.0);
-	button3.position.set(0,0.84,0);
-	button4.position.set(0,1.19,0.0);
+	button2.position.set(0,0.14,0.0);
+	button3.position.set(0,0.43,0);
+	button4.position.set(0,0.57,0.0);
 
 
 	toIntersect.push(buttons.button1);

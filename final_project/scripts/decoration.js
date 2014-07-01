@@ -100,46 +100,24 @@ screenTV.rotation.x=Math.PI/2;
 screenTV.position.set(4.9,19.35,3.32);
 
 
-// ***** forno cucina *****
-loader1.load('models/kitchen/fkc.obj', function (obj) {
-      var material = new THREE.MeshPhongMaterial({map: texture_cucina, normalMap:texture_cucina_normal, metal: false});
-      obj.traverse(function (child) {
-          if (child instanceof THREE.Mesh) {
-            child.material = material;
-            }
-      });
-      obj.scale.set(0.07, 0.07, 0.07);
-      obj.rotation.x = Math.PI/2;
-      apartment.add(obj);
-      obj.position.set(21.45,19.83,0.8);
-});
-var fire1 = castFire(100,0.26,0.05,0.5);
-apartment.add(fire1);
-fire1.position.set(21.78,19.245,1.169);
-animateFire(fire1, 0.25);
-
-var fire2 = castFire(100,0.21,0.05,0.5);
-apartment.add(fire2);
-fire2.position.set(21.03,19.285,1.169);
-animateFire(fire2, 0.2);
-
-var fire3 = castFire(100,0.2,0.05,0.5);
-apartment.add(fire3);
-fire3.position.set(21.77,20.374,1.169);
-animateFire(fire3, 0.19);
-
-var fire4 = castFire(100,0.25,0.05,0.5);
-apartment.add(fire4);
-fire4.position.set(21.06,20.41,1.169);
-animateFire(fire4, 0.24);
+// // ***** forno cucina *****
+// loader1.load('models/kitchen/fkc.obj', function (obj) {
+//       var material = new THREE.MeshPhongMaterial({map: texture_cucina, normalMap:texture_cucina_normal, metal: false});
+//       obj.traverse(function (child) {
+//           if (child instanceof THREE.Mesh) {
+//             child.material = material;
+//             }
+//       });
+//       obj.scale.set(0.07, 0.07, 0.07);
+//       obj.rotation.x = Math.PI/2;
+//       apartment.add(obj);
+//       obj.position.set(21.45,19.83,0.8);
+// });
 
 
 
-var buttons = mk_buttons();
-apartment.add(buttons);
-// var button1 = new THREE.Mesh(new THREE.CircleGeometry(0.05), new THREE.MeshLambertMaterial({color:0xAACCFF, transparent: true, opacity:0.5}));
-// apartment.add(button1);
-buttons.position.set(22.169,19.14,2.71);
+
+
 
 
 
@@ -187,7 +165,7 @@ bidet.position.set(22,7.08,0.86);
 var microonde = loading('models/Microwave/Microwave.obj','models/Microwave/Microwave.mtl');
     microonde.rotation.set(Math.PI/2,0,0);
     apartment.add(microonde);
-    microonde.position.set(18.45,19.83,2.85);
+    microonde.position.set(18.45,19.83,2.81);
 var frigo;
 loader1.load('models/Hitachi.obj', function (obj) {
       var material = new THREE.MeshLambertMaterial({color: 0xffffff, metal: false});
@@ -217,4 +195,47 @@ chair.rotation.set(Math.PI/2,0,0);
 apartment.add(chair);
 chair.position.set(17.9,1.7,0.86);
 
+//Forno
+var piano_cottura = loading('models/cucina/cucina.obj','models/cucina/cucina.mtl');
+piano_cottura.rotation.set(Math.PI/2,0,0);
+piano_cottura.scale.set(0.024,0.024,0.024);
+apartment.add(piano_cottura);
+piano_cottura.position.set(21.45,19.30,0.8);
 
+var fire1 = castFire(50,0.05,0.05,0.5);
+apartment.add(fire1);
+fire1.position.set(20.83,19.80,1.16);
+animateFire(fire1, 0.04);
+
+var fire2 = castFire(50,0.075,0.05,0.5);
+apartment.add(fire2);
+fire2.position.set(20.01,19.80,1.16);
+animateFire(fire2, 0.065);
+
+var fire3 = castFire(50,0.06,0.05,0.5);
+apartment.add(fire3);
+fire3.position.set(20.83,20.28,1.16);
+animateFire(fire3, 0.05);
+
+var fire4 = castFire(50,0.06,0.5,0.5);
+apartment.add(fire4);
+fire4.position.set(20.01,20.28,1.16);
+animateFire(fire4, 0.05);
+
+var buttons = mk_buttons();
+apartment.add(buttons);
+buttons.position.set(21.11,19.78,2.71);
+
+//Piano cucina doppio
+var piano_doppio = loading('models/doppio/doppio.obj','models/doppio/doppio.mtl');
+piano_doppio.rotation.set(Math.PI/2,0,0);
+piano_doppio.scale.set(0.024,0.024,0.024);
+apartment.add(piano_doppio);
+piano_doppio.position.set(13.55,15.94,0.8);
+
+//piano cucina singolo
+var piano_singolo = loading('models/singolo/singolo.obj','models/singolo/singolo.mtl');
+piano_singolo.rotation.set(Math.PI/2,0,0);
+piano_singolo.scale.set(0.024,0.024,0.024);
+apartment.add(piano_singolo);
+piano_singolo.position.set(19.278,19.3,0.8);
