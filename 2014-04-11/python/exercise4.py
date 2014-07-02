@@ -13,16 +13,16 @@ def mkstair(a):
 		s.append(CUBOID([wid,dept/n,(height/(n))*i]))
 	return s
 
-def larTorus(params):
-	r,R = params
-	def larTorus0(shape=[24,36,1]):
-		domain = larIntervals(shape)([2*PI,PI,r])
-		V,CV = domain
-		x = lambda V : [(R + p[2]*COS(p[0])) * COS(p[1]) for p in V]
-		y = lambda V : [(R + p[2]*COS(p[0])) * SIN(p[1]) for p in V]
-		z = lambda V : [-p[2] * SIN(p[0]) for p in V]
-		return larMap([x,y,z])(domain)
-	return larTorus0
+# def larTorus(params):
+# 	r,R = params
+# 	def larTorus0(shape=[24,36,1]):
+# 		domain = larIntervals(shape)([2*PI,PI,r])
+# 		V,CV = domain
+# 		x = lambda V : [(R + p[2]*COS(p[0])) * COS(p[1]) for p in V]
+# 		y = lambda V : [(R + p[2]*COS(p[0])) * SIN(p[1]) for p in V]
+# 		z = lambda V : [-p[2] * SIN(p[0]) for p in V]
+# 		return larMap([x,y,z])(domain)
+# 	return larTorus0
 
 
 ######## MAIN FLOOR ##############
@@ -339,7 +339,7 @@ parking_complex=STRUCT([parking_houses_1, parking_houses_2, parking_houses_3, pa
 
 
 ### Lampioni ###
-semi_anello=(larTorus([0.2,1])([36,36,1]))
+# semi_anello=(larTorus([0.2,1])([36,36,1]))
 palo=CYLINDER([0.2,7.0])(32)
 # semi_anello=T([1,3])([1,5])(R([2,3])(PI/2)(STRUCT(MKPOLS(semi_anello))))
 luce=SPHERE(0.4)([32,32])

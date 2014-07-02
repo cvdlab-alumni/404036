@@ -21,7 +21,7 @@ def aggiornaToRemove(lista, volte, facce, k):
 def MergingDiagram2MultipleCells(subDiagram, master,toRemove, toMerges):
 	toMerges = list(sort(toMerges))
 	#Aggiorno la lista di celle da rimuovere, calcolo quale sara' la loro numerazione dopo l'innesto
-	toRemovE=aggiornaToRemove(toRemove, len(toMerges), len(subDiagram[1]), (len(master[1]))-len(toMerges))
+	toRemove=aggiornaToRemove(toRemove, len(toMerges), len(subDiagram[1]), (len(master[1]))-len(toMerges))
 	#eseguo gli innesti
 	for i in range(len(toMerges)):
 		master = diagram2cell(subDiagram,master,toMerges[i]-i)
