@@ -22,7 +22,7 @@ Script Organization:
 * [specialFX](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/specialFX.js) creates effects using particle system.
 * [text_mat](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/text_mat.js) loads and initializes textures and materials.
 
-Graphic Techniques
+Graphic Techniques:
 ==================
 * bump and normal map -> frame and some walls.
 * texture -> floors and walls.
