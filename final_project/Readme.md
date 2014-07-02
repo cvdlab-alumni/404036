@@ -28,9 +28,9 @@ Graphic Techniques
 * import obj, obj/mtl -> various elements of the house 
 * **skybox**
 * **pointerLock + picking object.**
-* **particle -> rain, water in the shower, flames on the stove.**
-* **texture video -> television.**
-* **texture from webcam -> imac.**
-* **fading audio -> tv.**
+* **particle** -> rain, water in the shower, flames on the stove.
+* texture video -> television.
+* **texture from webcam** -> imac.
+* **fading audio** -> tv.
 * **collision detection.**
-* **sound effect -> frame.**
+* **sound effect** -> frame.
