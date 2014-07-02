@@ -119,7 +119,7 @@ function mk_all_int_walls(apartment){
       var muro_ingr_1 = mk_plane(5,1,1, 4.4,6, [0.5,0, 3.4,4.4]);
       muro_ingr_1.rotation.x = Math.PI/2;
       apartment.add(muro_ingr_1);
-      muro_ingr_1.position.set(10.5,0.81,0.8);
+      muro_ingr_1.position.set(10.5,0.813,0.8);
 
       var muro_ingr_2 = mk_plane(5,1,1, 4.4,6, [1.4,0, 1.6,4.2]);
       muro_ingr_2.rotation.x = Math.PI/2;
@@ -251,7 +251,7 @@ function mk_all_int_walls(apartment){
       var muro_cuc_1 = mk_plane(9,2,2, 6.3,4.5, []);
       muro_cuc_1.rotation.x = Math.PI/2;
       apartment.add(muro_cuc_1);
-      muro_cuc_1.position.set(17.5,12.202,0.8);
+      muro_cuc_1.position.set(17.5,12.207,0.8);
 
       var muro_cuc_2 = mk_plane(9,2,2, 2.3,4.5, []);
       muro_cuc_2.rotation.x = Math.PI/2;
@@ -269,11 +269,11 @@ function mk_all_int_walls(apartment){
       muro_cuc_4.rotation.y = Math.PI/2;
       muro_cuc_4.position.set(23.79,12.2,0.8);
 
-      var muro_cuc_5 = mk_plane(9,2,2, 5.7,4.5, []);
+      var muro_cuc_5 = mk_plane(9,2,2, 5.71,4.5, []);
       muro_cuc_5.rotation.x = Math.PI/2;
       apartment.add(muro_cuc_5);
       muro_cuc_5.rotation.y = Math.PI/2;
-      muro_cuc_5.position.set(17.498,6.50,0.8);
+      muro_cuc_5.position.set(17.497,6.50,0.8);
 
       var muro_cuc_6 = mk_plane(9,2,2, 14.3,4.5, [2.1,0, 1.6,4.2, 11.2,0, 1.6,4.2]);
       muro_cuc_6.rotation.x = Math.PI/2;
@@ -293,18 +293,18 @@ function mk_all_ext_walls(apartment){
       apartment.add(muro_ext_1);
       muro_ext_1.position.set(-0.01,-0.01,0);
 
-      var muro_ext_2 = mk_plane(10,2,2, 24.61,6.81, []);
+      var muro_ext_2 = mk_plane(10,2,2, 24.62,6.81, []);
       muro_ext_2.rotation.x = Math.PI/2;
       apartment.add(muro_ext_2);
-      muro_ext_2.position.set(0,21.61,0);
+      muro_ext_2.position.set(-0.01,21.62,0);
 
-      var muro_ext_3 = mk_plane(10,2,2, 21.62,6.8, [8.21,2.81, 2,2.4,   16.21,2.81, 2,2.4]);
+      var muro_ext_3 = mk_plane(10,2,2, 21.63,6.8, [8.21,2.81, 2,2.4,   16.21,2.81, 2,2.4]);
       muro_ext_3.rotation.x = Math.PI/2;
       apartment.add(muro_ext_3);
       muro_ext_3.rotation.y = Math.PI/2;
       muro_ext_3.position.set(24.61,-0.01,0);
 
-      var muro_ext_4 = mk_plane(10,2,2, 21.62,6.8, [2.25,2.81, 3.2,3, 6.89,2.81, 3.2,3, 11.53,2.81, 3.2,3, 16.17,2.81, 3.2,3]);
+      var muro_ext_4 = mk_plane(10,2,2, 21.63,6.8, [2.25,2.81, 3.2,3, 6.89,2.81, 3.2,3, 11.53,2.81, 3.2,3, 16.17,2.81, 3.2,3]);
       muro_ext_4.rotation.x = Math.PI/2;
       apartment.add(muro_ext_4);
       muro_ext_4.rotation.y = Math.PI/2;
