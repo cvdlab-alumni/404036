@@ -134,7 +134,7 @@ function animateFire( sF, rf){
       alfa += 2/50;
         if(counter%2===0){
           new TWEEN.Tween(v)
-          .to({x:(rf*1.1 * Math.cos(alfa*2* Math.PI)), y: (rf*1.1 * Math.sin(alfa*2* Math.PI)), z: 1.58},200)
+          .to({x:(rf*1.1 * Math.cos(alfa*2* Math.PI)), y: (rf*1.3 * Math.sin(alfa*2* Math.PI)), z: 1.575},200)
           .repeat(Infinity)
           .easing(TWEEN.Easing.Linear.None)
           .yoyo(true)
