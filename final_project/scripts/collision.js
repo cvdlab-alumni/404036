@@ -30,7 +30,7 @@ function detectCollision() {
 
 		var intersects = rayCaster.intersectObjects(objects);
 	  	// console.log(intersects.length);
-	  	if (intersects.length > 0 && intersects[0].distance < 6) {
+	  	if (intersects.length > 0 && intersects[0].distance < 8) {
 		    // console.log(intersects[0].distance);
 		    if(i===0) {
 		   		console.log("In avanti collido con: ", intersects.length);
