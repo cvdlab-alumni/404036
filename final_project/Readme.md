@@ -27,8 +27,8 @@ Graphic Techniques:
 * bump and normal map -> frame and some walls.
 * texture -> floors and walls.
 * tween animation -> opening/closing doors and windows.
-* import obj, obj/mtl -> various elements of the house 
-* **skybox**
+* import obj, obj/mtl -> various elements of the house.
+* **skybox.**
 * **pointerLock + picking object.**
 * **particle** -> rain, water in the shower, flames on the stove.
 * texture video -> television.
