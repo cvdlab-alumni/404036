@@ -1,4 +1,4 @@
-Final Project GC
+Final Project - GC
 ================
 Daniele Conti 2013/2014
 -----------------------
@@ -11,3 +11,17 @@ Script Organization:
 * [forniture](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/forniture.js) contains functions used to create objects for the house.
 * [fpsInteract](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/fpsInteract.js) is the code used to switch between trackball system and PointerLock.
 * [functions](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/functions.js) contains generics functions.
+* [gui](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/gui.js) incorporates the control/gui used in the project.
+* [init](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/init.js) initializes variables.
+* [initVideo](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/initVideo.js) initializes variables concernign audio and video.
+* [light](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/light.js) initializes lights and switcher.
+* [render](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/render.js) contains the render function.
+* [rooms](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/rooms.js) creates all the windows, doors, internal and external walls.
+* [specialFX](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/specialFX.js) creates effects using particle system.
+* [text_mat](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/text_mat.js) loads and initializes textures and materials.
+
+Graphic Techniques
+==================
+
+
+

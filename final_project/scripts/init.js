@@ -15,7 +15,7 @@ var toIntersect=[];
 var trackballControls = new THREE.TrackballControls(camera);
 
 var axisHelper = new THREE.AxisHelper(276);
-scene.add(axisHelper);
+// scene.add(axisHelper);
 
 var webGLRenderer = new THREE.WebGLRenderer();
 webGLRenderer.setClearColor(new THREE.Color(0xC7C7C7, 1.0));

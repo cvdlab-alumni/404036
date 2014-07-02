@@ -35,24 +35,24 @@ var controlGUI = new function() {
   };
 };
 
-      var gui = new dat.GUI();
-      gui.add(controlGUI, "startFP");
-      gui.add(controlGUI, "bumpScale", -2.0, 2.0).onChange(controlGUI.updateBump);
-      gui.add(controlGUI, "normalScale", -2.0, 2.0).onChange(controlGUI.updateNormal);
-      var textureFolder = gui.addFolder("textures");
-      textureFolder.add(controlGUI, "cameraOriginale").onChange(controlGUI.textureCamera);
-      textureFolder.add(controlGUI, "saloneOriginale").onChange(controlGUI.textureSalone);
-      textureFolder.add(controlGUI, "stanzeOriginale").onChange(controlGUI.textureStanze);
+var gui = new dat.GUI();
+gui.add(controlGUI, "startFP");
+gui.add(controlGUI, "bumpScale", -2.0, 2.0).onChange(controlGUI.updateBump);
+gui.add(controlGUI, "normalScale", -2.0, 2.0).onChange(controlGUI.updateNormal);
+var textureFolder = gui.addFolder("textures");
+textureFolder.add(controlGUI, "cameraOriginale").onChange(controlGUI.textureCamera);
+textureFolder.add(controlGUI, "saloneOriginale").onChange(controlGUI.textureSalone);
+textureFolder.add(controlGUI, "stanzeOriginale").onChange(controlGUI.textureStanze);
 
-      gui.add(controlGUI, "collision").onChange(function (e){
-        collisione =e;
-      });
-      gui.add(controlGUI, "rain").onChange(function (e){
-        if (e){
-          rain=e;
-          scene.add(particleSystem);
-        } else {
-          rain = e;
-          scene.remove(particleSystem);
-        }
-      });
+gui.add(controlGUI, "collision").onChange(function (e){
+  collisione =e;
+});
+gui.add(controlGUI, "rain").onChange(function (e){
+  if (e){
+    rain=e;
+    scene.add(particleSystem);
+  } else {
+    rain = e;
+    scene.remove(particleSystem);
+  }
+});
