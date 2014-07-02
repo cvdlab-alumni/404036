@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Final Project - Daniele Conti</title> 
+  <style>
+    body{
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #stats {  /* Align stats top-left */
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
+    /*roba aggiunta da me*/
+    #pointer {
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     margin-top: -15px;
+     margin-left: -15px;
+     width: 30px;
+     height: 30px;
+     display: none;
+     background-image: url("images/pointer.png");
+     background-repeat: no-repeat;
+     background-size: contain;
+   }
+
+   #film{
+    display: none; 
+    position: absolute; 
+    left: 0px;
+    top: 0px;
+  }
+  #monitor{
+    display: none; 
+    position: absolute; 
+    left: 0px;
+    top: 0px;
+  }
+  #videoImage{
+    display: none; 
+    position: absolute; 
+    left: 0px;
+    top: 0px;
+  }
+
+  /**/
+</style> 
+</head>
+<body>
+
+  <!-- Roba per la webcam -->
+  <video id="monitor" autoplay width="160" height="120" style="visibility: hidden; float:left;"></video>
+  <canvas id="videoImage" width="160" height="120" style="visibility: hidden; float:left;"></canvas>
+  <video id="film" src="movies/Big_Buck_Bunny_small.ogv" controls="true" autoplay="false"></video> 
+  <script>
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    window.URL = window.URL || window.webkitURL;
+
+    var camvideo = document.getElementById('monitor');
+
+    if (!navigator.getUserMedia) 
+    {
+      document.getElementById('errorMessage').innerHTML = 
+      'Sorry. <code>navigator.getUserMedia()</code> is not available.';
+    } else {
+      navigator.getUserMedia({video: true}, gotStream, noStream);
+    }
+
+    function gotStream(stream) 
+    {
+      if (window.URL) 
+        {   camvideo.src = window.URL.createObjectURL(stream);   } 
+  else // Opera
+    {   camvideo.src = stream;   }
+
+  camvideo.onerror = function(e) 
+  {   stream.stop();   };
+
+  stream.onended = noStream;
+}
+
+function noStream(e) 
+{
+  var msg = 'No camera available.';
+  if (e.code == 1) 
+    {   msg = 'User denied access to use camera.';   }
+  // document.getElementById('errorMessage').textContent = msg;
+}
+</script>
+
+<!--  roba aggiunta da me -->
+<div id="pointer"></div>
+<!--  -->
+
+<!-- JavaScript libraries -->
+<script src="libs/three.min.js"></script>
+<script src="libs/jquery.min.js"></script>  
+<script src="libs/tween.min.js"></script>
+<script src="libs/PointerLockControls.js"></script>
+<script src="libs/Stats.min.js"></script>
+<script src="libs/dat.gui.min.js"></script>
+<script src="libs/TrackballControls.js"></script>
+<script type="text/javascript" src="libs/OBJLoader.js"></script> 
+<script type="text/javascript" src="libs/MTLLoader.js"></script> 
+<script type="text/javascript" src="libs/OBJMTLLoader.js"></script>
+<script type="text/javascript" src="libs/helvetiker_regular.typeface.js"></script>
+
+<script src="scripts/initVideo.js"></script>
+<script src="scripts/functions.js"></script>
+<script src="scripts/forniture.js"></script>
+<script src="scripts/rooms.js"></script>
+<script src="scripts/fpsInteract.js"></script>
+
+
+<script src="scripts/init.js"></script>
+<script src="scripts/text_mat.js"></script>
+<script src="scripts/specialFX.js"></script>
+<script src="scripts/apartment.js"></script>
+<script src="scripts/light.js"></script>
+<script src="scripts/decoration.js"></script>
+<script src="scripts/collision.js"></script>
+
+<script src="scripts/gui.js"></script>
+<script src="scripts/render.js"></script>
+
+
+<!-- Javascript code that runs our Three.js examples --> 
+<script>
+    // once everything is loaded, we run our Three.js stuff.
+    $(function () {
+
+      // add the output of the renderer to the html element
+      $('body').append(webGLRenderer.domElement);
+
+      //SkyBox
+var urls = [
+  'textures/box/pos-x.png',
+  'textures/box/neg-x.png',
+  'textures/box/pos-y.png',
+  'textures/box/neg-y.png',
+  'textures/box/pos-z.png',
+  'textures/box/neg-z.png'
+];
+// wrap it up into the object that we need
+cubemap = THREE.ImageUtils.loadTextureCube(urls);
+
+// set the format, likely RGB unless you've gone crazy
+cubemap.format = THREE.RGBFormat;
+var materialArray = [];
+  for (var i = 0; i < 6; i++)
+    materialArray.push( new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture( urls[i]), side: THREE.BackSide }));
+var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
+var wallpaperGeometry = new THREE.BoxGeometry(1000,1000,1000);
+var wallpaper= new THREE.Mesh(wallpaperGeometry, skyMaterial);
+scene.add(wallpaper);
+
+// ***** green ***** 
+var terrain = new THREE.Mesh(new THREE.PlaneGeometry(500,500),new THREE.MeshLambertMaterial({map: texture_prato, side: THREE.DoubleSide}));
+scene.add(terrain);
+terrain.rotation.x=Math.PI/2;
+terrain.position.set(0,7.99,0);
+
+      render();
+
+      
+   });
+</script>  
+</body>
+</html>
