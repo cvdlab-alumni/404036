@@ -3,6 +3,8 @@ Final Project - GC
 Daniele Conti 2013/2014
 -----------------------
 
+[Load project](http://denjo.github.io/)
+
 Script Organization:
 ==================
 * [apartment](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/apartment.js) recalls the functions that create all the windows, doors, walls and some object created by me.
@@ -20,13 +22,13 @@ Script Organization:
 * [specialFX](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/specialFX.js) creates effects using particle system.
 * [text_mat](https://github.com/cvdlab-cg/404036/blob/master/final_project/scripts/text_mat.js) loads and initializes textures and materials.
 
-Graphic Techniques
+Graphic Techniques:
 ==================
 * bump and normal map -> frame and some walls.
 * texture -> floors and walls.
 * tween animation -> opening/closing doors and windows.
-* import obj, obj/mtl -> various elements of the house 
-* **skybox**
+* import obj, obj/mtl -> various elements of the house.
+* **skybox.**
 * **pointerLock + picking object.**
 * **particle** -> rain, water in the shower, flames on the stove.
 * texture video -> television.
