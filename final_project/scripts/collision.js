@@ -9,9 +9,13 @@ function detectCollision() {
 	var vector = new THREE.Vector3( 0, 0, 1 );
 	var projector2 = new THREE.Projector();
 
+
 	//unproject passa da 2D->3D
 	//project fa l'opposto 3D->2D
 	projector2.unprojectVector(vector, camera);
+	// console.log("vettore: ",vector);
+	// console.log("position: ", controls.getObject().position);
+	// console.log("sub/normalize: ", vector.sub(controls.getObject().position));
 	vector.y=35;
 	vector1.copy(vector);
 	vector2.copy(vector);
